@@ -1,0 +1,188 @@
+snippet defmo "defmodule"
+defmodule ${1:PapaPal.} do
+@moduledoc """
+This is gonna be awesome dude, write your tests first and eat your vegetables
+
+#TODO: ADD METRICS
+#TODO: ADD LOGGING
+"""
+
+
+require Logger
+
+
+end
+
+endsnippet
+
+snippet pry "PRY"
+require IEx; IEx.pry
+endsnippet
+
+snippet insp "IO inspect"
+IO.inspect($1, limit: :infinity, pretty: true, label: "$2")
+endsnippet
+
+snippet pinsp "IO inspect with pipe"
+|> IO.inspect(limit: :infinity, pretty: true, label: "$1")
+endsnippet
+
+snippet def "def func"
+
+@doc ""
+@spec $1() :: :ok
+def $1($2) do
+
+end
+
+endsnippet
+
+snippet defp "def private func"
+# Little blurb about this private
+defp $1($2) do
+
+end
+
+endsnippet
+
+snippet test "def test"
+test "$1", %{$2} do
+
+end
+
+endsnippet
+
+
+snippet desc "describe block "
+describe "$1" do
+	setup do
+		$2
+		:ok
+	end
+
+end
+endsnippet
+
+snippet env_var "creates a private function for an env var"
+
+defp get_$1 do
+  Application.get_env(:papa_pal, :$1)
+end
+endsnippet
+
+snippet soft_migr "soft delete migration"
+	use Ecto.Migration
+
+	@disable_ddl_transaction true
+	@disable_migration_lock true
+
+	@schema $1 
+
+	def change do
+		alter table(@schema) do
+			add(:soft_deleted_at, :utc_datetime_usec, [])
+		end
+
+		create index(@schema, [:soft_deleted_at], concurrently: true)
+	end
+endsnippet
+
+snippet soft_field "soft delete field"
+field(:soft_deleted_at, :utc_datetime_usec)
+endsnippet
+
+snippet oban_new "queue a new job"
+
+	|> $1.new(args,
+	# scheduled_at: Timex.now(), 
+	# schedule_in: {15, :minutes} 
+	)
+	|> Oban.insert()
+endsnippet
+
+snippet oban_job "create a oban job"
+@moduledoc """
+"""
+@max_attempt 20
+
+require Logger
+
+use Oban.Worker,
+  queue: :default,
+  max_attempts: @max_attempt
+	# priority: # 0 to 3
+	# unique: [:arg1, :arg2, :arg3]
+
+@impl Oban.Worker
+@spec perform(%Oban.Job{}) :: :ok | :error
+@doc ""
+def perform(%Oban.Job{args: args}) do
+Logger.info("Performing Job", [args: args])
+end
+endsnippet
+
+snippet oban_perform "perform job pattern match boilerplate"
+@impl Oban.Worker
+def perform(%Oban.Job{
+      args: %{
+        # "some_key" => some_string_val,
+      }
+    }) do
+
+# Make sure it alwas returns {:ok, _} or similar, OR {:error, _} or similar
+#  :ok
+end
+
+endsnippet
+
+
+snippet oban_test "create an oban test resource"
+@moduledoc """
+"""
+use PapaPal.DataCase
+# Test functions to leverage
+# perform_job(MODULE_BEING_TESTED, args)
+# assert_enqueued(worker: MODULE_BEING_TESTED)
+
+describe "$1" do
+	setup do
+		$2
+		:ok
+	end
+
+	test "$3", %{$4} do
+	$5
+	end
+end
+endsnippet
+
+snippet log_info "Add an info log"
+Logger.info("$1",[
+	# id: some_id,
+	# val: some_val
+])
+endsnippet
+
+
+snippet log_warn "Add an info log"
+Logger.warn("$1",[
+	# id: some_id,
+	# val: some_val
+])
+endsnippet
+
+snippet log_error "Add an info log"
+Logger.error("$1",[
+	# id: some_id,
+	# val: some_val
+])
+endsnippet
+
+snippet res_error "Add a resolver level error to return by the API"
+%{
+  code: :error_code,
+  key: :schema_field_name,
+  message: "$1",
+  messages: ["$1"]
+}
+endsnippet

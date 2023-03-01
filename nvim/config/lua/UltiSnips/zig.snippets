@@ -1,0 +1,64 @@
+snippet module "define a module"
+const print = std.debug.print;
+const std = @import("std");
+const os = std.os;
+const assert = std.debug.assert;
+
+pub fn main() void {
+}
+test "basic test" {
+    try std.testing.expectEqual(10, 3 + 7);
+}
+
+endsnippet
+
+snippet func "define a function"
+
+// Be sure to add a type after the parenthesis and before the {
+pub fn $1() {
+}
+
+endsnippet
+
+snippet test "define a test"
+test "basic test" {
+    try std.testing.expectEqual(10, 3 + 7);
+}
+endsnippet
+
+snippet pfunc "define a private function"
+fn $1(){
+}
+endsnippet
+
+snippet while "define a while loop" 
+while($1){
+}
+endsnippet
+
+snippet if "define an if statement"
+if($1){
+}
+endsnippet
+snippet ifelse "define an if/else statement"
+if($1){
+}
+endsnippet
+snippet ifelif "define an if/elseif/else statement"
+if($1){
+}
+endsnippet
+
+snippet switch "define a switch statement" 
+switch($1){
+// 1 + 1 = 3 =>
+
+//...
+
+// else => "output this"
+}
+endsnippet
+
+snippet print "interpolated print statement"
+print("Hello, {s}!\n", .{"world"});
+endsnippet
