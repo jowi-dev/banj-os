@@ -27,5 +27,5 @@ Where is my clown mask. I like my dev tooling like I like my women. High mainten
 - [ ] Once ctags is setup, complete TagStack, migrate to new repo
 
 
-
+### Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
