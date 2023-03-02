@@ -3,14 +3,12 @@
   programs = {
     git = {
       enable = true;
-
       userName = "jowi-dev";
       #userEmail = if config.my-home.isWork then "jwilliams@joinpapa.com" else "joey8williams@gmail.com";
       userEmail = "joey8williams@gmail.com";
 
       aliases = {
       };
-
 
       extraConfig = {
         advice = {
@@ -20,7 +18,6 @@
         apply = {
           whitespace = "nowarn";
         };
-
 
         branch = {
           autosetupmerge = true;
@@ -33,12 +30,10 @@
         };
 
         "color \"branch\"" = {
-
           current = "yellow reverse";
           local = "yellow";
           remote = "green";
         };
-
 
         "color \"diff\"" = {
           meta = "yellow bold";
@@ -58,7 +53,6 @@
           algorithm = "patience";
         };
 
-
         format = {
           pretty = "format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset";
         };
@@ -73,15 +67,12 @@
           prompt = false;
         };
 
-
         pull = {
           ff = "only";
         };
 
-
         push = {
           default = "tracking";
-
         };
 
         rerere = {
@@ -121,14 +112,10 @@
 
       ignores = [
         # macOS
-
         ".DS_Store"
         "._*"
-
         ".Spotlight-V100"
-
         ".Trashes"
-
 
         # Windows
         "Thumbs.db"
@@ -137,5 +124,4 @@
 
     };
   };
-
 }

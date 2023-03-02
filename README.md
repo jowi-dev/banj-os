@@ -9,9 +9,6 @@ Where is my clown mask? I like my dev tooling like I like my women: High mainten
 
 With that said if you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
 
-**TODO**: Maybe I should start keeping logs in this repo? that way they travel with me? Hell yeah dude. Hell yeah.
-**TODO**: Start documenting why these tech choices are made so its not just me yeeting tech into my stack without prior history
-
 ## Setup
 
 
@@ -33,6 +30,7 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 - [ ] tmux setup via nix
     * This includes setting it up to run without the tmux package manager
 - [ ] zsh setup via nix
+    * Possibly a switch to toggle between bash/zsh at home/work
 - [ ] Nerdfonts installation 
 
 #### Nice to haves/easy setups
@@ -54,6 +52,8 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 - [ ] A rest/GQL testing tool would be amazing
 - [ ] Any worthwhile docker tooling to have?
     * This is likely unnecessary and better of deleted
+- [ ] Something to help with markdown
+    * vim-markdown removed for now, maybe consider [a new plugin](https://github.com/iamcco/markdown-preview.nvim)
 
 ### Neovim Related
 - [ ] Test command for running tests in a new tmux split window, so we don't have to keep typing MIX_ENV=test mix test.....
@@ -69,10 +69,11 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 - [ ] setup cpp tooling
     * This is likely going to be an easy find via @fmoda3's nixconfig (Acknowledgements)
 
-### Moonshots
+### Tangential Project Ideas
 - [ ] Once ctags is setup, complete TagStack, migrate to new repo
 - [ ] Maybe its time to start considering having a command reference UI?
     * Maybe [cheatsheet](https://github.com/sudormrfbin/cheatsheet.nvim) as a start? Seems bloated
+- [ ] Create a way to quickly grep/add/edit your knowledge base stored in logs/ so that you can reference it as needed.
 
 
 ## Bored?
