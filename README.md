@@ -1,13 +1,28 @@
-# This was a giant waste of time
-I'm now committed to it, like a toxic girl. Nix is the one for me.
-Nvim is the one for me
+# My Dev Environment
 
-Where is my clown mask. I like my dev tooling like I like my women. High maintenance and providing very little in return for it.
+## Foreward
+### This was a giant waste of time
+
+I'm now committed to it, like a toxic girl. Nix is the one for me. Nvim is the one for me.
+
+Where is my clown mask? I like my dev tooling like I like my women: High maintenance and providing very little in return for it.
+
+With that said if you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
+
+**TODO**: Maybe I should start keeping logs in this repo? that way they travel with me? Hell yeah dude. Hell yeah.
 
 ## Setup
+
+
+#### Prerequisites
 This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager](https://nix-community.github.io/home-manager/). Please make sure they are both installed before proceeding
 
-Clone the contents of this repo into your `~/.config/nixpkgs/` directory
+#### Steps
+1. Clone the contents of this repo into your `~/.config/nixpkgs/` directory
+2. `home-manager switch` - This should download all of the deps/configs to your local machine
+3. `nvim` then `:checkhealth` to ensure everything is in working order
+
+
 
 ## Roadmap
 
@@ -64,3 +79,4 @@ Have a look at [Awesome Neovim](https://github.com/rockerBOO/awesome-neovim) to 
 
 ## Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
+
