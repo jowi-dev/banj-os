@@ -1,0 +1,5 @@
+[user]
+  name = Joe Williams
+  email= jwilliams@joinpapa.com
+[push]
+  autoSetupRemote=true
