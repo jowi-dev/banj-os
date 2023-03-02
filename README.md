@@ -10,6 +10,7 @@ Where is my clown mask? I like my dev tooling like I like my women: High mainten
 With that said if you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
 
 **TODO**: Maybe I should start keeping logs in this repo? that way they travel with me? Hell yeah dude. Hell yeah.
+**TODO**: Start documenting why these tech choices are made so its not just me yeeting tech into my stack without prior history
 
 ## Setup
 
