@@ -19,24 +19,30 @@ Clone the contents of this repo into your `~/.config/nixpkgs/` directory
 - [ ] zsh setup via nix
 - [ ] Nerdfonts installation 
 
-#### Other Tooling
-- [ ] [Simulators for Mobile Dev](https://github.com/dimaportenko/telescope-simulators.nvim)
-    * This will likely be a breaking point on needing to understand env vars in Nix. isMac/isLinux so linux installs don't get cluttered w/ iOS emulators they can't run
-- [ ] Is there a way to have a browser window in the terminal so alt tabbing isn't needed for client side dev?
-- [ ] htop/performance monitors? How can these be integrated effectively into the workflow? Monitoring is still a big miss in my local dev flow
-    * Maybe as a lualine indicator? Maybe as a disposable/composable vim buffer?
-- [ ] Any worthwhile docker tooling to have?
-    * This is likely unnecessary and better of deleted
-
 #### Nice to haves/easy setups
 - [ ] bash setup via nix
 - [ ] alacritty setup via nix
 - [ ] starship setup via nix
 - [ ] erlang wxwidgets setup for erlang debugger/process viewer tools?
 
+### Tooling Improvements
+
+#### Other Tooling
+- [ ] [Simulators for Mobile Dev](https://github.com/dimaportenko/telescope-simulators.nvim)
+    * This will likely be a breaking point on needing to understand env vars in Nix. isMac/isLinux so linux installs don't get cluttered w/ iOS emulators they can't run
+- [ ] Is there a way to have a browser window in the terminal so alt tabbing isn't needed for client side dev?
+    * LOL [lynx](https://search.nixos.org/packages?channel=22.11&show=lynx&from=0&size=50&sort=relevance&type=packages&query=lynx)
+- [ ] htop/performance monitors? How can these be integrated effectively into the workflow? Monitoring is still a big miss in my local dev flow
+    * Maybe as a lualine indicator? Maybe as a disposable/composable vim buffer?
+- [ ] NGNIX is likely gonna be helpful
+- [ ] A rest/GQL testing tool would be amazing
+- [ ] Any worthwhile docker tooling to have?
+    * This is likely unnecessary and better of deleted
+
 ### Neovim Related
 - [ ] Test command for running tests in a new tmux split window, so we don't have to keep typing MIX_ENV=test mix test.....
 - [ ] Also include a command to close said tmux split quickly
+- [ ] @aruder's get github link for current file command
 - [ ] ctags setup cross platform -> integrate setup into nvim for tag usage
 - [ ] Determine if its worth moving from Ultisnips -> [Luasnips](https://github.com/L3MON4D3/LuaSnip)
     * This is likely pointless but it saves scripting from needing to be done in Python
@@ -49,7 +55,12 @@ Clone the contents of this repo into your `~/.config/nixpkgs/` directory
 
 ### Moonshots
 - [ ] Once ctags is setup, complete TagStack, migrate to new repo
+- [ ] Maybe its time to start considering having a command reference UI?
+    * Maybe [cheatsheet](https://github.com/sudormrfbin/cheatsheet.nvim) as a start? Seems bloated
 
 
-### Acknowledgements
+## Bored?
+Have a look at [Awesome Neovim](https://github.com/rockerBOO/awesome-neovim) to get some inspiration.
+
+## Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
