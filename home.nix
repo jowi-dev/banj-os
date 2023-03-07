@@ -11,7 +11,10 @@ in
 	imports =  [
     ./nvim 
     ./git
+    ./bash
     ];
+
+  
 
 	options.my-home = {
 	    useNeovim = lib.mkOption {
@@ -23,18 +26,13 @@ in
 	    };
 	};
 
-	options.home-manager = {
-		enable = true;
-		path = "/home/jowi/.nix-profile/bin/home-manager";
-  };
-
 	config = {
+    programs.home-manager.enable = true;
 		home = {
-      stateVersion = "18.09";
+      stateVersion = "22.11";
       username = "jowi";
       homeDirectory = "/home/jowi";
       packages = with pkgs; [
-        home-manager
         git 
         neovim-unwrapped
         tmux
