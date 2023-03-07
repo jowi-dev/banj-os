@@ -3,11 +3,9 @@
 ## Foreward
 ### This was a giant waste of time
 
-I'm now committed to it, like a toxic girl. Nix is the one for me. Nvim is the one for me.
+I stand by it, but also now its a great way to have a completely portable env, that's pretty cool too.
 
-Where is my clown mask? I like my dev tooling like I like my women: High maintenance and providing very little in return for it.
-
-With that said if you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
+If you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
 
 
 ## Setup
