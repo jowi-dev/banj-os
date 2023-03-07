@@ -9,16 +9,21 @@ Where is my clown mask? I like my dev tooling like I like my women: High mainten
 
 With that said if you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
 
+
 ## Setup
 
 
 #### Prerequisites
 This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager](https://nix-community.github.io/home-manager/). Please make sure they are both installed before proceeding
 
+**As of right now Nix version 2.13.3 is the newest stable version, please use [these instructions](https://github.com/NixOS/nix/issues/7937#issuecomment-1451293677) and save yourself headache.**
+
+
 #### Steps
 1. Clone the contents of this repo into your `~/.config/nixpkgs/` directory
 2. `home-manager switch` - This should download all of the deps/configs to your local machine
 3. `nvim` then `:checkhealth` to ensure everything is in working order
+
 
 
 
@@ -33,11 +38,13 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
     * Possibly a switch to toggle between bash/zsh at home/work
 - [ ] Nerdfonts installation 
 
+
 #### Nice to haves/easy setups
-- [ ] bash setup via nix
+- [x] bash setup via nix
 - [ ] alacritty setup via nix
 - [ ] starship setup via nix
 - [ ] erlang wxwidgets setup for erlang debugger/process viewer tools?
+
 
 ### Tooling Improvements
 
@@ -55,6 +62,7 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 - [ ] Something to help with markdown
     * vim-markdown removed for now, maybe consider [a new plugin](https://github.com/iamcco/markdown-preview.nvim)
 
+
 ### Neovim Related
 - [ ] Test command for running tests in a new tmux split window, so we don't have to keep typing MIX_ENV=test mix test.....
 - [ ] Also include a command to close said tmux split quickly
@@ -69,6 +77,7 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 - [ ] setup cpp tooling
     * This is likely going to be an easy find via @fmoda3's nixconfig (Acknowledgements)
 
+
 ### Tangential Project Ideas
 - [ ] Once ctags is setup, complete TagStack, migrate to new repo
 - [ ] Maybe its time to start considering having a command reference UI?
@@ -76,9 +85,11 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 - [ ] Create a way to quickly grep/add/edit your knowledge base stored in logs/ so that you can reference it as needed.
 
 
+
 ## Bored?
 Have a look at [Awesome Neovim](https://github.com/rockerBOO/awesome-neovim) to get some inspiration.
 
 ## Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
+
 
