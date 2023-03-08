@@ -2,9 +2,10 @@
 with lib;
 let
   python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
+  nvimLuaEnv = pkgs.luajit.withPackages (p: with p; [http lpeg basexx cqueues cjson]);
 in
 {
-  config = mkIf config.my-home.useNeovim {
+  config =  {
     programs.neovim = {
       package = pkgs.neovim-unwrapped;
       enable = true;
@@ -52,8 +53,13 @@ in
 
         # ZIG BABY
         zig
+
         # Lua
         lua-language-server
+        # Http packages for makin bacon pancakes w/ chatGPT
+        #luajitPackages.rest-nvim
+        luajit
+        #luajitPackages.http
 
         # Nix
         rnix-lsp
@@ -73,9 +79,13 @@ in
         fd
       ];
 
+# .. ";${nvimLuaEnv}/lib/lua/5.1/?.so"
       extraConfig = ''
         let g:elixir_ls_home = "${pkgs.beam.packages.erlang.elixir_ls}"
 
+        :lua open_api_key = "${config.local-env.openAPIKey}"
+        :lua package.path = "${config.local-env.homeDirectory}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
+        :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
         :luafile ~/.config/nvim/lua/init.lua
       '';
 
