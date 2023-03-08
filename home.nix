@@ -11,7 +11,9 @@ in
 	imports =  [
     ./nvim 
     ./git
+    ./tmux
     ./bash
+    ./starship
     ];
 
   
