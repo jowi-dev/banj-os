@@ -8,6 +8,7 @@ I stand by it, but also now its a great way to have a completely portable env, t
 If you, like me, are also interested in an metaphorical code gardening project - Nix + tmux + Neovim will certainly keep you busy. Feel free to give it a try.
 
 
+
 ## Setup
 
 
@@ -25,23 +26,26 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 
 
 
+
 ## Roadmap
 
 ### Nix Related Conversions
 
 #### Blocking from Adoption for Work Laptop
-- [ ] tmux setup via nix
+- [x] tmux setup via nix
     * This includes setting it up to run without the tmux package manager
 - [ ] zsh setup via nix
     * Possibly a switch to toggle between bash/zsh at home/work
 - [ ] Nerdfonts installation 
 
 
+
 #### Nice to haves/easy setups
 - [x] bash setup via nix
-- [ ] alacritty setup via nix
-- [ ] starship setup via nix
+- [x] alacritty setup via nix
+- [x] starship setup via nix
 - [ ] erlang wxwidgets setup for erlang debugger/process viewer tools?
+
 
 
 ### Tooling Improvements
@@ -59,6 +63,7 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
     * This is likely unnecessary and better of deleted
 - [ ] Something to help with markdown
     * vim-markdown removed for now, maybe consider [a new plugin](https://github.com/iamcco/markdown-preview.nvim)
+
 
 
 ### Neovim Related
@@ -84,10 +89,13 @@ This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager]
 
 
 
+
 ## Bored?
 Have a look at [Awesome Neovim](https://github.com/rockerBOO/awesome-neovim) to get some inspiration.
 
 ## Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
+
+
 
 

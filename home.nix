@@ -35,9 +35,6 @@ in
       username = "jowi";
       homeDirectory = "/home/jowi";
       packages = with pkgs; [
-        git 
-        neovim-unwrapped
-        tmux
         ctags 
         luajit 
         sumneko-lua-language-server
@@ -54,8 +51,7 @@ in
         powerline-fonts
         bat
         lsd
-        starship
-        tmuxPlugins.resurrect
+        xclip
 		  ];
 	  };
   };

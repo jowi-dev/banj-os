@@ -2,6 +2,7 @@
 vim.opt.background='dark'
 local cmd = vim.cmd
 cmd('syntax on')
+cmd('set clipboard+=unnamedplus')
 
 -- Neovim Theme
 --cmd('colorscheme github')
