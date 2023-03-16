@@ -62,3 +62,35 @@ function CopyToClipboard()
     -- restore original register
     vim.fn.setreg('"', saved_register)
 end
+
+function GPTSubmit()
+  local selected_text = vim.fn.getline("'<,'>")
+  local api_key = "<your-api-key-here>"
+  local url = "https://api.openai.com/v1/engines/davinci-codex/completions"
+  
+  local http = require("http")
+  
+  local headers = {
+    ["Content-Type"] = "application/json",
+    ["Authorization"] = "Bearer " .. api_key,
+  }
+  
+  local body = {
+    prompt = selected_text,
+    max_tokens = 1024,
+    temperature = 0.5,
+  }
+  
+  local response = http.post(url, {
+    headers = headers,
+    json = body,
+  })
+
+  
+  local result = response.body
+  
+  vim.fn.setreg("+", result)
+  print("Response saved to + register.")
+
+end
+
