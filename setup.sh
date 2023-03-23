@@ -2,7 +2,7 @@
 
 echo "Welcome to the Setup Wizard!"
 echo "Please ensure this repo was cloned to $HOME/.config/nixpkgs before continuing"
-# TODO: There should be a way to setup some sane defaults here given the system is known
+#TODO: Give the user an exit opportunity here
 echo "System Setup.."
 sys_name=$(uname) # will be Darwin (mac) or Linux
 user=$(id -un)
@@ -30,6 +30,21 @@ fi
 
 echo user is $user
 
+
+cat > env.nix << EOF
+{ config, pkgs, ... }: {
+  imports = [
+    ./defenv
+  ];
+  local-env = {
+    username = "$user"
+    homeDirectory = "$home"
+    gitUserName = "$git_user"
+    gitEmail = "$git_email"
+    openAPIKey = "$open_api_key"
+  }
+}
+EOF
 
 #cat > env.nix <<EOF
 #{ pkgs ? import <nixpkgs> {} }:
