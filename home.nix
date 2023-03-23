@@ -9,6 +9,7 @@ let
 in
 {
 	imports =  [
+    ./env
     ./nvim 
     ./git
     ./tmux
