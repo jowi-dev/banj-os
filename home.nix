@@ -10,7 +10,8 @@
     ./nvim 
     ./git
     ./tmux
-    ./bash
+    #./bash
+    ./zsh
     ./starship
     ];
 

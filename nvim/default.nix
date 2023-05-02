@@ -47,7 +47,7 @@ in
         nodePackages.bash-language-server
 
         # Elixir
-        beam.packages.erlang.elixir_ls
+        beam.packages.erlang.elixir-ls
         # Erlang
         beam.packages.erlang.erlang-ls
 
@@ -81,7 +81,7 @@ in
 
 # .. ";${nvimLuaEnv}/lib/lua/5.1/?.so"
       extraConfig = ''
-        let g:elixir_ls_home = "${pkgs.beam.packages.erlang.elixir_ls}"
+        let g:elixir_ls_home = "${pkgs.beam.packages.erlang.elixir-ls}"
 
         :lua open_api_key = "${config.local-env.openAPIKey}"
         :lua package.path = "${config.local-env.homeDirectory}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
