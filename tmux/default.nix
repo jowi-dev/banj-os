@@ -11,13 +11,15 @@
     escapeTime = 10;
 #    #shortcut = "a";
 #    baseIndex = 1;
-#    #keyMode = "vi";
+    keyMode = "vi";
 #    historyLimit = 10000;
 #    customPaneNavigationAndResize = true;
 #    resizeAmount = 5;
 #
 #
 #    extraConfig = ''
+#      set-window-option -g mode-keys vi
+#    '';
 #      # splitting panes
 #      # START:panesplit
 ##      bind | split-window -h

@@ -6,6 +6,7 @@ with lib;
   enable = true;
   enableCompletion = true;
   initExtra = ''
+    set -o vi
   '';
 
 
