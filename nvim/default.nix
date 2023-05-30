@@ -47,7 +47,7 @@ in
         nodePackages.bash-language-server
 
         # Elixir
-        beam.packages.erlang.elixir_ls
+        #if config.local-env.isMac then beam.packages.erlang.elixir-ls else beam.packages.erlang.elixir_ls
         # Erlang
         beam.packages.erlang.erlang-ls
 
@@ -77,11 +77,49 @@ in
         # Telescope tools
         ripgrep
         fd
-      ];
+      ] ++ (
+        let
+        erlang_25 = erlangR25.override {
+          version = "25.2.3";
+          # nix-prefetch-url --unpack https://github.com/erlang/otp/archive/OTP-25.2.3.tar.gz
+          sha256 = "10ad3xqrxkcpdbj57n50990d1jhhdmc6rcf7swmf64nf23rcgr55";
+          javacSupport = false;
+          odbcSupport = false;
+          configureFlags = [ "--with-ssl=${lib.getOutput "out" openssl}" ]
+            ++ [ "--with-ssl-incl=${lib.getDev openssl}" ];
+        };
+
+        beamPkg = beam.packagesWith erlang_25;
+
+        elixir_1_14 = beamPkg.elixir.override {
+          version = "1.14.2";
+          # nix-prefetch-url --unpack https://github.com/elixir-lang/elixir/archive/refs/tags/v1.14.2.tar.gz
+          sha256 = "1w0wda304bk3j220n76bmv4yv0pkl9jca8myipvz7lm6fnsvw500";
+        };
+
+        elixir_ls = beamPkg.elixir-ls.override {
+          lib = lib // {
+            # Merge custom importJSON into lib.
+            importJSON = _: {
+              version = "0.14.6";
+              sha256 = "sha256-O977DZLWPyLafIaOTPZKI4MOtK9E9TDProf2xyk05aI=";
+              depsSha256 = "sha256-jF1Plkz1D85aWkiNgeBlJmHndhr7us+8+m/gMkXHvDw=";
+            };
+          };
+          elixir = elixir_1_14;
+          mixRelease = beamPkg.mixRelease.override { elixir = elixir_1_14; };
+        };
+      in
+      [
+        erlang_25
+        elixir_1_14
+        elixir_ls
+      ]
+  );
 
 # .. ";${nvimLuaEnv}/lib/lua/5.1/?.so"
       extraConfig = ''
-        let g:elixir_ls_home = "${pkgs.beam.packages.erlang.elixir_ls}"
+        let g:elixir_ls_home = "${pkgs.elixir_ls}"
         let g:UltiSnipsSnippetDirectories = ["lua/UltiSnips"]
 
         :lua open_api_key = "${config.local-env.openAPIKey}"

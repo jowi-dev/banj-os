@@ -5,6 +5,14 @@ let
 in
 {
 	options.local-env = {
+
+	    isMac = mkOption {
+	      type = types.boolean;
+	      default = "";
+	      description = ''
+		      is it 
+	      '';
+	    };
 	    username = mkOption {
 	      type = types.str;
 	      default = "";
