@@ -28,6 +28,8 @@
         elixir 
         nodejs 
         nodePackages.neovim
+        yarn
+        bun
         python310Full
         ruby
         python310Packages.pynvim
