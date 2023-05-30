@@ -7,6 +7,7 @@ with lib;
   enableCompletion = true;
   initExtra = ''
     set -o vi
+    source ~/.nix-profile/etc/profile.d/nix.sh
   '';
 
 
