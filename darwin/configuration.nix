@@ -1,13 +1,11 @@
 # Darwin Config
 { config, pkgs, lib, ... }:
 with lib;
-let
-  cfg = config.my-darwin;
-in
-{
+let cfg = config.my-darwin;
+in {
 
-  imports = [ 
-  <home-manager/nix-darwin> 
+  imports = [
+    <home-manager/nix-darwin>
 
   ];
 
@@ -25,7 +23,7 @@ in
   };
 
   config = {
-  environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+    environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
     users.users.jwilliams = {
       name = "jwilliams";
@@ -33,27 +31,26 @@ in
     };
     home-manager.users.jwilliams = {
       path = "${config.home.homeDirectory}/.config/nixpkgs/home.nix";
-      imports = [../home.nix];
+      imports = [ ../home.nix ];
 
-#      imports = [
-#     # ../env
-#     # ../env/defenv
-#     ../nvim
-#     ../tmux
-#     ../starship
-#      ];
+      #      imports = [
+      #     # ../env
+      #     # ../env/defenv
+      #     ../nvim
+      #     ../tmux
+      #     ../starship
+      #      ];
       home = {
 
-	      stateVersion = "22.11";
-	      username = "jwilliams";
-	      homeDirectory = "/Users/jwilliams";
-	      #packages = with pkgs; [
-        };
+        stateVersion = "22.11";
+        username = "jwilliams";
+        homeDirectory = "/Users/jwilliams";
+        #packages = with pkgs; [
+      };
 
     };
     # Make sure nix always runs in multi-user mode on Mac
     services.nix-daemon.enable = true;
-
 
     nix = {
       package = pkgs.nixStable;
@@ -68,35 +65,25 @@ in
       extraOptions = "experimental-features = nix-command flakes";
       # An aarch64-linux vm running nixos, so I can build my raspberry pi config
       # on it and deploy remotely.  Building on the rpi3 directly is super slow.
-      buildMachines = [
-        {
-          hostName = "192.168.123.132";
-          sshUser = "root";
-          systems = [ "aarch64-linux" "x86_64-linux" ];
-          supportedFeatures = [ "big-parallel" ];
-        }
-      ];
+      buildMachines = [{
+        hostName = "192.168.123.132";
+        sshUser = "root";
+        systems = [ "aarch64-linux" "x86_64-linux" ];
+        supportedFeatures = [ "big-parallel" ];
+      }];
       # Required for the above build machines to be used.
       distributedBuilds = true;
     };
 
-  homebrew = {
-    enable = config.my-darwin.isWork;
-    onActivation = {
-      cleanup = "uninstall";
-    };
-    taps = [
-      {
+    homebrew = {
+      enable = config.my-darwin.isWork;
+      onActivation = { cleanup = "uninstall"; };
+      taps = [{
         name = "toasttab/toast";
         clone_target = "git@github.com:toasttab/homebrew-toast";
-      }
-    ];
-    brews = [
-      "libffi"
-      "cocoapods"
-      "lunchbox"
-    ];
-  };
+      }];
+      brews = [ "libffi" "cocoapods" "lunchbox" ];
+    };
 
     # Create /etc/zshrc that loads the nix-darwin environment.
     programs.zsh = {
@@ -113,33 +100,31 @@ in
     # $ darwin-rebuild changelog
     system.stateVersion = 4;
 
-  system.keyboard = {
-    enableKeyMapping = true;
-    #remapCapsLockToControl = true;
-  };
-
-  system.defaults = {
-    dock = {
-      orientation = "bottom";
-      showhidden = true;
-      mineffect = "genie";
-      minimize-to-application = true;
-      launchanim = true;
-      show-process-indicators = true;
-      # tilesize = 48;
-      mru-spaces = true;
+    system.keyboard = {
+      enableKeyMapping = true;
+      #remapCapsLockToControl = true;
     };
-    finder = {
-      # AppleShowAllExtensions = true;
-      # FXEnableExtensionChangeWarning = false;
-      # CreateDesktop = false; # disable desktop icons
-    };
-    NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark"; # set dark mode
+
+    system.defaults = {
+      dock = {
+        orientation = "bottom";
+        showhidden = true;
+        mineffect = "genie";
+        minimize-to-application = true;
+        launchanim = true;
+        show-process-indicators = true;
+        # tilesize = 48;
+        mru-spaces = true;
+      };
+      finder = {
+        # AppleShowAllExtensions = true;
+        # FXEnableExtensionChangeWarning = false;
+        # CreateDesktop = false; # disable desktop icons
+      };
+      NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark"; # set dark mode
+      };
     };
   };
-  };
-
-
 
 }

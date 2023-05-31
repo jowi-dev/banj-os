@@ -1,32 +1,30 @@
-#  IF THIS `$NIX_PATH is null` error happens again, copy paste this line into your shell
+# IF THIS `$NIX_PATH is null` error happens again, copy paste this line into your shell
 #  export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 # Note - this PATH ^ does not work for WSL under the recommended install b/c WSL uses single user install vs per user. TODO - find the single user path and if/else it.
 
-
-{config, pkgs, lib, ...}: 
-{
-	imports =  [
+{ config, pkgs, lib, ... }: {
+  imports = [
     ./env
-    ./nvim 
+    ./nvim
     ./git
     ./tmux
     ./bash
     #./zsh
     ./starship
-    ];
+  ];
 
-	config = {
+  config = {
     programs.home-manager.enable = true;
-		home = {
+    home = {
       stateVersion = "22.11";
       username = config.local-env.username;
       homeDirectory = config.local-env.homeDirectory;
       packages = with pkgs; [
-        ctags 
-        luajit 
+        ctags
+        luajit
         sumneko-lua-language-server
-        elixir 
-        nodejs 
+        elixir
+        nodejs
         nodePackages.neovim
         yarn
         bun
@@ -41,11 +39,8 @@
         bat
         lsd
         xclip
-		  ];
-	  };
+      ];
+    };
   };
 }
-
-
-
 

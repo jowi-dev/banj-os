@@ -2,10 +2,10 @@
 with lib;
 let
   python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
-  nvimLuaEnv = pkgs.luajit.withPackages (p: with p; [http lpeg basexx cqueues cjson]);
-in
-{
-  config =  {
+  nvimLuaEnv =
+    pkgs.luajit.withPackages (p: with p; [ http lpeg basexx cqueues cjson ]);
+in {
+  config = {
     programs.neovim = {
       package = pkgs.neovim-unwrapped;
       enable = true;
@@ -38,55 +38,55 @@ in
         ultisnips
       ];
 
-      extraPackages = with pkgs; [
-        tree-sitter
-        nodejs
+      extraPackages = with pkgs;
+        [
+          nixfmt
+          tree-sitter
+          nodejs
 
-        # Language Servers
-        # Bash
-        nodePackages.bash-language-server
+          # Language Servers
+          # Bash
+          nodePackages.bash-language-server
 
-        # Elixir
-        #if config.local-env.isMac then beam.packages.erlang.elixir-ls else beam.packages.erlang.elixir_ls
-        # Erlang
-        beam.packages.erlang.erlang-ls
+          # Elixir
+          #-- Defined below due to a mac/linux inconsistency
+          # Erlang
+          beam.packages.erlang.erlang-ls
 
-        # ZIG BABY
-        zig
+          # ZIG BABY
+          zig
 
-        # Lua
-        lua-language-server
-        # Http packages for makin bacon pancakes w/ chatGPT
-        #luajitPackages.rest-nvim
-        luajit
-        #luajitPackages.http
+          # Lua
+          lua-language-server
+          # Http packages for makin bacon pancakes w/ chatGPT
+          #luajitPackages.rest-nvim
+          luajit
+          #luajitPackages.http
 
-        # Nix
-        rnix-lsp
-        nixpkgs-fmt
-        statix
+          # Nix
+          rnix-lsp
+          nixpkgs-fmt
+          statix
 
-        #python-debug
-        black
-        # Typescript
-        nodePackages.typescript-language-server
+          #python-debug
+          black
+          # Typescript
+          nodePackages.typescript-language-server
 
-        # Web (ESLint, HTML, CSS, JSON)
-        nodePackages.vscode-langservers-extracted
+          # Web (ESLint, HTML, CSS, JSON)
+          nodePackages.vscode-langservers-extracted
 
-        # Telescope tools
-        ripgrep
-        fd
-      ] ++ ( 
-        let
-          elixir_ls = if config.local-env.isMac then beam.packages.erlang.elixir-ls else beam.packages.erlang.elixir_ls;
-      in
-      [
-        elixir_ls
-      ]
-  );
+          # Telescope tools
+          ripgrep
+          fd
+        ] ++ (let
+          elixir_ls = if config.local-env.isMac then
+            beam.packages.erlang.elixir-ls
+          else
+            beam.packages.erlang.elixir_ls;
+        in [ elixir_ls ]);
 
-# .. ";${nvimLuaEnv}/lib/lua/5.1/?.so"
+      # .. ";${nvimLuaEnv}/lib/lua/5.1/?.so"
       extraConfig = ''
         let g:elixir_ls_home = "${pkgs.elixir_ls}"
         let g:UltiSnipsSnippetDirectories = ["lua/UltiSnips"]
@@ -98,8 +98,6 @@ in
       '';
 
     };
-
-
 
     xdg.configFile.nvim = {
       source = ./config;

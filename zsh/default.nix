@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
-with lib;
-{
+with lib; {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -14,9 +13,7 @@ with lib;
       extended = true;
     };
 
-    localVariables = {
-      GREP_COLOR = "1;33";
-    };
+    localVariables = { GREP_COLOR = "1;33"; };
 
     shellAliases = {
       # PS
@@ -111,7 +108,8 @@ with lib;
       gz = "tar -zcvf";
 
       # RM
-      rm = "nocorrect rm"; # Override rm -i alias which makes rm prompt for every action
+      rm =
+        "nocorrect rm"; # Override rm -i alias which makes rm prompt for every action
 
       # Misc
       caff = "caffeinate -d -i -m -s"; # Prevents computer from falling asleep
