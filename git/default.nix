@@ -3,9 +3,8 @@
   programs = {
     git = {
       enable = true;
-      userName = "jowi-dev";
-      #userEmail = if config.my-home.isWork then "jwilliams@joinpapa.com" else "joey8williams@gmail.com";
-      userEmail = "joey8williams@gmail.com";
+      userName = config.local-env.gitUserName;
+      userEmail = config.local-env.gitEmail;
 
       aliases = {
       };
