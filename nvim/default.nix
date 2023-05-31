@@ -2,6 +2,10 @@
 with lib;
 let
   python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
+
+  # So this is actually pretty cool.
+  # We're making a luajit environment with http (and dependencies) available.
+  # This is used in the ChatGPT submission code
   nvimLuaEnv =
     pkgs.luajit.withPackages (p: with p; [ http lpeg basexx cqueues cjson ]);
 in {
@@ -40,7 +44,6 @@ in {
 
       extraPackages = with pkgs;
         [
-          nixfmt
           tree-sitter
           nodejs
 
@@ -48,8 +51,6 @@ in {
           # Bash
           nodePackages.bash-language-server
 
-          # Elixir
-          #-- Defined below due to a mac/linux inconsistency
           # Erlang
           beam.packages.erlang.erlang-ls
 
@@ -58,12 +59,10 @@ in {
 
           # Lua
           lua-language-server
-          # Http packages for makin bacon pancakes w/ chatGPT
-          #luajitPackages.rest-nvim
           luajit
-          #luajitPackages.http
 
           # Nix
+          nixfmt
           rnix-lsp
           nixpkgs-fmt
           statix
@@ -80,13 +79,15 @@ in {
           ripgrep
           fd
         ] ++ (let
+          # Elixir
+          # This exists down here because of the dumbest bug on earth.
+          # yes the name really is different between operating systems
           elixir_ls = if config.local-env.isMac then
             beam.packages.erlang.elixir-ls
           else
             beam.packages.erlang.elixir_ls;
         in [ elixir_ls ]);
 
-      # .. ";${nvimLuaEnv}/lib/lua/5.1/?.so"
       extraConfig = ''
         let g:elixir_ls_home = "${pkgs.elixir_ls}"
         let g:UltiSnipsSnippetDirectories = ["lua/UltiSnips"]
