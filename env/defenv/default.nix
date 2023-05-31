@@ -7,7 +7,7 @@ in
 	options.local-env = {
 
 	    isMac = mkOption {
-	      type = types.boolean;
+	      type = types.bool;
 	      default = "";
 	      description = ''
 		      is it 
