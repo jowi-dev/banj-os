@@ -1,3 +1,4 @@
+require('actions.test')
 require('actions.gpt')
 require('actions.http_post')
 require('actions.copy_to_clipboard')
@@ -40,6 +41,9 @@ map('n', '<leader>sb',   ':UltiSnipsJumpBackwardTrigger',{noremap=true})
 map('n', '<leader>vc', ':e ~/.config/nvim/init.lua', {noremap=true})
 map('n', '<leader>vr', ':source ~/.config/nvim/init.lua', {noremap=true})
 
+
+-- Testing Keybinds -- PREFIX t
+map('n', '<leader>t',   ':lua RunTests()<CR>',{noremap=true})
 
 -- If you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsExpandTrigger="<leader>sx"
