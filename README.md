@@ -34,14 +34,16 @@ TODO (WSL) - make an option that chooses the correct path to export so single us
 
 
 
+
 ## Roadmap
+
 
 ### Nix Related Conversions
 
 #### Blocking from Adoption for Work Laptop
 - [x] tmux setup via nix
     * This includes setting it up to run without the tmux package manager
-- [ ] zsh setup via nix
+- [x] zsh setup via nix
     * Possibly a switch to toggle between bash/zsh at home/work
 - [ ] Nerdfonts installation 
 
@@ -51,7 +53,8 @@ TODO (WSL) - make an option that chooses the correct path to export so single us
 - [x] bash setup via nix
 - [x] alacritty setup via nix
 - [x] starship setup via nix
-- [ ] erlang wxwidgets setup for erlang debugger/process viewer tools?
+- [ ] ~erlang wxwidgets setup for erlang debugger/process viewer tools?~
+    - skipping this because elixir supports DAP now so i really don't care about java nonsense
 
 
 
@@ -65,6 +68,7 @@ TODO (WSL) - make an option that chooses the correct path to export so single us
 - [ ] htop/performance monitors? How can these be integrated effectively into the workflow? Monitoring is still a big miss in my local dev flow
     * Maybe as a lualine indicator? Maybe as a disposable/composable vim buffer?
     * ctop as well
+    * DTOP AS WELL TIPPY TOP
 - [ ] NGNIX is likely gonna be helpful
 - [ ] A rest/GQL testing tool would be amazing
 - [ ] Any worthwhile docker tooling to have?
@@ -76,6 +80,10 @@ TODO (WSL) - make an option that chooses the correct path to export so single us
 
 
 ### Neovim Related
+- [ ] setup [Neomux](https://github.com/nikvdp/neomux)
+    - tmux isn't windows compatible, and this is a step towards being windows compat
+- [ ] setup [Session Manager](https://github.com/Shatur/neovim-session-manager)
+    - again, the less tmux we have the less weird errors that come from switches. 
 - [ ] Test command for running tests in a new tmux split window, so we don't have to keep typing MIX_ENV=test mix test.....
 - [ ] Also include a command to close said tmux split quickly
 - [ ] @aruder's get github link for current file command
@@ -104,6 +112,7 @@ Have a look at [Awesome Neovim](https://github.com/rockerBOO/awesome-neovim) to 
 
 ## Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
+
 
 
 
