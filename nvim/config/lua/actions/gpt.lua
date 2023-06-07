@@ -13,7 +13,7 @@ function GPTSubmit()
   -- different actions for programming tips vs code review vs 
   -- debugging vs other? TBD
   local payload = {
-    model="gpt-3.5-turbo",
+    model="gpt-4",
     messages={
       {role="system", content="You are an expert programming assistant"},
       { role="user", content=selected_text }

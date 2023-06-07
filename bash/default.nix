@@ -6,6 +6,8 @@ with lib; {
     initExtra = ''
       set -o vi
       source ~/.nix-profile/etc/profile.d/nix.sh
+
+      alias bs="echo ':terminal' | nvim -s --listen /tmp/$(tmux display-message -p '#S').pipe"
     '';
 
   };

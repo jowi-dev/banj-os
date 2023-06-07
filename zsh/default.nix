@@ -16,6 +16,9 @@ with lib; {
     localVariables = { GREP_COLOR = "1;33"; };
 
     shellAliases = {
+
+      bs="echo ':terminal' | nvim -s --listen /tmp/$(tmux display-message -p '#S').pipe";
+
       # PS
       psa = "ps aux";
       psg = "ps aux | grep ";

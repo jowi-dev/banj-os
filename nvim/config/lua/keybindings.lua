@@ -45,6 +45,9 @@ map('n', '<leader>vr', ':source ~/.config/nvim/init.lua', {noremap=true})
 -- Testing Keybinds -- PREFIX t
 map('n', '<leader>t',   ':lua RunTests()<CR>',{noremap=true})
 
+-- Formatting Keybinds -- PREFIX f
+map('n', '<leader>f',   ':lua Format()<CR>',{noremap=true})
+
 -- If you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsExpandTrigger="<leader>sx"
 vim.g.UltiSnipsJumpForwardTrigger="<leader>sf"
