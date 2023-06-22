@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
+  #python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
 
   # So this is actually pretty cool.
   # We're making a luajit environment with http (and dependencies) available.
   # This is used in the ChatGPT submission code
-  nvimLuaEnv =
-    pkgs.luajit.withPackages (p: with p; [ http lpeg basexx cqueues cjson ]);
+  nvimLuaEnv = pkgs.luajit.withPackages (p: with p; [ http lpeg basexx cqueues cjson ]);
+
 in {
   config = {
     programs.neovim = {
@@ -25,6 +25,7 @@ in {
         vim-merginal
         tmuxline-vim
         vim-elixir
+        vim-nix
         vim-gitgutter
         nvim-treesitter
         playground
@@ -53,6 +54,7 @@ in {
 
           # Erlang
           beam.packages.erlang.erlang-ls
+            beam.packages.erlang.elixir-ls
 
           # ZIG BABY
           zig
@@ -78,18 +80,10 @@ in {
           # Telescope tools
           ripgrep
           fd
-        ] ++ (let
-          # Elixir
-          # This exists down here because of the dumbest bug on earth.
-          # yes the name really is different between operating systems
-          elixir_ls = if config.local-env.isMac then
-            beam.packages.erlang.elixir-ls
-          else
-            beam.packages.erlang.elixir_ls;
-        in [ elixir_ls ]);
+        ];
 
       extraConfig = ''
-        let g:elixir_ls_home = "${pkgs.elixir_ls}"
+        let g:elixir_ls_home = "${pkgs.elixir-ls}"
         let g:UltiSnipsSnippetDirectories = ["lua/UltiSnips"]
 
         :lua open_api_key = "${config.local-env.openAPIKey}"
