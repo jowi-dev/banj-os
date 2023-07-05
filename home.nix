@@ -17,11 +17,9 @@ in {
     ./git
     ./tmux
     ./bash
-    #./zsh
     ./starship
   ];
   config = {
-
     programs.home-manager.enable = true;
     home = {
       stateVersion = "23.11";
@@ -42,6 +40,7 @@ in {
         # Global Tooling
         git 
         yarn
+        nix-prefetch-github
 
         ctags
         nodePackages.neovim

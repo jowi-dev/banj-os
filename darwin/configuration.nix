@@ -6,7 +6,6 @@ in {
 
   imports = [
     <home-manager/nix-darwin>
-
   ];
 
   options.my-darwin = {
@@ -32,20 +31,10 @@ in {
     home-manager.users.jwilliams = {
       path = "${config.home.homeDirectory}/.config/nixpkgs/home.nix";
       imports = [ ../home.nix ];
-
-      #      imports = [
-      #     # ../env
-      #     # ../env/defenv
-      #     ../nvim
-      #     ../tmux
-      #     ../starship
-      #      ];
       home = {
-
         stateVersion = "23.11";
         username = "jwilliams";
         homeDirectory = "/Users/jwilliams";
-        #packages = with pkgs; [
       };
 
     };
@@ -102,7 +91,6 @@ in {
 
     system.keyboard = {
       enableKeyMapping = true;
-      #remapCapsLockToControl = true;
     };
 
     system.defaults = {
@@ -113,13 +101,7 @@ in {
         minimize-to-application = true;
         launchanim = true;
         show-process-indicators = true;
-        # tilesize = 48;
         mru-spaces = true;
-      };
-      finder = {
-        # AppleShowAllExtensions = true;
-        # FXEnableExtensionChangeWarning = false;
-        # CreateDesktop = false; # disable desktop icons
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark"; # set dark mode
