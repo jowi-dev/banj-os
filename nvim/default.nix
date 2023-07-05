@@ -20,7 +20,7 @@ in {
       plugins = with pkgs.vimPlugins; [
         palenight-vim
         nerdtree
-        csv-vim
+        # csv-vim
         vim-fugitive
         vim-merginal
         tmuxline-vim
@@ -55,7 +55,7 @@ in {
 
           # Erlang
           beam.packages.erlang.erlang-ls
-            beam.packages.erlang.elixir-ls
+          beam.packages.erlang.elixir-ls
 
           # ZIG BABY
           zig
@@ -72,6 +72,10 @@ in {
 
           #python-debug
           black
+          python310Full
+          python310Packages.pynvim
+          python310Packages.powerline
+
           # Typescript
           nodePackages.typescript-language-server
 

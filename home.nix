@@ -28,23 +28,25 @@ in {
       username = config.local-env.username;
       homeDirectory = config.local-env.homeDirectory;
       packages = with pkgs; [
-        ctags
+        # Global Languages
         luajit
-        sumneko-lua-language-server
         elixir
         nodejs
-        nodePackages.neovim
-        yarn
+        go 
         bun
         zig
-        esbuild 
-        git 
-        go 
-        python310Full
         ruby
-        python310Packages.pynvim
-        python310Packages.powerline
         rustup
+
+
+        # Global Tooling
+        git 
+        yarn
+
+        ctags
+        nodePackages.neovim
+
+        # Why is this here?
         fzf
         ripgrep
         powerline-fonts

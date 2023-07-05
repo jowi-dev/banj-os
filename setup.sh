@@ -1,6 +1,8 @@
 #! /bin/bash
 
 echo "Welcome to the Setup Wizard!"
+# TODO - wsl.conf needs to be called out here
+# TODO - home-manager needs to be cloned into ~/.config/home-manager with nix updates
 read -p "Please ensure this repo was cloned to $HOME/.config/nixpkgs before continuing. Continue? (Y/n): " p1cont
 
 if [ $p1cont == 'n' ] then 
@@ -21,8 +23,15 @@ fi
 
 export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
+# Unstable Home Manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
+
+# Unstable NixPkgs
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
+nix-channel --update
+
+
 
 nix-shell '<home-manager>' -A install
 

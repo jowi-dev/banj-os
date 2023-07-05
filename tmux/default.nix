@@ -16,9 +16,10 @@
     #    resizeAmount = 5;
     #
     #
-    #    extraConfig = ''
-    #      set-window-option -g mode-keys vi
-    #    '';
+    extraConfig = ''
+          set-window-option -g mode-keys vi
+          set-option -sa terminal-overrides ',xterm-256color:RGB'
+        '';
     #      # splitting panes
     #      # START:panesplit
     ##      bind | split-window -h
@@ -56,10 +57,9 @@
     ##      bind P pipe-pane -o "cat >>~/#W.log" \; display "Toggled logging to ~/#W.log"
     #      # END:pipe-pane
     #      # Neovim color compatibility
-    #      set-option -sa terminal-overrides ',xterm-256color:RGB'
     #      # Auto rename windows to directory
     #      set-option -g automatic-rename on
     #      set-option -g automatic-rename-format '#{b:pane_current_path}'
-    #    '';
+    #'';
   };
 }

@@ -2,7 +2,7 @@ local lsp = require'lspconfig'
 
 -- Going to try a new LS for elixir
 --lsp.elixirls = require'languages/elixir'
---local elixirls = require("elixir.elixirls")
+local elixirls = require("elixir.elixirls")
 require("elixir").setup({
   nextls = {
     enable = true, -- defaults to false
