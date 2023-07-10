@@ -41,6 +41,7 @@ in {
         nvim-cmp
         lualine-nvim
         ultisnips
+        elixir-tools-nvim
       ];
 
       extraPackages = with pkgs;
@@ -85,6 +86,8 @@ in {
       extraConfig = ''
         let g:elixir_ls_home = "${pkgs.elixir-ls}"
         let g:UltiSnipsSnippetDirectories = ["lua/UltiSnips"]
+
+        :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
 
         :lua open_api_key = "${config.local-env.openAPIKey}"
         :lua package.path = "${config.local-env.homeDirectory}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 

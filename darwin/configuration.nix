@@ -42,7 +42,7 @@ in {
       #      ];
       home = {
 
-        stateVersion = "22.11";
+        stateVersion = "23.11";
         username = "jwilliams";
         homeDirectory = "/Users/jwilliams";
         #packages = with pkgs; [
