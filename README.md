@@ -74,7 +74,7 @@ TODO (WSL) - make an option that chooses the correct path to export so single us
 - [ ] Any worthwhile docker tooling to have?
     * This is likely unnecessary and better of deleted
     * ctop
-- [ ] Something to help with markdown
+- [x] Something to help with markdown
     * vim-markdown removed for now, maybe consider [a new plugin](https://github.com/iamcco/markdown-preview.nvim)
 
 
@@ -84,7 +84,7 @@ TODO (WSL) - make an option that chooses the correct path to export so single us
     - tmux isn't windows compatible, and this is a step towards being windows compat
 - [ ] setup [Session Manager](https://github.com/Shatur/neovim-session-manager)
     - again, the less tmux we have the less weird errors that come from switches. 
-- [ ] Test command for running tests in a new tmux split window, so we don't have to keep typing MIX_ENV=test mix test.....
+- [x] Test command for running tests in a new tmux split window, so we don't have to keep typing MIX_ENV=test mix test.....
 - [ ] Also include a command to close said tmux split quickly
 - [ ] @aruder's get github link for current file command
 - [ ] ctags setup cross platform -> integrate setup into nvim for tag usage
