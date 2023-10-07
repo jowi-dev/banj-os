@@ -3,6 +3,7 @@
 echo "Welcome to the Setup Wizard!"
 # TODO - wsl.conf needs to be called out here
 # TODO - home-manager needs to be cloned into ~/.config/home-manager with nix updates
+# TODO - darwin related modules need to be optionally created/moved to the correct place
 read -p "Please ensure this repo was cloned to $HOME/.config/nixpkgs before continuing. Continue? (Y/n): " p1cont
 
 if [ $p1cont == 'n' ] then 
@@ -14,12 +15,13 @@ if [ $p2cont == 'n' ] then
   exit N 
 fi
 
-curl -L https://releases.nixos.org/nix/nix-2.13.3/install | sh -s -- --daemon
-nix_install=$(nix --version)
-
-if [ ! nix_install == 'nix (Nix) 2.13.3' ] then
-  exit $nix_install
-fi
+#curl -L https://releases.nixos.org/nix/nix-2.13.3/install | sh -s -- --daemon
+sh <(curl -L https://nixos.org/nix/install) --daemon
+#nix_install=$(nix --version)
+#
+#if [ ! nix_install == 'nix (Nix) 2.13.3' ] then
+#  exit $nix_install
+#fi
 
 export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 
