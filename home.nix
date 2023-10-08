@@ -57,3 +57,27 @@ in {
   };
 }
 
+#how to change nix store version to unstable
+#To switch to the Nix unstable channel, follow these steps:
+#
+#1. Remove the current channel:
+#
+#   ```bash
+#   sudo nix-channel --remove nixpkgs
+#   ```
+#
+#2. Add the unstable channel:
+#
+#   ```bash
+#   sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+#   ```
+#
+#3. Update the channel:
+#
+#   ```bash
+#   sudo nix-channel --update
+#   ```
+#
+#4. Now you can install packages from the unstable channel.
+#
+#Please note that switching to the unstable channel might bring some instability or bugs as the packages in this channel are not as thoroughly tested as those in the stable channel. Use it at your own risk.

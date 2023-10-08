@@ -1,0 +1,29 @@
+snippet daily_note "daily_note"
+# Key Takeaways
+
+-- Use GPT more
+-- Aggressively build out flakes, namely the nixpkgs flake and home manager flake to run a leaner system
+-- Functions once called can not be updated. Doh. 
+-- Notes are officially here!
+
+# Daily Jottings
+All Vim configuration today. The Love hate for Nix has swung full love. Having access to rebuild not only my editor but the languages underneath of it as well as underlying tools is a huge win for cross system compatibility. 
+
+Build times are still pretty slow, so having a flake migration from the standard build process will likely net a much snappier performance.
+
+GPT was a huge boon in getting unblocked on some of these problems. For the most part the vim api is `just try it, it'll probably work`, but here and there it was a huge success to have access to a helper. Would be nice to extend it in a way where the chat logs could be saved in these logs somewhere
+
+Blocked for hours on a problem that ended up being my own misunderstanding of the rebuild process - I had assumed a race condition in the nix rebuild/copy/replacement of files vs the lua sourcing of new origin files. Instead the issue was a function already loaded into memory being the test subject. Woof. Outputting the files helped uncover what was happening, but I more or less lucked into the solution.
+
+Starting to lean heavier into the command palette of vim rather than keybindings, we'll see how that goes
+
+# Interesting Links/Resources/Readings
+
+## 3 Part Nix tutorial on Flakes, and making packages
+https://www.youtube.com/watch?v=FFuBCgsLPlw
+
+# Topics
+- Nix
+- Neovim
+- GPT
+endsnippet

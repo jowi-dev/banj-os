@@ -2,6 +2,7 @@ require('actions.test')
 require('actions.gpt')
 require('actions.http_post')
 require('actions.copy_to_clipboard')
+require('actions.build_environment')
 
 -- Leader Key
 vim.g.mapleader=","

@@ -21,6 +21,12 @@ null_ls.setup({
   null_ls.builtins.diagnostics.eslint,
 })
 
+  -- LSP freaks but nix handles
+local telekasten = require('telekasten').setup({
+  home = vim.fn.expand(logs_path)
+})
+
+vim.fn.Notes = telekasten
 
 -- UltiSnips Options
 vim.g.ultisnips_edit_split="vertical"
