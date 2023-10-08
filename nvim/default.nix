@@ -21,6 +21,8 @@ in {
         palenight-vim
         nerdtree
         # csv-vim
+        nvim-jqx
+        vim-graphql
         vim-fugitive
         vim-merginal
         tmuxline-vim
@@ -47,6 +49,7 @@ in {
 
       extraPackages = with pkgs;
         [
+          jq
           tree-sitter
           nodejs
 
