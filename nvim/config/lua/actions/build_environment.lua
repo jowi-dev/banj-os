@@ -10,6 +10,7 @@ local function source_all()
     "actions/copy_to_clipboard.lua",
     "actions/gpt.lua",
     "actions/http_post.lua",
+    "actions/gql_request.lua",
     "actions/test.lua",
     "languages/elixir.lua",
     "languages/typescript.lua",

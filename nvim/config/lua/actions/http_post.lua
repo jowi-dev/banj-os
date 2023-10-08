@@ -34,5 +34,7 @@ function Post(url, body, api_key)
     return
   end
 
+  print(resp_body)
+
   return result
 end
