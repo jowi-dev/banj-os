@@ -22,6 +22,7 @@ in {
         nerdtree
         # csv-vim
         nvim-jqx
+        vim-graphql
         vim-fugitive
         vim-merginal
         tmuxline-vim

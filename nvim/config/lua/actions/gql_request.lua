@@ -3,35 +3,49 @@ function Output(data)
   local buffer = vim.api.nvim_win_get_buf(0)
   vim.api.nvim_buf_set_lines(buffer, 0, 0, false, {data})
   vim.cmd("%! jq .")
-
 end
--- Env Vars needed per project
--- url - HOST
--- token - bearer token for auth
 
--- body - request itself
--- This could be done the same way GPT grabs prompts from nvim?
+function GqlInput()
+  vim.cmd("new request.gql")
+end
+
+function GqlGetHost()
+  if HAMMERCURL_HOST ~= ""
+    then
+      print(HAMMERCURL_HOST)
+    else
+      print("Please Set GQL Host")
+    end
+end
+
+function GqlSetHost(host)
+  HAMMERCURL_HOST = host
+end
+
+function GqlGetToken()
+  if HAMMERCURL_TOKEN ~= ""
+    then
+      print(HAMMERCURL_TOKEN)
+    else
+      print("Please Set GQL Bearer Token")
+    end
+end
+
+function GqlSetToken(token)
+  HAMMERCURL_TOKEN = token
+end
+
 function GqlRequest()
+  local buffer = vim.api.nvim_win_get_buf(0)
+  local lines = vim.api.nvim_buf_get_lines(buffer, 0, -1, false)
+
   local body = {}
-  body.query = "{ currentAccount {data {id}} }"
-  local token = ""
-  local url = "https://stable-main.backend.papadev.co/api/graphql"
-  --local body = { "query": "query ($id: Int) { user(id: $id) { name } }", "variables": { "id": 1 } }
+  body.query = table.concat(lines, " ")
   local options = {}
   options["disable_decode"] = true
-  local result = Post(url, body, token, options)
-  Output(result)
+  local result = Post(HAMMERCURL_HOST, body, HAMMERCURL_TOKEN, options)
 
---
---  if result == nil then
---    return
---  end
---
---  for k,v in pairs(result) do
---    print("result line")
---    print(k)
---    print(v)
---  end
+  Output(result)
 end
 
 --How to format a GQL request body in a curl request?

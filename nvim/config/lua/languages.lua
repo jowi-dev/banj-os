@@ -48,6 +48,7 @@ local on_attach = function()
 	vim.opt.signcolumn = "yes"
 end
 
+lsp.graphql.setup{}
 lsp.tsserver = require'languages/typescript'
 lsp.zls.setup{}
 lsp.rust_analyzer.setup{
