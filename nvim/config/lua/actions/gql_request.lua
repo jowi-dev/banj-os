@@ -1,3 +1,10 @@
+function Output(data)
+  vim.cmd("new output.json")
+  local buffer = vim.api.nvim_win_get_buf(0)
+  vim.api.nvim_buf_set_lines(buffer, 0, 0, false, {data})
+  vim.cmd("%! jq .")
+
+end
 -- Env Vars needed per project
 -- url - HOST
 -- token - bearer token for auth
@@ -10,7 +17,11 @@ function GqlRequest()
   local token = ""
   local url = "https://stable-main.backend.papadev.co/api/graphql"
   --local body = { "query": "query ($id: Int) { user(id: $id) { name } }", "variables": { "id": 1 } }
-  local result = Post(url, body, token)
+  local options = {}
+  options["disable_decode"] = true
+  local result = Post(url, body, token, options)
+  Output(result)
+
 --
 --  if result == nil then
 --    return
@@ -43,6 +54,3 @@ end
 --In this example, the query is `query ($id: Int) { user(id: $id) { name } }`, and the variable is `"id": 1`.
 --
 --Remember to replace `http://localhost:4000/graphql` with the URL of your GraphQL server.
-
-
-

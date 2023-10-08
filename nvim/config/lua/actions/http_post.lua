@@ -1,7 +1,7 @@
 -- This is a generic post request written mostly for the OpenAPI request
 -- but should work for any request using a bearer token style, or 
 -- that does not require a token to post
-function Post(url, body, api_key)
+function Post(url, body, api_key, opts)
   local request = require("http.request")
   local http_headers = require("http.headers")
   local json = require "cjson"
@@ -25,7 +25,6 @@ function Post(url, body, api_key)
 
   local head, stream = assert(req:go())
   local resp_body = assert(stream:get_body_as_string())
-  local result = json.decode(resp_body)
 
   local status = head:get(":status")
   print("Response Status: ".. status)
@@ -34,7 +33,10 @@ function Post(url, body, api_key)
     return
   end
 
-  print(resp_body)
-
-  return result
+  if opts["disable_decode"] == true
+  then
+    return resp_body
+  else
+    return json.decode(resp_body)
+  end
 end
