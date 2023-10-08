@@ -1,7 +1,6 @@
 local function source_all()
   local rel_path = "~/.config/nvim"
   local files = {
---    "init.lua",
     "lua/aliases.lua",
     "lua/init.lua",
     "lua/keybindings.lua",
