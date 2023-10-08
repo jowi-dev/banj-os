@@ -92,7 +92,7 @@ in {
         let g:elixir_ls_home = "${pkgs.elixir-ls}"
         let g:UltiSnipsSnippetDirectories = ["${config.local-env.homeDirectory}/.config/home-manager/nvim/config/lua/UltiSnips"]
 
-        :lua nvimHome = "${config.local-env.homeDirectory}/.config/nvim"
+        :lua nvimHome = "${config.local-env.homeDirectory}/.config/nvim/lua"
         :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
         :lua logs_path = "${config.local-env.homeDirectory}/.config/home-manager/logs"
 
@@ -101,8 +101,6 @@ in {
         :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
 
         :luafile ~/.config/nvim/lua/init.lua
-        :e ~/.config/home-manager/nvim/config/lua/actions/build_environment.lua
-        :lua BuildEnv()
       '';
 
     };

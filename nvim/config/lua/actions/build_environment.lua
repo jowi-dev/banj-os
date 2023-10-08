@@ -1,27 +1,26 @@
 local function source_all()
-  local rel_path = "~/.config/nvim"
   local files = {
-    "lua/aliases.lua",
-    "lua/init.lua",
-    "lua/keybindings.lua",
-    "lua/languages.lua",
-    "lua/opts.lua",
-    "lua/package_config.lua",
-    "lua/actions/build_environment.lua",
-    "lua/actions/copy_to_clipboard.lua",
-    "lua/actions/gpt.lua",
-    "lua/actions/http_post.lua",
-    "lua/actions/test.lua",
-    "lua/languages/elixir.lua",
-    "lua/languages/typescript.lua",
-    "lua/package_configs/cmp.lua",
-    "lua/package_configs/telescope.lua",
+    "aliases.lua",
+    "init.lua",
+    "keybindings.lua",
+    "languages.lua",
+    "opts.lua",
+    "package_config.lua",
+    "actions/build_environment.lua",
+    "actions/copy_to_clipboard.lua",
+    "actions/gpt.lua",
+    "actions/http_post.lua",
+    "actions/test.lua",
+    "languages/elixir.lua",
+    "languages/typescript.lua",
+    "package_configs/cmp.lua",
+    "package_configs/telescope.lua",
 
 
   }
 
   for _, file in ipairs(files) do
-    vim.cmd(':source ' .. rel_path .. '/' .. file)
+    vim.cmd(':source ' .. nvimHome .. '/' .. file)
   end
 end
 
