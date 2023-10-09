@@ -4,6 +4,7 @@ require('actions.http_post')
 require('actions.gql_request')
 require('actions.copy_to_clipboard')
 require('actions.build_environment')
+require('actions.send_to_note')
 
 -- Leader Key
 vim.g.mapleader=","
