@@ -7,6 +7,7 @@ local function source_all()
     "opts.lua",
     "package_config.lua",
     "actions/build_environment.lua",
+    "actions/send_to_note.lua",
     "actions/copy_to_clipboard.lua",
     "actions/gpt.lua",
     "actions/http_post.lua",

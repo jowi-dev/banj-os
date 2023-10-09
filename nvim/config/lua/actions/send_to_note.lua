@@ -7,4 +7,5 @@ function SendToNote()
   local file = logs_path .. '/' .. current_date .. '.md'
 
   os.execute("echo " .. selected_text .. " >> " .. file)
+  --print(file)
 end
