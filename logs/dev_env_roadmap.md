@@ -8,19 +8,12 @@
 - [ ] Nerdfonts installation 
 
 
-
-
-
 #### Nice to haves/easy setups
 - [x] bash setup via nix
 - [x] alacritty setup via nix
 - [x] starship setup via nix
 - [ ] ~erlang wxwidgets setup for erlang debugger/process viewer tools?~
     - skipping this because elixir supports DAP now so i really don't care about java nonsense
-
-
-
-
 
 ### Tooling Improvements
 
@@ -42,9 +35,6 @@
     * vim-markdown removed for now, maybe consider [a new plugin](https://github.com/iamcco/markdown-preview.nvim)
 
 
-
-
-
 ### Neovim Related
 - [ ] setup [Neomux](https://github.com/nikvdp/neomux)
     - tmux isn't windows compatible, and this is a step towards being windows compat
@@ -63,13 +53,8 @@
 - [ ] setup cpp tooling
     * This is likely going to be an easy find via @fmoda3's nixconfig (Acknowledgements)
 
-
-
-
 ### Tangential Project Ideas
 - [ ] Once ctags is setup, complete TagStack, migrate to new repo
 - [ ] Maybe its time to start considering having a command reference UI?
     * Maybe [cheatsheet](https://github.com/sudormrfbin/cheatsheet.nvim) as a start? Seems bloated
 - [x] Create a way to quickly grep/add/edit your knowledge base stored in logs/ so that you can reference it as needed.
-
-
