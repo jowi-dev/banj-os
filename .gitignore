@@ -1,3 +1,5 @@
 runner.sh
 test.sh
 env/default.nix
+demos/raylib-c/build/*
+demos/raylib-c/.cache/*

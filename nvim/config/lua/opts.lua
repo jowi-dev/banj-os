@@ -43,3 +43,4 @@ vim.opt.ttyfast=true
 vim.opt.showmatch=true
 vim.opt.incsearch=true
 vim.opt.hlsearch=true
+--vim.opt.nofoldenabled=true

@@ -27,6 +27,7 @@ in {
       homeDirectory = config.local-env.homeDirectory;
       packages = with pkgs; [
         # Global Languages
+        cmake
         luajit
         elixir
         nodejs
@@ -39,8 +40,12 @@ in {
 
         # Global Tooling
         git 
+        gum
+        github-cli
         yarn
         nix-prefetch-github
+        htop
+        ctop
 
         ctags
         nodePackages.neovim

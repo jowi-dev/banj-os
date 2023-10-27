@@ -27,8 +27,19 @@ local function source_all()
 end
 
 function BuildEnv()
-  vim.cmd(':silent exec "!home-manager switch"')
+  vim.cmd("term gum spin -s line  --title 'Reloading Nix Environment' -- home-manager switch")
   source_all()
 
-  print("Environment Rebuilt.")
+  --print("Environment Rebuilt.")
 end
+
+function LightMode()
+  vim.cmd('colorscheme github')
+  --BuildEnv()
+end
+
+function DarkMode()
+  vim.cmd('colorscheme palenight')
+  --BuildEnv()
+end
+

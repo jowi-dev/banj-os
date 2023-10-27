@@ -1,6 +1,8 @@
 local lsp = require'lspconfig'
 
+require'lspconfig'.clangd.setup{}
 -- Going to try a new LS for elixir
+
 lsp.elixirls = require'languages/elixir'
 --local elixirls = require("elixir.elixirls")
 --require("elixir").setup({

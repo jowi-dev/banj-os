@@ -12,6 +12,9 @@ To bring the functionality of Insomnia to neovim, so that APIs can be tested fro
 - [x] Leveraging a .gitignored folder per-project as a repo for these queries
   * This would be the same idea as insomnia's query lib, just with the ability to source it under the relevant repo
 - [x] Bonus: Make it pretty - Floating window the result, split window the result; something where the input/output would be easy to digest and easy to yank to clipboard as needed
+- [ ] Init function to create a new .hammercurl folder per project
+- [ ] REST requests
+- [ ] local init function to create a .hammercurl folder in the home directory to store environment vars/endpoint information
 
 
 

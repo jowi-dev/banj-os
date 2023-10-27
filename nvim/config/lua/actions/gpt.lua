@@ -21,7 +21,7 @@ function GPTSubmit()
     max_tokens = 1024,
     temperature = 0.5,
   }
-  local result = Post(url, payload, api_key)
+  local result = Post(url, payload, api_key, {})
 
   if result == nil then
     return
