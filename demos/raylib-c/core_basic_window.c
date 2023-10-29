@@ -28,7 +28,7 @@ int screenHeight = 450;
 //----------------------------------------------------------------------------------
 // Module Functions Declaration
 //----------------------------------------------------------------------------------
-void UpdateDrawFrame(void);     // Update and Draw one frame
+void UpdateDrawFrame(Rectangle*);     // Update and Draw one frame
 
 //----------------------------------------------------------------------------------
 // Main Entry Point
@@ -38,6 +38,7 @@ int main()
     // Initialization
     //--------------------------------------------------------------------------------------
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    Rectangle square = {screenWidth/2, screenHeight/2, 50, 50}; // Square in the middle of the screen
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
@@ -48,7 +49,7 @@ int main()
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        UpdateDrawFrame();
+        UpdateDrawFrame(&square);
     }
 #endif
 
@@ -63,20 +64,25 @@ int main()
 //----------------------------------------------------------------------------------
 // Module Functions Definition
 //----------------------------------------------------------------------------------
-void UpdateDrawFrame(void)
+void UpdateDrawFrame(Rectangle *square)
 {
     // Update
     //----------------------------------------------------------------------------------
     // TODO: Update your variables here
     //----------------------------------------------------------------------------------
+    if (IsKeyDown(KEY_W)) square->y -= 2.0f;
+    if (IsKeyDown(KEY_S)) square->y += 2.0f;
+    if (IsKeyDown(KEY_A)) square->x -= 2.0f;
+    if (IsKeyDown(KEY_D)) square->x += 2.0f;
 
     // Draw
     //----------------------------------------------------------------------------------
+
+    // Draw
     BeginDrawing();
 
-        ClearBackground(RAYWHITE);
-
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+    ClearBackground(RAYWHITE);
+    DrawRectangleRec(*square, RED); // Draw the square
 
     EndDrawing();
     //----------------------------------------------------------------------------------
