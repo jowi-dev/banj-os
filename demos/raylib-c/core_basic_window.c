@@ -73,6 +73,13 @@ int main(void)
     return 0;
 }
 
+// TODO - Basically this needs to clamp on a few things
+// - As the player approaches any axis, the movespeed relative to that axis needs to increase because they are moving more purely in that direction
+// - Conversely, as they move toward any other axis the speed relative needs to decrease because they are not moving in that direction.
+// (e.g. if they are at the top of the sphere, their Y direction movement will be near 0 while their x-z movement could potentially be anywhere between 1 or 0 depending on direction they're facing
+// - Player size needs to be set at 1, and movement speed at 1, that way grid sizing can be set to 1 to make calculations easy.
+// - as of right now, rotating the player is not possible (limitation of having a cube vs a model). so loading a model will need to be done before there can be too much more progress
+//
 void moveCube(Vector3 *cubePosition, Vector3 *cubeVelocity, Vector3 *cubeRotation)
 {
         // Clamp movement to spherical map
