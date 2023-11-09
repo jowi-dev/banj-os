@@ -34,12 +34,13 @@ function BuildEnv()
 end
 
 function LightMode()
-  vim.cmd('colorscheme github')
+  vim.cmd('let ayucolor="light"')
+  vim.cmd('colorscheme ayu')
   --BuildEnv()
 end
 
 function DarkMode()
-  vim.cmd('colorscheme palenight')
+  vim.cmd('colorscheme angr')
   --BuildEnv()
 end
 

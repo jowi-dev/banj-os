@@ -6,7 +6,7 @@ cmd('set clipboard+=unnamedplus')
 
 -- Neovim Theme
 --cmd('colorscheme github')
-cmd('colorscheme palenight')
+cmd('colorscheme angr')
 --cmd('colorscheme horizon')
 --require('palenight').set()
 
