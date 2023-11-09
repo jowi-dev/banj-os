@@ -28,7 +28,7 @@ map('n',  '<leader>gg', ':Git<CR>',{noremap=true})
 -- Search and  FileNavigation Related keybinds
 map('n',  '<C-p>',      ':Telescope find_files<CR>',{noremap=true})
 map('n',  '<C-f>',      ':Telescope live_grep<CR>',{noremap=true})
-map('n',  '<leader>c',  ':bd<CR>',{noremap=true})
+map('n',  '<leader>c',  ':b#<bar>bd#<CR>',{noremap=true})
 map('n',  '<leader>q',  ':bprev<CR>',{noremap=true})
 map('n',  '<leader>p',  ':bnext<CR>',{noremap=true})
 map('n',  '<leader>l',  ':NERDTreeToggle<CR>',{noremap=true})
@@ -59,7 +59,8 @@ vim.g.UltiSnipsJumpBackwardTrigger="<leader>sb"
 
 -- custom actions - because I can
 map('v', '<leader>c',   ':lua CopyToClipboard()<CR>',{noremap=true})
-map('v', '<leader>gpt', ':lua GPTSubmit()<CR>',{noremap=true})
+map('v', '<leader>gpt3', ':lua GPTSubmit("3")<CR>',{noremap=true})
+map('v', '<leader>gpt4', ':lua GPTSubmit()<CR>',{noremap=true})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

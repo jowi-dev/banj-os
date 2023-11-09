@@ -1,4 +1,12 @@
-function GPTSubmit()
+function GPTSubmit(version)
+  local max_tokens = nil
+  if version == "3" then
+    version = "gpt-3.5-turbo"
+    max_tokens = 1024
+  else
+    version = "gpt-4-1106-preview"
+    max_tokens = 1024
+  end
   local answer = ""
   vim.cmd('y')
   local selected_text = vim.fn.getreg('"')
@@ -13,12 +21,12 @@ function GPTSubmit()
   -- different actions for programming tips vs code review vs 
   -- debugging vs other? TBD
   local payload = {
-    model="gpt-4",
+    model=version,
     messages={
       {role="system", content="You are an expert programming assistant"},
       { role="user", content=selected_text }
     },
-    max_tokens = 1024,
+    max_tokens = max_tokens,
     temperature = 0.5,
   }
   local result = Post(url, payload, api_key, {})
