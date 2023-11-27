@@ -57,6 +57,7 @@ in {
         bat
         lsd
         xclip
+        jq
       ];
     };
   };

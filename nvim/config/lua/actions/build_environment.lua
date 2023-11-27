@@ -12,6 +12,7 @@ local function source_all()
     "actions/gpt.lua",
     "actions/http_post.lua",
     "actions/gql_request.lua",
+    "actions/http_request.lua",
     "actions/test.lua",
     "languages/elixir.lua",
     "languages/typescript.lua",
