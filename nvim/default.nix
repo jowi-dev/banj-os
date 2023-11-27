@@ -18,7 +18,7 @@ in {
       vimdiffAlias = true;
 
       plugins = with pkgs.vimPlugins; [
-        #awesome-vim-colorschemes
+        awesome-vim-colorschemes
         nerdtree
         # csv-vim
         nvim-jqx
