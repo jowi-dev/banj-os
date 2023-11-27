@@ -82,6 +82,12 @@ lsp.lua_ls.setup{
         -- Surpress the 'undefined global vim' warning
         enable = true,
         globals = {'vim'}
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
       }
     }
   }
@@ -95,11 +101,6 @@ lsp.lua_ls.setup{
 --        enable = true,
 --        globals = {'vim'},  -- this is for neovim, add other globals you need
 --      },
---      workspace = {
---        library = {
---          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
---          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
---        },
 --      },
 }
 

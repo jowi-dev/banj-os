@@ -18,11 +18,11 @@ in {
       vimdiffAlias = true;
 
       plugins = with pkgs.vimPlugins; [
-        awesome-vim-colorschemes
+        #awesome-vim-colorschemes
         nerdtree
         # csv-vim
         nvim-jqx
-        vim-graphql
+        #vim-graphql
         vim-fugitive
         vim-merginal
         tmuxline-vim
@@ -44,7 +44,7 @@ in {
         nvim-cmp
         lualine-nvim
         ultisnips
-        elixir-tools-nvim
+        #elixir-tools-nvim
       ];
 
       extraPackages = with pkgs;
