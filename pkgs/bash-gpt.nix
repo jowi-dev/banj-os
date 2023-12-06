@@ -20,7 +20,8 @@
 
 { stdenv, fetchFromGitHub  }:
 
-let inherit (import ../env/default.nix) local-env; in
+# JOE - this is how you import variables from other files
+#let inherit (import ../env/default.nix) local-env; in
 stdenv.mkDerivation rec {
   pname = "bash-gpt";
   version = "1.0.0";
@@ -38,16 +39,14 @@ stdenv.mkDerivation rec {
   installPhase = ''
     # Custom installation commands
     mkdir -p $out/bin
-    cp gpt $out/bin 
-    #cp gpt $out/bin && chmod +x $out/bin/gpt
+    #cp gpt $out/bin 
+    cp gpt $out/bin && chmod +x $out/bin/gpt
+    cp openai $out/bin && chmod +x $out/bin/openai
     cp chat $out/bin && chmod +x $out/bin/chat
+    cp chat-beta $out/bin && chmod +x $out/bin/chat-beta
     cp code $out/bin && chmod +x $out/bin/code
     cp cmd $out/bin && chmod +x $out/bin/cmd
     cp tester $out/bin && chmod +x $out/bin/tester
-    echo KEY IS ${local-env.openAPIKey}
-    export OPENAI_API_KEY=${local-env.openAPIKey}
-    #export OPENAI_MODEL=gpt-4-1106-preview
-    
   '';
 
 #  meta = with stdenv.lib; {

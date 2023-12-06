@@ -28,7 +28,7 @@ in {
 
       sessionVariables = {
         OPENAI_API_KEY=config.local-env.openAPIKey;
-        OPENAI_API_MODEL="gpt-4";
+        OPENAI_MODEL="gpt-4-1106-preview";
       };
       stateVersion = "23.11";
       username = config.local-env.username;
