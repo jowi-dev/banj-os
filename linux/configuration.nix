@@ -3,11 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+     <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -87,6 +87,8 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jowi = {
+	name = "jowi";
+	home = "/home/jowi";
     isNormalUser = true;
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -101,8 +103,21 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  home-manager.users.jowi = {
+    #path = "/home/jowi/.config/nix-config/home.nix";	
+    imports = [ "/home/jowi/.config/nix-config/home.nix"];
+    home = {
+	stateVersion = "23.11";
+	username = "jowi";
+	homeDirectory = "/home/jowi";
+};
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  environment.variables = {
+	NIXOS_CONFIG = "/home/jowi/.config/nix-config/linux/configuration.nix";
+};
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   git
