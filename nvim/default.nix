@@ -29,8 +29,6 @@ in {
         vim-elixir
         vim-nix
         vim-gitgutter
-        nvim-treesitter
-        playground
         nvim-lspconfig
         plenary-nvim
         null-ls-nvim
@@ -105,6 +103,20 @@ in {
 
         :luafile ~/.config/nvim/lua/init.lua
       '';
+#      extraConfig = ''
+#        let g:elixir_ls_home = "${pkgs.elixir-ls}"
+#        let g:UltiSnipsSnippetDirectories = ["${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/nvim/config/lua/UltiSnips"]
+#
+#        :lua nvimHome = "${config.local-env.homeDirectory}/.config/nvim/lua"
+#        :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
+#        :lua logs_path = "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/logs"
+#
+#        :lua open_api_key = "${config.local-env.openAPIKey}"
+#        :lua package.path = "${config.local-env.homeDirectory}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
+#        :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
+#
+#        :luafile ~/.config/nvim/lua/init.lua
+#      '';
 
     };
 
