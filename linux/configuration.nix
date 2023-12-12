@@ -6,6 +6,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      ../env
       ./hardware-configuration.nix
      <home-manager/nixos>
     ];
@@ -105,7 +106,7 @@
 
   home-manager.users.jowi = {
     #path = "/home/jowi/.config/nix-config/home.nix";	
-    imports = [ "/home/jowi/.config/nix-config/home.nix"];
+    imports = [ "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/home.nix"];
     home = {
 	stateVersion = "23.11";
 	username = "jowi";
@@ -116,8 +117,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.variables = {
-	NIXOS_CONFIG = "/home/jowi/.config/nix-config/linux/configuration.nix";
-};
+	  NIXOS_CONFIG = "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/linux/configuration.nix";
+    OPENAI_API_KEY = "${config.local-env.openAPIKey}";
+  };
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   git

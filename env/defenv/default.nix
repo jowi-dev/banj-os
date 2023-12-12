@@ -23,6 +23,13 @@ in {
         "	      The home directory. Usually the output of `echo $HOME`\n      ";
     };
 
+     toolingInstallDirectory = mkOption {
+      type = types.str;
+      default = "";
+      description =
+        "	      The home directory. Usually the output of `echo $HOME`\n      ";
+    };
+
     gitUserName = mkOption {
       type = types.str;
       default = "jowi";

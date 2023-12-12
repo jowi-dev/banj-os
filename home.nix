@@ -44,6 +44,7 @@ in {
         zig
         ruby
         rustup
+        alacritty
 
 
         # Global Tooling
