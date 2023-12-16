@@ -45,7 +45,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.windowManager.i3.enable = true;
+  services.xserver.windowManager.awesome.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -94,9 +94,10 @@
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
+      #firefox
       kate
-      qutebrowser
+      #qutebrowser
+      brave
     #  thunderbird
     ];
   };
