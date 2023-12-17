@@ -8,7 +8,7 @@
     [ # Include the results of the hardware scan.
       ../env
       ./hardware-configuration.nix
-     <home-manager/nixos>
+     #<home-manager/nixos>
     ];
 
   # Bootloader.
@@ -103,17 +103,17 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
 
-  home-manager.users.jowi = {
-    #path = "/home/jowi/.config/nix-config/home.nix";	
-    imports = [ "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/home.nix"];
-    home = {
-	stateVersion = "23.11";
-	username = "jowi";
-	homeDirectory = "/home/jowi";
-};
-  };
+#  home-manager.users.jowi = {
+#    #path = "/home/jowi/.config/nix-config/home.nix";	
+#    imports = [ "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/home.nix"];
+#    home = {
+#	stateVersion = "23.11";
+#	username = "jowi";
+#	homeDirectory = "/home/jowi";
+#};
+#  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

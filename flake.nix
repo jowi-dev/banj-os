@@ -12,33 +12,51 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    systems.url = "github:nix-systems/default";
+    #systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, systems, flake-parts }: 
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-parts }: 
     let
+      nixpkgsConfig = with inputs; {
+        config = {
+          allowUnfree = true;
+        };
+      };
     #darwinModules = [];
-    nixosModules = {user, host}: with inputs; [
+    nixosModules = [
       (./. + "/linux/configuration.nix")
+      home-manager.nixosModules.home-manager
+      {
+        nixpkgs = nixpkgsConfig;
+        #nix.registry = nixpkgs.lib.mapAttrs (_: value: {flake = value;}) inputs;
+
+        users.users.jowi = {
+          home = "/home/jowi";
+          isNormalUser = true;
+          #group = "jowi";
+        };
+        home-manager = {
+          users.jowi = import (./. + "/home.nix");
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          };
+      }
     ];
     in
     flake-parts.lib.mkFlake {inherit inputs;} {
       flake = {
         nixosConfigurations = {
-          yoga = nixpkgs.lib.nixosSystem {
-            #system = "aarch64-linux";
-            modules = nixosModules {
-              user = "jowi";
-              host = "yoga";
-            };
-          };
+          nixos = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = nixosModules;
         };
 
       };
+    };
+      systems = ["x86_64-linux"];
 
     };
 
 
 }
-
