@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  #python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
-
   # So this is actually pretty cool.
   # We're making a luajit environment with http (and dependencies) available.
   # This is used in the ChatGPT submission code
@@ -23,6 +21,7 @@ in {
         # csv-vim
         nvim-jqx
         #vim-graphql
+        nvim-treesitter.withAllGrammars
         vim-fugitive
         vim-merginal
         tmuxline-vim
@@ -44,7 +43,7 @@ in {
         ultisnips
         #elixir-tools-nvim
 
-        nvim-treesitter-parsers.pony
+        #nvim-treesitter-parsers.pony
       ];
 
       extraPackages = with pkgs;
@@ -66,7 +65,7 @@ in {
 
           # Lua
           lua-language-server
-          luajit
+          #luajit
 
           # Nix
           nixfmt

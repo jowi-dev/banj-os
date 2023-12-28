@@ -2,7 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
+let
+  awesome = pkgs.awesome.overrideAttrs (oldAttrs: {
+    buildInputs = oldAttrs.buildInputs ++ [pkgs.luajitPackages.vicious];
+  }) ;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -45,7 +51,12 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.windowManager.awesome.package = awesome;
   services.xserver.windowManager.awesome.enable = true;
+  services.xserver.windowManager.awesome.luaModules = [
+    pkgs.luaPackages.luarocks
+    pkgs.luaPackages.vicious
+  ];
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -98,6 +109,7 @@
       kate
       #qutebrowser
       brave
+      arcan
     #  thunderbird
     ];
   };
@@ -105,29 +117,24 @@
   # Allow unfree packages
   #nixpkgs.config.allowUnfree = true;
 
-#  home-manager.users.jowi = {
-#    #path = "/home/jowi/.config/nix-config/home.nix";	
-#    imports = [ "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/home.nix"];
-#    home = {
-#	stateVersion = "23.11";
-#	username = "jowi";
-#	homeDirectory = "/home/jowi";
-#};
-#  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.variables = {
 	  NIXOS_CONFIG = "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/linux/configuration.nix";
     OPENAI_API_KEY = "${config.local-env.openAPIKey}";
   };
+
+  #environment.etc."awesome/rc.lua".source = myAwesomeConfig;
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   git
+  manix
   #  wget
   ];
 
+
   # Some programs need SUID wrappers, can be configured further or are
+  programs.river.enable = true;
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
