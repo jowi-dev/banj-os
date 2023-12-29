@@ -4,7 +4,7 @@ let
     bash-gpt = pkgs.callPackage  ./pkgs/bash-gpt.nix {};
     myAwesomeConfig = pkgs.writeTextFile{
       name = "/.config/awesome/rc.lua"; 
-      text = builtins.readFile "${config.local-env.homeDirectory}/.config/nix-config/linux/config/window-manager/awesome-gpt-1.lua";
+      text = builtins.readFile "${config.local-env.homeDirectory}/.config/nix-config/linux/config/window-manager/awesome.lua";
     };
 
     xrandrConfig = pkgs.writeTextFile{

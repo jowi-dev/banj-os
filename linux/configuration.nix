@@ -59,11 +59,13 @@ in
   ];
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.theme = "sddm-chili";
+#  services.xserver.displayManager.sddm.enable = true;
+#  services.xserver.displayManager.sddm.theme = "sddm-chili";
 
-  services.xserver.displayManager.sddm.wayland.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.defaultSession = "none+awesome";
+  services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.displayManager.lightdm.greeters.tiny.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -109,13 +111,12 @@ in
       kate
       #qutebrowser
       brave
-      arcan
     #  thunderbird
     ];
   };
 
   # Allow unfree packages
-  #nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -128,13 +129,26 @@ in
   environment.systemPackages = with pkgs; [
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   git
-  manix
+  #manix
+      arcan
+      durden
+  discord
+  lutris
+  mangohud
+  (wineWowPackages.full.override {
+    wineRelease = "staging";
+    mingwSupport = true;
+  })
+  winetricks
+  wine
+  xorg.xkill
+  flameshot
   #  wget
   ];
 
 
   # Some programs need SUID wrappers, can be configured further or are
-  programs.river.enable = true;
+  #programs.river.enable = true;
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
