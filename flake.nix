@@ -50,7 +50,11 @@
           nixos = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = nixosModules;
-        };
+          };
+          nixosIso = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = ["${nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"] ++ nixosModules;
+          };
 
       };
     };

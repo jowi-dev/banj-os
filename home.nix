@@ -2,16 +2,6 @@
 with lib;
 let
     bash-gpt = pkgs.callPackage  ./pkgs/bash-gpt.nix {};
-    myAwesomeConfig = pkgs.writeTextFile{
-      name = "/.config/awesome/rc.lua"; 
-      text = builtins.readFile "${config.local-env.homeDirectory}/.config/nix-config/linux/config/window-manager/awesome.lua";
-    };
-
-    xrandrConfig = pkgs.writeTextFile{
-      name = "/.config/awesome/xrandr.lua"; 
-      text = builtins.readFile "${config.local-env.homeDirectory}/.config/nix-config/linux/config/window-manager/xrandr.lua";
-    };
-
 in {
   imports = [
     ./env
@@ -35,8 +25,8 @@ in {
       username = config.local-env.username;
       homeDirectory = config.local-env.homeDirectory;
       file = {
-        ".config/awesome/rc.lua".source = myAwesomeConfig;
-        ".config/awesome/xrandr.lua".source = xrandrConfig;
+        ".config/awesome/rc.lua".source = ./linux/config/window-manager/awesome.lua;
+        ".config/awesome/xrandr.lua".source = ./linux/config/window-manager/xrandr.lua;
       };
       packages = with pkgs; [
         # Global Languages

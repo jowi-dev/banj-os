@@ -117,6 +117,10 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    # For Etcher
+    "electron-19.1.9"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -134,6 +138,8 @@ in
       durden
   discord
   lutris
+  nixos-generators
+  etcher
   mangohud
   (wineWowPackages.full.override {
     wineRelease = "staging";
