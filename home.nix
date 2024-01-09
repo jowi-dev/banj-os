@@ -20,14 +20,15 @@ in {
       sessionVariables = {
         OPENAI_API_KEY=config.local-env.openAPIKey;
         OPENAI_MODEL="gpt-4-1106-preview";
+        EDITOR="nvim";
       };
       stateVersion = "23.11";
       username = config.local-env.username;
-      homeDirectory = config.local-env.homeDirectory;
-      file = {
-        ".config/awesome/rc.lua".source = ./linux/config/window-manager/awesome.lua;
-        ".config/awesome/xrandr.lua".source = ./linux/config/window-manager/xrandr.lua;
-      };
+      #homeDirectory = config.local-env.homeDirectory;
+#      file = {
+#        ".config/awesome/rc.lua".source = ./linux/config/window-manager/awesome.lua;
+#        ".config/awesome/xrandr.lua".source = ./linux/config/window-manager/xrandr.lua;
+#      };
       packages = with pkgs; [
         # Global Languages
         cmake

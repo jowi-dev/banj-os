@@ -1,23 +1,3 @@
-#{ fetchFromGitHub , vimUtils }:
-#vimUtils.buildVimPlugin {
-#  pname = "bash-gpt";
-#  version = "2023-11-30";
-#  src = fetchFromGitHub {
-#    owner = "sysread";
-#    repo = "bash-gpt";
-#    rev = "4c86c7a5a09e1d1f1357ccaee8eca4cd50f6cec4";
-#    sha256 =  "sha256-VAb3wdnFewqNbivUOv5LdZYQ9bjCWO4IohzC3fUwSoE=";
-#    
-#  };
-#  meta.homepage = "https://github.com/sysread/bash-gpt/";
-#}
-#{ stdenv, fetchFromGitHub }:
-#vimUtils.buildVimPlugin {
-#  pname = "bash-gpt";
-#  version = "2023-11-30";
-#  meta.homepage = "https://github.com/sysread/bash-gpt/";
-#}
-
 { stdenv, fetchFromGitHub  }:
 
 # JOE - this is how you import variables from other files

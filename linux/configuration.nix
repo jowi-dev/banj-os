@@ -101,8 +101,8 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jowi = {
-	name = "jowi";
-	home = "/home/jowi";
+    name = "jowi";
+    home = "/home/jowi";
     isNormalUser = true;
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" ];

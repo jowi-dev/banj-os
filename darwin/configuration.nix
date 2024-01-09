@@ -5,7 +5,7 @@ let cfg = config.my-darwin;
 in {
 
   imports = [
-    <home-manager/nix-darwin>
+    #<home-manager/nix-darwin>
   ];
 
   options.my-darwin = {
@@ -26,15 +26,15 @@ in {
 
     users.users.jwilliams = {
       name = "jwilliams";
-      home = "/Users/jwilliams";
+      home = /Users/jwilliams;
     };
     home-manager.users.jwilliams = {
-      path = "${config.home.homeDirectory}/.config/nixpkgs/home.nix";
+      #path = "./home.nix";
       imports = [ ../home.nix ];
       home = {
         stateVersion = "23.11";
         username = "jwilliams";
-        homeDirectory = "/Users/jwilliams";
+        #homeDirectory = /Users/jwilliams;
       };
 
     };
