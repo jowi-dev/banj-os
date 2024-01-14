@@ -23,7 +23,7 @@ in {
         "	      The home directory. Usually the output of `echo $HOME`\n      ";
     };
 
-     toolingInstallDirectory = mkOption {
+     toolingDirectory = mkOption {
       type = types.str;
       default = "";
       description =
@@ -48,6 +48,13 @@ in {
       default = "";
       description =
         "	      The API key associated to your open API account. Leave blank if you do not need ChatGPT integration\n      ";
+    };
+
+    homeWifiPassword = mkOption {
+      type = types.str;
+      default = "";
+      description =
+        "	      The Wifi password most often used on this machine\n      ";
     };
   };
 

@@ -22,14 +22,15 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.networks.Obsidian.psk="$HOME_WIFI_PASSWORD";
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -64,6 +65,12 @@ in
 
   services.xserver.displayManager.defaultSession = "none+awesome";
   services.xserver.displayManager.lightdm.enable = true;
+  # Need Anything to start when log in?
+#  services.xserver.displayManager.setupCommands = [
+#  "echo '802-11-wireless-security.psk:${config.local-env.homeWifiPassword}' > wifi-pass"
+#  "nmcli con up Obsidian passwd-file ${config.local-env.homeDirectory}${config.local-env.toolingDirectory}/wifi-pass"
+#  "rm wifi-pass"
+#]; 
   #services.xserver.displayManager.lightdm.greeters.tiny.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
 
@@ -117,15 +124,15 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    # For Etcher
-    "electron-19.1.9"
-  ];
+#  nixpkgs.config.permittedInsecurePackages = [
+#    # For Etcher
+#    "electron-19.1.9"
+#  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.variables = {
-	  NIXOS_CONFIG = "${config.local-env.homeDirectory}${config.local-env.toolingInstallDirectory}/linux/configuration.nix";
+	  NIXOS_CONFIG = "${config.local-env.homeDirectory}${config.local-env.toolingDirectory}/linux/configuration.nix";
     OPENAI_API_KEY = "${config.local-env.openAPIKey}";
   };
 
@@ -134,19 +141,20 @@ in
   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   git
   #manix
-      arcan
-      durden
+#      arcan
+#      durden
   discord
-  lutris
-  nixos-generators
-  etcher
+  gparted
+  #lutris
+#  nixos-generators
+  #etcher
   mangohud
-  (wineWowPackages.full.override {
-    wineRelease = "staging";
-    mingwSupport = true;
-  })
-  winetricks
-  wine
+#  (wineWowPackages.full.override {
+#    wineRelease = "staging";
+#    mingwSupport = true;
+#  })
+#  winetricks
+#  wine
   xorg.xkill
   flameshot
   #  wget
