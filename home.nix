@@ -2,6 +2,7 @@
 with lib;
 let
     bash-gpt = pkgs.callPackage  ./pkgs/bash-gpt.nix {};
+    burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso {};
 in {
   imports = [
     ./env
@@ -40,6 +41,7 @@ in {
         ruby
         rustup
         alacritty
+        kitty
 
 
         # Global Tooling
@@ -56,6 +58,7 @@ in {
 
         # Custom
         bash-gpt
+        burn-to-iso
 
         # Why is this here?
         fzf
