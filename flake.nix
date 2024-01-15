@@ -29,10 +29,6 @@
 
         nixpkgs = nixpkgsConfig;
 
-#        users.users.jwilliams = {
-#          home = "/Users/jwilliams";
-#          #isNormalUser = true;
-#        };
         home-manager = {
           users.jwilliams = import (./. + "/home.nix");
           useGlobalPkgs = true;
@@ -46,18 +42,7 @@
       home-manager.nixosModules.home-manager
       {
         nixpkgs = nixpkgsConfig;
-        #nix.registry = nixpkgs.lib.mapAttrs (_: value: {flake = value;}) inputs;
-
-        file = {
-          ".config/awesome/rc.lua".source = ./linux/config/window-manager/awesome.lua;
-          ".config/awesome/xrandr.lua".source = ./linux/config/window-manager/xrandr.lua;
-        };
-
-        users.users.jowi = {
-          home = "/home/jowi";
-          isNormalUser = true;
-          #group = "jowi";
-        };
+        nix.registry = nixpkgs.lib.mapAttrs (_: value: {flake = value;}) inputs;
         home-manager = {
           users.jowi = import (./. + "/home.nix");
           useGlobalPkgs = true;
