@@ -22,8 +22,15 @@ null_ls.setup({
 })
 
   -- LSP freaks but nix handles
+local logs = vim.fn.expand(logs_path)
 local telekasten = require('telekasten').setup({
-  home = vim.fn.expand(logs_path)
+  home = logs,
+  dailies = logs .. "/dailies/",
+  weeklies = logs .. "/weeklies/",
+  templates = logs .. "/templates/",
+  template_new_note = logs .. "/templates/generic_template.md",
+  template_new_daily = logs .. "/templates/daily_template.md",
+  template_new_weekly = logs .. "/templates/weekly_template.md",
 })
 
 vim.fn.Notes = telekasten
