@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "sysread";
     repo = "bash-gpt";
-    rev = "4c86c7a5a09e1d1f1357ccaee8eca4cd50f6cec4";
+    rev = "cf63fe7ae9c3c29d1a9e5ab12065ce7a580e0984";
     sha256 =  "sha256-VAb3wdnFewqNbivUOv5LdZYQ9bjCWO4IohzC3fUwSoE=";
     
   };

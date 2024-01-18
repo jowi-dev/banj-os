@@ -14,7 +14,7 @@ in
     [ # Include the results of the hardware scan.
       ../env
       ./hardware-configuration.nix
-     #<home-manager/nixos>
+      #../bash
     ];
 
   # Bootloader.
@@ -22,7 +22,8 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.networks.Obsidian.psk="$HOME_WIFI_PASSWORD";
+  networking.wireless.networks.Obsidian.psk="countryclub";
+  networking.wireless.userControlled.enable = true;
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -107,9 +108,12 @@ in
   nix.settings.experimental-features = "nix-command flakes";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
   users.users.jowi = {
     name = "jowi";
     home = "/home/jowi";
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -134,6 +138,7 @@ in
   environment.variables = {
 	  NIXOS_CONFIG = "${config.local-env.homeDirectory}${config.local-env.toolingDirectory}/linux/configuration.nix";
     OPENAI_API_KEY = "${config.local-env.openAPIKey}";
+    HOME_WIFI_PASSWORD = "${config.local-env.homeWifiPassword}";
   };
 
   #environment.etc."awesome/rc.lua".source = myAwesomeConfig;
