@@ -4,9 +4,6 @@ with lib;
 let cfg = config.my-darwin;
 in {
 
-  imports = [
-    #<home-manager/nix-darwin>
-  ];
 
   options.my-darwin = {
     isWork = lib.mkEnableOption "work profile";
@@ -24,20 +21,13 @@ in {
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
+    # TODO - this needs to be folded into the flake config if possible, or imported from local env
     users.users.jwilliams = {
       name = "jwilliams";
-      home = /Users/jwilliams;
+      home = "/Users/jwilliams";
+      shell = pkgs.zsh;
     };
-    home-manager.users.jwilliams = {
-      #path = "./home.nix";
-      imports = [ ../home.nix ];
-      home = {
-        stateVersion = "23.11";
-        username = "jwilliams";
-        #homeDirectory = /Users/jwilliams;
-      };
 
-    };
     # Make sure nix always runs in multi-user mode on Mac
     services.nix-daemon.enable = true;
 
@@ -89,9 +79,7 @@ in {
     # $ darwin-rebuild changelog
     system.stateVersion = 4;
 
-    system.keyboard = {
-      enableKeyMapping = true;
-    };
+    system.keyboard = { enableKeyMapping = true; };
 
     system.defaults = {
       dock = {

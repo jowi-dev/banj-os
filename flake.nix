@@ -29,12 +29,21 @@
 
         nixpkgs = nixpkgsConfig;
 
+#    home-manager.users.jwilliams = {
+#      #path = "./home.nix";
+#      imports = [ ../home.nix ];
+#      home = {
+#        stateVersion = "23.11";
+#        username = "jwilliams";
+#        #homeDirectory = /Users/jwilliams;
+#      };
+
 #        users.users.jwilliams = {
 #          home = "/Users/jwilliams";
 #          #isNormalUser = true;
 #        };
         home-manager = {
-          users.jwilliams = import (./. + "/home.nix");
+          users.jwilliams.imports = [ ./home.nix ];
           useGlobalPkgs = true;
           useUserPackages = true;
           };
