@@ -14,4 +14,8 @@ _Copy for work and home if needed_
 ## Summary
 
 
+## For Tomorrow
+
+
+## Scratch
 tags: #example-topic-idea
