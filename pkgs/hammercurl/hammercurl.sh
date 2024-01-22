@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CONTENT_TYPE="Content-Type: application/json"
-PROSPECT_FLAG="{\"prospect_only\": true}"
+PROSPECT_FLAG='{"prospect_only": true}'
 SEEDLING_EMAIL_GETTER='.account.email'
 PAL_LOGIN_TOKEN_GETTER='.data.palAppLoginV2.token'
 ADMIN_LOGIN_TOKEN_GETTER='.data.loginAdmin.token'
@@ -11,12 +11,47 @@ DEFAULT_ADMIN_ACCOUNT="admin@joinpapa.com"
 PROSPECT_CREATE_TEXT="Using Seedling to create a new Prospect Pal.."
 PAL_CREATE_TEXT="Using Seedling to create a new Pal.."
 
-seed() {
+seed_pal() {
   echo "Seeding $1 via Seedling API"
+  data="{}"
+  if [ "$1" = "prospect" ]; then
+    data="$PROSPECT_FLAG"
+  fi
+
+  ACCOUNT_EMAIL=$(gum spin --title="$SEEDLING_TEXT" --show-output -- curl -X POST "$SEEDLING_URL" -H "$CONTENT_TYPE"  -d "$data" | jq -r "$SEEDLING_EMAIL_GETTER") 
 }
 
 login() {
-  echo "Logging in as $1"
+  echo "Logging in as $ACCOUNT_EMAIL"
+  LOGIN_TOKEN=$(gum spin --title="$LOGIN_TEXT" --show-output -- curl -X POST "$GQL_URL" -H "$CONTENT_TYPE" -d "$1" | jq -r "$2")
+}
+
+# Given a ENV file that exists, add it to the shell env
+set_env() {
+  #source "$1"
+  GQL_URL="https://$2.backend.papadev.co/api/graphql"
+  SEEDLING_URL="https://$2.backend.papadev.co/seedling/api/pals/new"
+
+  FILE="$HOME/.hammercurl/$1"
+  GQL_URL="https://$RA_NAME.backend.papadev.co/api/graphql"
+  SEEDLING_URL="https://$RA_NAME.backend.papadev.co/seedling/api/pals/new"
+
+  # Check if the file exists
+  if [ -f "$FILE" ]; then
+    source "$FILE"
+  fi
+}
+
+pal_app_login() {
+  PAL_LOGIN_MUTATION='{ "query": "mutation { palAppLoginV2(input: {email: \"'$ACCOUNT_EMAIL'\", password: \"'$DEFAULT_ACCOUNT_PASSWORD'\"}) { token } }"}'
+  login "$PAL_LOGIN_MUTATION" "$PAL_LOGIN_TOKEN_GETTER"
+}
+
+login_admin() {
+  ACCOUNT_EMAIL=$DEFAULT_ADMIN_ACCOUNT
+  ADMIN_LOGIN_MUTATION='{ "query": "mutation { loginAdmin(input: {email: \"'$ACCOUNT_EMAIL'\", password: \"'$DEFAULT_ACCOUNT_PASSWORD'\"}) { token } }"}'
+
+  login "$ADMIN_LOGIN_MUTATION" "$ADMIN_LOGIN_TOKEN_GETTER"
 }
 
 # Check if ~/.hammercurl/ directory exists, if not then create it
@@ -34,39 +69,24 @@ FILE="$HOME/.hammercurl/$HAMMER_ENV_NAME"
 
 # Check if the file exists
 if [ -f "$FILE" ]; then
-  # If it exists, source it
-  source "$FILE"
-  GQL_URL="https://$RA_NAME.backend.papadev.co/api/graphql"
-  SEEDLING_URL="https://$RA_NAME.backend.papadev.co/seedling/api/pals/new"
+  set_env "$HAMMER_ENV_NAME" "$RA_NAME"
 else
+  # Collect necessary user information
   RA_NAME=$(gum input --placeholder="Review App Name...")
   USER_TYPE=$(gum choose "admin" "prospect" "pal" --header="Select Account type to login as")
-  SEEDLING_TEXT=$(seed "$USER_TYPE")
-  LOGIN_TEXT=$(login "$USER_TYPE")
-
   HAMMER_ENV_NAME="${RA_NAME}_${USER_TYPE}"
-  FILE="$HOME/.hammercurl/$HAMMER_ENV_NAME"
-  GQL_URL="https://$RA_NAME.backend.papadev.co/api/graphql"
-  SEEDLING_URL="https://$RA_NAME.backend.papadev.co/seedling/api/pals/new"
 
-  if [ "$USER_TYPE" = "prospect" ]; then
+  set_env "$HAMMER_ENV_NAME" "$RA_NAME"
 
-    ACCOUNT_EMAIL=$(gum spin --title="$SEEDLING_TEXT" --show-output -- curl -X POST "$SEEDLING_URL" -H "$CONTENT_TYPE"  -d "{ \"prospect_only\": true }" | jq -r $SEEDLING_EMAIL_GETTER) 
 
-    PAL_LOGIN_MUTATION='{ "query": "mutation { palAppLoginV2(input: {email: \"'$ACCOUNT_EMAIL'\", password: \"'$DEFAULT_ACCOUNT_PASSWORD'\"}) { token } }"}'
-    LOGIN_TOKEN=$(gum spin --title="$LOGIN_TEXT" --show-output -- curl -X POST "$GQL_URL" -H "$CONTENT_TYPE" -d "$PAL_LOGIN_MUTATION" | jq -r '.data.palAppLoginV2.token')
-  elif [ "$USER_TYPE" = "pal" ]; then
-
-    ACCOUNT_EMAIL=$(gum spin --title="$SEEDLING_TEXT" --show-output -- curl -X POST "$SEEDLING_URL" -H "Content-Type: application/json"  | jq -r $SEEDLING_EMAIL_GETTER)
-    PAL_LOGIN_MUTATION='{ "query": "mutation { palAppLoginV2(input: {email: \"'$ACCOUNT_EMAIL'\", password: \"'$DEFAULT_ACCOUNT_PASSWORD'\"}) { token } }"}'
-    LOGIN_TOKEN=$(gum spin --title="$LOGIN_TEXT" --show-output -- curl -X POST "$GQL_URL" -H "$CONTENT_TYPE" -d "$PAL_LOGIN_MUTATION" | jq -r '.data.palAppLoginV2.token')
+  if [ "$USER_TYPE" = "admin" ]; then
+    login_admin
   else
-    ACCOUNT_EMAIL=$DEFAULT_ADMIN_ACCOUNT
-    ADMIN_LOGIN_MUTATION='{ "query": "mutation { loginAdmin(input: {email: \"'$ACCOUNT_EMAIL'\", password: \"'$DEFAULT_ACCOUNT_PASSWORD'\"}) { token } }"}'
-    LOGIN_TOKEN=$(gum spin --title="$LOGIN_TEXT" --show-output -- curl -X POST "$GQL_URL" -H "$CONTENT_TYPE" -d "$ADMIN_LOGIN_MUTATION" | jq -r '.data.loginAdmin.token')
+    seed_pal "$USER_TYPE"
+    pal_app_login "$USER_TYPE"
   fi
 
-  echo ":white_check_mark: Successfully logged in as $ACCOUNT_EMAIL. User Type: $USER_TYPE" | gum format -t emoji
+  echo ":white_check_mark: Successfully logged in as "$ACCOUNT_EMAIL". User Type: $USER_TYPE" | gum format -t emoji
 
   # If the file does not exist, create it and write the environment variables to it
   {
