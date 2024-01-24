@@ -76,6 +76,7 @@
     in
     flake-parts.lib.mkFlake {inherit inputs;} {
       flake = {
+        templates = import ./templates;
         nixosConfigurations = {
           nixos = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
