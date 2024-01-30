@@ -20,7 +20,7 @@ in {
         nerdtree
         # csv-vim
         nvim-jqx
-        #vim-graphql
+        vim-graphql
         nvim-treesitter.withAllGrammars
         vim-fugitive
         vim-merginal
