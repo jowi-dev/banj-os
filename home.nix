@@ -9,7 +9,6 @@ in {
     ./nvim
     ./git
     ./tmux
-    #./bash
     ./shell
     ./starship
 

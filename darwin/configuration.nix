@@ -22,11 +22,11 @@ in {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
     # TODO - this needs to be folded into the flake config if possible, or imported from local env 
-#    users.users.jwilliams = {
-#      name = "jwilliams";
-#      home = "/Users/jwilliams";
-#      #shell = pkgs.fish;
-#    };
+    users.users.jwilliams = {
+      name = "jwilliams";
+      home = "/Users/jwilliams";
+      shell = pkgs.fish;
+    };
 
     # Make sure nix always runs in multi-user mode on Mac
     services.nix-daemon.enable = true;
@@ -64,14 +64,14 @@ in {
       brews = [ "libffi" "cocoapods" "lunchbox" ];
     };
 
-#    # Create /etc/zshrc that loads the nix-darwin environment.
-#    programs.fish = {
-#      enable = true;
+    # Create /etc/zshrc that loads the nix-darwin environment.
+    programs.fish = {
+      enable = true;
 #      # This fixes a bug between nix darwin and home-manager over completion conflicts
 #      # Completion is enabled in home-manager config
 #      enableCompletion = false;
 #      promptInit = "";
-#    };
+    };
 
     security.pam.enableSudoTouchIdAuth = cfg.enableSudoTouch;
 
