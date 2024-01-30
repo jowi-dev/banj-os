@@ -23,7 +23,6 @@ in {
         OPENAI_API_KEY= openAPIKey;
         OPENAI_MODEL="gpt-4-1106-preview";
         EDITOR="nvim";
-        SHELL="${pkgs.fish}";
         HOME_WIFI_PASSWORD= homeWifiPassword;
         BASHGPT_CHAT_HOME= "${homeDirectory}${toolingDirectory}/logs/bashgpt/";
         BASHGPT_CONVERSATION_HISTORY_DIR="${homeDirectory}${toolingDirectory}/logs/bashgpt/";
