@@ -14,7 +14,7 @@ in
     [ # Include the results of the hardware scan.
       ../env
       ./hardware-configuration.nix
-      #../bash
+      #../shell
     ];
 
   # Bootloader.
@@ -108,12 +108,12 @@ in
   nix.settings.experimental-features = "nix-command flakes";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
   users.users.jowi = {
     name = "jowi";
     home = "/home/jowi";
-    shell = pkgs.zsh;
+    #shell = pkgs.fish;
     isNormalUser = true;
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" ];
