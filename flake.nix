@@ -12,11 +12,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    bash-gpt = {
+      url = "github:sysread/bash-gpt";
+      inputs.nixpkgs.follows ="nixpkgs";
+    };
+
     #systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-parts }: 
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts }: 
     let
       nixpkgsConfig = with inputs; {
         config = {
@@ -25,15 +30,14 @@
       };
       darwinModules = [
         (./. + "/darwin/configuration.nix")
-        home-manager.darwinModules.home-manager {
-
+        home-manager.darwinModules.home-manager { 
         nixpkgs = nixpkgsConfig;
-
+        nix.registry = nixpkgs.lib.mapAttrs (_: value: {flake = value;}) inputs;
         home-manager = {
-          users.jwilliams.imports = [ ./home.nix ];
+          users.jwilliams = import ./home.nix ;
           useGlobalPkgs = true;
           useUserPackages = true;
-          };
+        };
 
         }
       ];
@@ -47,7 +51,7 @@
           users.jowi.imports = [ ./home.nix ];
           useGlobalPkgs = true;
           useUserPackages = true;
-          };
+        };
       }
     ];
     in

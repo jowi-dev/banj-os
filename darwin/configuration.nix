@@ -3,6 +3,7 @@
 with lib;
 let 
   cfg = config.my-darwin;
+  myFish = pkgs.wrapFish { pluginPkgs = with pkgs; [fishPlugins.bass babelfish];};
 
 in {
 
@@ -22,17 +23,18 @@ in {
 
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-    environment.shells = [pkgs.fish];
-    environment.systemPackages = [pkgs.fish];
+    environment.shells = [pkgs.zsh myFish];
+    environment.systemPackages = [myFish pkgs.zsh pkgs.fishPlugins.bass];
     environment.loginShellInit = ''
-      chsh -s /run/current-system/sw/bin/fish
+      #chsh -s /run/current-system/sw/bin/fish
       '';
 
     # TODO - this needs to be folded into the flake config if possible, or imported from local env 
     users.users.jwilliams = {
       name = "jwilliams";
       home = "/Users/jwilliams";
-      shell = pkgs.fish;
+      shell = pkgs.zsh;
+      #shell = myFish;
     };
 
     # Make sure nix always runs in multi-user mode on Mac
@@ -72,24 +74,29 @@ in {
     };
 
     # Create /etc/zshrc that loads the nix-darwin environment.
-    programs.fish = {
+    programs.zsh = {
       enable = true;
-#      # This fixes a bug between nix darwin and home-manager over completion conflicts
-#      # Completion is enabled in home-manager config
-#      enableCompletion = false;
-#      promptInit = "";
-      loginShellInit = let
-      # This naive quoting is good enough in this case. There shouldn't be any
-      # double quotes in the input string, and it needs to be double quoted in case
-      # it contains a space (which is unlikely!)
-      dquote = str: "\"" + str + "\"";
-
-      makeBinPathList = map (path: path + "/bin");
-    in ''
-      fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList config.environment.profiles)}
-      set fish_user_paths $fish_user_paths
-    '';
     };
+#    programs.fish = {
+#      enable = true;
+#      useBabelfish = true;
+#
+##      # This fixes a bug between nix darwin and home-manager over completion conflicts
+##      # Completion is enabled in home-manager config
+##      enableCompletion = false;
+##      promptInit = "";
+#      loginShellInit = let
+#      # This naive quoting is good enough in this case. There shouldn't be any
+#      # double quotes in the input string, and it needs to be double quoted in case
+#      # it contains a space (which is unlikely!)
+#      dquote = str: "\"" + str + "\"";
+#
+#      makeBinPathList = map (path: path + "/bin");
+#    in ''
+#      fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList config.environment.profiles)}
+#      set fish_user_paths $fish_user_paths
+#    '';
+#    };
 
     security.pam.enableSudoTouchIdAuth = cfg.enableSudoTouch;
 

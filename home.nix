@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: 
 with lib;
 let
-    bash-gpt = pkgs.callPackage  ./pkgs/bash-gpt.nix {};
+    #bash-gpt = pkgs.callPackage  ./pkgs/bash-gpt.nix {};
     burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso {};
 in {
   imports = [
@@ -62,7 +62,7 @@ in {
         nodePackages.neovim
 
         # Custom
-        bash-gpt
+        #bash-gpt
         burn-to-iso
 
         # Why is this here?
