@@ -2,6 +2,7 @@
 {
   makeLinuxAliases = system: {
     switch = "sudo nixos-rebuild switch --flake ${system}/.";
+    sleep = "systemctl hibernate";
     monitor-duplicate = "xrandr --auto";
     monitor-extended =
       "monitor-duplicate && xrandr --output eDP-1 --right-of HDMI-2";
