@@ -12,7 +12,6 @@ in {
     ./git
     #./tmux
     ./shell
-    ./starship
 
   ];
   config = {

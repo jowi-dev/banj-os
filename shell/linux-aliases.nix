@@ -1,4 +1,3 @@
-# {config, ...}:
 {
   makeLinuxAliases = system: {
     switch = "sudo nixos-rebuild switch --flake ${system}/.";
