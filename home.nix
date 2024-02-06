@@ -3,14 +3,14 @@ with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
 
-  inherit (import ./nix_functions/get_system_type.nix) getSystemType;
+  inherit (import ./nix_functions/get_system_type.nix) isMac;
 
 in {
   imports = [
     ./env
     ./nvim
     ./git
-    ./tmux
+    #./tmux
     ./shell
     ./starship
 
@@ -32,7 +32,7 @@ in {
       };
       stateVersion = "23.11";
       username = config.local-env.username;
-      file = if getSystemType config.local-env.system then
+      file = if isMac config.local-env.system then
         import ./linux/config/window-manager
       else
         { };
