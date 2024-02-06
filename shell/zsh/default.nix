@@ -14,19 +14,8 @@ with lib; {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    shellAliases = {
-    ports="lsof -i -P -n";
-    port-kill="kill $(lsof -t -i:4369)";
-
-    flake-hide="git add --intent-to-add flake.nix flake.lock && git update-index --assume-unchanged flake.nix flake.lock";
-
-    bs="echo ':terminal' | nvim -s --listen /tmp/$(tmux display-message -p '#S').pipe";
-    hmc="home-manager expire-generations '-2 days'";
-    hml="home-manager generations";
-    hms="home-manager switch";
-
-    };
-#    initExtra = ''
+    shellAliases = import ../aliases.nix;
+    #    initExtra = ''
 #      set -o vi
 #      source ~/.nix-profile/etc/profile.d/nix.sh
 #    '';

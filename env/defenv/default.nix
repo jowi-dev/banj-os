@@ -3,58 +3,57 @@ with lib;
 let cfg = config.local-env;
 in {
   options.local-env = {
-
-    isMac = mkOption {
-      type = types.bool;
+    system = mkOption {
+      type = types.str;
       default = "";
-      description = "	      is it \n      ";
+      description = "the system architecture of the current system";
     };
     username = mkOption {
       type = types.str;
       default = "";
       description =
-        "	      The system username of the currently logged in user\n      ";
+        "The system username of the currently logged in user\n      ";
     };
 
     homeDirectory = mkOption {
       type = types.str;
       default = "";
       description =
-        "	      The home directory. Usually the output of `echo $HOME`\n      ";
+        "The home directory. Usually the output of `echo $HOME`\n      ";
     };
 
      toolingDirectory = mkOption {
       type = types.str;
       default = "";
       description =
-        "	      The home directory. Usually the output of `echo $HOME`\n      ";
+        "The home directory. Usually the output of `echo $HOME`\n      ";
     };
 
     gitUserName = mkOption {
       type = types.str;
       default = "jowi";
       description =
-        "	      The username associated to your git account\n      ";
+        "The username associated to your git account\n      ";
     };
 
     gitEmail = mkOption {
       type = types.str;
       default = "";
-      description = "	      The email associated with your git account\n      ";
+      description = "The email associated with your git account\n      ";
     };
 
     openAPIKey = mkOption {
       type = types.str;
       default = "";
       description =
-        "	      The API key associated to your open API account. Leave blank if you do not need ChatGPT integration\n      ";
+        "The API key associated to your open API account. Leave blank if you do not need ChatGPT integration\n      ";
     };
 
     homeWifiPassword = mkOption {
       type = types.str;
       default = "";
       description =
-        "	      The Wifi password most often used on this machine\n      ";
+        "The Wifi password most often used on this machine\n      ";
     };
   };
 

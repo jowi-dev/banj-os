@@ -108,12 +108,12 @@ in
   nix.settings.experimental-features = "nix-command flakes";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
   users.users.jowi = {
     name = "jowi";
     home = "/home/jowi";
-    #shell = pkgs.fish;
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" ];

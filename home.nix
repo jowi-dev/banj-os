@@ -1,8 +1,10 @@
-{ config, pkgs, lib, ... }: 
+{ config, pkgs, lib, bash-gpt, ... }:
 with lib;
 let
-    #bash-gpt = pkgs.callPackage  ./pkgs/bash-gpt.nix {};
-    burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso {};
+  burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
+
+  inherit (import ./nix_functions/get_system_type.nix) getSystemType;
+
 in {
   imports = [
     ./env
@@ -19,28 +21,28 @@ in {
     home = {
 
       sessionVariables = with config.local-env; {
-        OPENAI_API_KEY= openAPIKey;
-        OPENAI_MODEL="gpt-4-1106-preview";
-        EDITOR="nvim";
-        HOME_WIFI_PASSWORD= homeWifiPassword;
-        BASHGPT_CHAT_HOME= "${homeDirectory}${toolingDirectory}/logs/bashgpt/";
-        BASHGPT_CONVERSATION_HISTORY_DIR="${homeDirectory}${toolingDirectory}/logs/bashgpt/";
+        OPENAI_API_KEY = openAPIKey;
+        OPENAI_MODEL = "gpt-4-1106-preview";
+        EDITOR = "nvim";
+        HOME_WIFI_PASSWORD = homeWifiPassword;
+        BASHGPT_CHAT_HOME = "${homeDirectory}${toolingDirectory}/logs/bashgpt/";
+        BASHGPT_CONVERSATION_HISTORY_DIR =
+          "${homeDirectory}${toolingDirectory}/logs/bashgpt/";
 
       };
       stateVersion = "23.11";
       username = config.local-env.username;
-      #homeDirectory = config.local-env.homeDirectory;
-      file = {
-        ".config/awesome/rc.lua".source = ./linux/config/window-manager/awesome.lua;
-        ".config/awesome/xrandr.lua".source = ./linux/config/window-manager/xrandr.lua;
-      };
+      file = if getSystemType config.local-env.system then
+        import ./linux/config/window-manager
+      else
+        { };
       packages = with pkgs; [
         # Global Languages
         cmake
-        (luajit.withPackages (p: with p; [luajitPackages.vicious]))
+        (luajit.withPackages (p: with p; [ luajitPackages.vicious ]))
         elixir
         nodejs
-        go 
+        go
         bun
         zig
         ruby
@@ -48,9 +50,8 @@ in {
         alacritty
         kitty
 
-
         # Global Tooling
-        git 
+        git
         gum
         github-cli
         yarn
@@ -62,7 +63,7 @@ in {
         nodePackages.neovim
 
         # Custom
-        #bash-gpt
+        bash-gpt.packages.${config.local-env.system}.default
         burn-to-iso
 
         # Why is this here?
