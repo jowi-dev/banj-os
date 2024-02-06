@@ -38,6 +38,7 @@
             users.jwilliams = import ./home.nix;
             useGlobalPkgs = true;
             useUserPackages = true;
+            extraSpecialArgs = { inherit bash-gpt; };
           };
 
         }

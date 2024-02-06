@@ -33,9 +33,9 @@ in {
       stateVersion = "23.11";
       username = config.local-env.username;
       file = if isMac config.local-env.system then
-        import ./linux/config/window-manager
+        { }
       else
-        { };
+        import ./linux/config/window-manager;
       packages = with pkgs; [
         # Global Languages
         cmake
