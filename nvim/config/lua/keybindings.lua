@@ -62,6 +62,7 @@ vim.g.UltiSnipsJumpBackwardTrigger="<leader>sb"
 map('v', '<leader>c',   ':lua CopyToClipboard()<CR>',{noremap=true})
 map('v', '<leader>gpt3', ':lua GPTSubmit("3")<CR>',{noremap=true})
 map('v', '<leader>gpt4', ':lua GPTSubmit()<CR>',{noremap=true})
+map('n', '<leader>gl', ':lua GithubLink()<CR>', {noremap=true})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
