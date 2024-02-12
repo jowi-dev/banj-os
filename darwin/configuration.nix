@@ -3,7 +3,7 @@
 with lib;
 let 
   cfg = config.my-darwin;
-  myFish = pkgs.wrapFish { pluginPkgs = with pkgs; [fishPlugins.bass babelfish];};
+  #myFish = pkgs.wrapFish { pluginPkgs = with pkgs; [fishPlugins.bass babelfish];};
 
 in {
 
@@ -23,17 +23,13 @@ in {
 
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-    environment.shells = [pkgs.zsh myFish];
-    environment.systemPackages = [myFish pkgs.zsh pkgs.fishPlugins.bass];
-    environment.loginShellInit = ''
-      #chsh -s /run/current-system/sw/bin/fish
-      '';
+    #environment.systemPackages = [myFish pkgs.zsh pkgs.fishPlugins.bass];
 
     # TODO - this needs to be folded into the flake config if possible, or imported from local env 
     users.users.jwilliams = {
       name = "jwilliams";
       home = "/Users/jwilliams";
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       #shell = myFish;
     };
 
@@ -74,9 +70,30 @@ in {
     };
 
     # Create /etc/zshrc that loads the nix-darwin environment.
-    programs.zsh = {
-      enable = true;
-    };
+      # zsh is the default shell on Mac and we want to make sure that we're
+    # configuring the rc correctly with nix-darwin paths.
+    programs.zsh.enable = true;
+    programs.zsh.shellInit = ''
+      # Nix
+      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      fi
+      # End Nix
+      '';
+
+    programs.fish.enable = true;
+    programs.fish.shellInit = ''
+      # Nix
+      if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+      end
+      # End Nix
+      '';
+
+    environment.shells = with pkgs; [bashInteractive zsh fish];
+#    programs.zsh = {
+#      enable = true;
+#    };
 #    programs.fish = {
 #      enable = true;
 #      useBabelfish = true;

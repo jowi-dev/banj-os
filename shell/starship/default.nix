@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    #enableFishIntegration = true;
+    enableFishIntegration = false;
     settings = {
       format = lib.concatStrings [
         "$username"

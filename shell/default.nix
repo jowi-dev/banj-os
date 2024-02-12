@@ -4,7 +4,7 @@ with lib; {
     # Command Prompt
     ./starship
     ./zsh
-    #./fish
+    ./fish
   ];
 }
 
