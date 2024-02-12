@@ -2,6 +2,10 @@
   ports="lsof -i -P -n";
   port-kill="kill $(lsof -t -i:4369)";
 
+  # Monitoring Commands: `monitor-*`
+  monitor="btop";
+  monitor-containers="lazydocker";
+
   movie="ssh -o StrictHostKeyChecking=no watch.ascii.theater";
   garbage-collect="nix-collect-garbage";
   flake-move-out="mv flake.nix flake.lock ~/";

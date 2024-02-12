@@ -6,79 +6,72 @@
 with lib;
 let
   awesome = pkgs.awesome.overrideAttrs (oldAttrs: {
-    buildInputs = oldAttrs.buildInputs ++ [pkgs.luajitPackages.vicious];
-  }) ;
-in
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ../env
-      ./hardware-configuration.nix
-      #../shell
-    ];
+    buildInputs = oldAttrs.buildInputs ++ [ pkgs.luajitPackages.vicious ];
+  });
+in {
+  imports = [ # Include the results of the hardware scan.
+    ../env
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.networks.Obsidian.psk="countryclub";
-  networking.wireless.userControlled.enable = true;
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    hostName = "nixos";
+    wireless = {
+      networks.Obsidian.psk = "countryclub";
+      userControlled.enable = true;
+      enable = true; # Enables wireless support via wpa_supplicant.
+    };
+  };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  #networking.networkmanager.enable = true;
+  virtualisation.docker.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
   };
+  services = {
+    # Enable CLI tools for checking battery information
+    acpid.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.windowManager.awesome.package = awesome;
-  services.xserver.windowManager.awesome.enable = true;
-  services.xserver.windowManager.awesome.luaModules = [
-    pkgs.luaPackages.luarocks
-    pkgs.luaPackages.vicious
-  ];
+    xserver = {
+      enable = true;
+      layout = "us";
+      xkbVariant = "";
+      displayManager = {
+        defaultSession = "none+awesome";
+        lightdm.enable = true;
+      };
+      windowManager = {
+        awesome = {
+          package = awesome;
+          enable = true;
+          luaModules = [ pkgs.luaPackages.luarocks pkgs.luaPackages.vicious ];
 
-  # Enable the KDE Plasma Desktop Environment.
-#  services.xserver.displayManager.sddm.enable = true;
-#  services.xserver.displayManager.sddm.theme = "sddm-chili";
+        };
 
-  services.xserver.displayManager.defaultSession = "none+awesome";
-  services.xserver.displayManager.lightdm.enable = true;
-  # Need Anything to start when log in?
-#  services.xserver.displayManager.setupCommands = [
-#  "echo '802-11-wireless-security.psk:${config.local-env.homeWifiPassword}' > wifi-pass"
-#  "nmcli con up Obsidian passwd-file ${config.local-env.homeDirectory}${config.local-env.toolingDirectory}/wifi-pass"
-#  "rm wifi-pass"
-#]; 
-  #services.xserver.displayManager.lightdm.greeters.tiny.enable = true;
-  #services.xserver.desktopManager.plasma5.enable = true;
+      };
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -101,9 +94,6 @@ in
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Nix Options
   nix.settings.experimental-features = "nix-command flakes";
 
@@ -116,75 +106,31 @@ in
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Joe Williams";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      #firefox
-      kate
-      #qutebrowser
-      brave
-    #  thunderbird
-    ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [ kate brave ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-#  nixpkgs.config.permittedInsecurePackages = [
-#    # For Etcher
-#    "electron-19.1.9"
-#  ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.variables = {
-	  NIXOS_CONFIG = "${config.local-env.homeDirectory}${config.local-env.toolingDirectory}/linux/configuration.nix";
-    OPENAI_API_KEY = "${config.local-env.openAPIKey}";
-    HOME_WIFI_PASSWORD = "${config.local-env.homeWifiPassword}";
+  environment = {
+    variables = with config.local-env; {
+      NIXOS_CONFIG =
+        "${homeDirectory}${toolingDirectory}/linux/configuration.nix";
+      OPENAI_API_KEY = "${openAPIKey}";
+      HOME_WIFI_PASSWORD = "${homeWifiPassword}";
+    };
+    systemPackages = with pkgs; [
+      vim
+      git
+      discord
+      gparted
+      mangohud
+      xorg.xkill
+      flameshot
+    ];
+
   };
-
-  #environment.etc."awesome/rc.lua".source = myAwesomeConfig;
-  environment.systemPackages = with pkgs; [
-  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  git
-  #manix
-#      arcan
-#      durden
-  discord
-  gparted
-  #lutris
-#  nixos-generators
-  #etcher
-  mangohud
-#  (wineWowPackages.full.override {
-#    wineRelease = "staging";
-#    mingwSupport = true;
-#  })
-#  winetricks
-#  wine
-  xorg.xkill
-  flameshot
-  #  wget
-  ];
-
-
-  # Some programs need SUID wrappers, can be configured further or are
-  #programs.river.enable = true;
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

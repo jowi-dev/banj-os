@@ -22,6 +22,7 @@ in {
         nvim-jqx
         vim-graphql
         nvim-treesitter.withAllGrammars
+        #nvim-treesitter
         vim-fugitive
         vim-merginal
         tmuxline-vim
@@ -103,8 +104,9 @@ in {
         :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
 
         :luafile ~/.config/nvim/lua/init.lua
-        :lua vim.treesitter.language.add('pony', {path="${pkgs.vimPlugins.nvim-treesitter-parsers.pony}/parser/pony.so"})
       '';
+
+        #:lua vim.treesitter.language.add('pony', {path="${pkgs.vimPlugins.nvim-treesitter-parsers.pony}/parser/pony.so"})
 
     };
 

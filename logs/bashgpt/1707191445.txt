@@ -230,4 +230,73 @@ sudo nixos-rebuild switch
 ```
 
 With these methods, you can clean your Nix store and potentially free up significant disk space. Remember to use these tools carefully, especially on a system where multiple users may have dependencies on Nix store paths—you don't want to remove something that's still needed.
+User: how can I check to see if elixir phoenix cli tools are installed in a bash script
+System: You can check if the Elixir Phoenix CLI tools are installed in a bash script by using the `mix` task `phx.new` as a proxy for determining if Phoenix is installed. Assuming that Elixir and `mix` are already installed (as Phoenix CLI tools are an archive installed into Mix), your bash script can simply check for the presence of the `phx.new` command within Mix.
+
+Here's a basic example of a bash script to check for the installed Phoenix version or if it's installed at all:
+
+```bash
+#!/bin/bash
+
+# Check if mix (Elixir build tool) is installed
+if ! command -v mix &> /dev/null; then
+    echo "mix (Elixir build tool) could not be found, please install it first."
+    exit 1
+fi
+
+# Try to get the Phoenix version
+phoenix_version=$(mix phx.new --version 2> /dev/null)
+
+# Check if the phoenix new command succeeded
+if [ $? -eq 0 ]; then
+    echo "Phoenix is installed. Version: $phoenix_version"
+else
+    echo "Phoenix is not installed or the phx.new mix task is not available."
+fi
+```
+
+This script will output whether Phoenix is installed and its version. Make sure to give execute permission to the script by running `chmod +x scriptname.sh` where `scriptname.sh` is the name of your script file. Then, you can run it with `./scriptname.sh`.
+
+If you want to install Phoenix in case it is not found, you could extend the script to include the mix command to install Phoenix:
+
+```bash
+# ...
+
+if [ $? -ne 0 ]; then
+    echo "Phoenix is not installed. Attempting to install now..."
+    mix archive.install hex phx_new
+fi
+```
+
+This line will use Mix to install the latest Phoenix archive available on Hex, which is the package manager for the Erlang ecosystem. Always be cautious when automatically installing software in scripts, and ensure that's the behavior you want to provide.
+User: what extra groups do I need to run docker commands on nixos for my user?
+System: On NixOS, in order to run Docker commands as a non-root user, you need to add your user to the `docker` group. This can be configured in your `configuration.nix` file and applied system-wide.
+
+Here's what you need to add to your `configuration.nix` file:
+
+```nix
+{ config, pkgs, ... }:
+
+{
+  # Allow the user to run Docker without sudo
+  users.users.<username>.extraGroups = [ "docker" ];
+
+  # Enable the Docker daemon
+  virtualisation.docker.enable = true;
+
+  # Other configurations...
+}
+```
+
+Replace `<username>` with your actual username. The `extraGroups` option adds your user to additional groups; in this case, the `docker` group.
+
+After you save your changes to `configuration.nix`, you need to rebuild your system configuration and switch to it using the command:
+
+```bash
+sudo nixos-rebuild switch
+```
+
+Once the configuration is applied, you may need to log out and log back in or even reboot for the new group membership to take effect. After that, you should be able to run Docker commands without needing to use `sudo`.
+
+Note that modifying the `extraGroups` of a user will not only affect Docker commands but also any other permissions associated with the groups added. Always be cautious when adding a user to additional groups and understand the implications for system security.
 

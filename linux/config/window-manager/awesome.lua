@@ -176,8 +176,10 @@ local cpuwidget = wibox.widget{
   max_value = .1
 }
 local ramwidget = wibox.widget.textbox()
+local batwidget = wibox.widget.textbox()
+vicious.register(batwidget, vicious.widgets.bat, "| Charge: $2% |", 60, "Battery 0")
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 1)
-vicious.register(ramwidget, vicious.widgets.mem, "$2mb", 3)
+vicious.register(ramwidget, vicious.widgets.mem, "| Ram Usage: $2mb |", 3)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -225,6 +227,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            batwidget,
             cpuwidget,
             ramwidget,
             mykeyboardlayout,

@@ -35,6 +35,8 @@ local telekasten = require('telekasten').setup({
 
 vim.fn.Notes = telekasten
 
+require("nvim-treesitter.configs").setup( { highlight = {enable = true} })
+
 -- UltiSnips Options
 vim.g.ultisnips_edit_split="vertical"
 

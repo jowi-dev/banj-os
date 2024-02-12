@@ -17,9 +17,9 @@ in {
   config = {
     programs.home-manager.enable = true;
 
-    home = {
+    home =  with config.local-env; {
 
-      sessionVariables = with config.local-env; {
+      sessionVariables = {
         OPENAI_API_KEY = openAPIKey;
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
@@ -30,8 +30,8 @@ in {
 
       };
       stateVersion = "23.11";
-      username = config.local-env.username;
-      file = if isMac config.local-env.system then
+      username = username;
+      file = if isMac system then
         { }
       else
         import ./linux/config/window-manager;
@@ -56,13 +56,15 @@ in {
         yarn
         nix-prefetch-github
         htop
-        ctop
+        btop
+        lazydocker
+        lazygit
 
         ctags
         nodePackages.neovim
 
         # Custom
-        bash-gpt.packages.${config.local-env.system}.default
+        bash-gpt.packages.${system}.default
         burn-to-iso
 
         # Why is this here?
