@@ -1,45 +1,27 @@
 # My Dev Environment
 
+## Elevator Pitch
+You're an avid OSS contributer, with a day job. You have a work computer courtesy of your company and Apple, and a personal computer that's linux. You install a shiny new monitoring tool at home, then go to work and ... no surprises its not there. You install it manually at work. Rinse and repeat for every single tool, all 30 of them. You go on a job hunt, get a new mac, boom! All of that setup on your old work laptop is gone.
+
+Wouldn't it be great to have a development environment that grows with you instead of holding you back? Docker is great and helps tremendously, but doesn't quite hit the bare metal audience as well as it could, so you're left with Nix. 
+
+I think the tooling nix provides is unmatched in a lot of ways. There's no sugar coating the unwieldy learning curve, but there's no understating how nice it is to say `git pull && rebuild` to have a perfect 1:1 clone of your development environment between all your machines.
+
+
 ## Setup
 
 
 #### Prerequisites
-**This has been tested on: Windows(WSL ONLY), Mac, Linux(PopOS/Debian). Use on other machines at your own risk. If you're thinking about trying to use this on Windows without WSL.. in the words of Obi Wan: "Don't try it Anakin"**
+1. Install nix, enable flakes
 
-This is built on [Nix](https://nix.dev/tutorials/install-nix) and [Home Manager](https://nix-community.github.io/home-manager/). 
-
-As of right now Nix version 2.13.3 is the newest stable version. [Related Issue](https://github.com/NixOS/nix/issues/7937#issuecomment-1451293677) and save yourself headache.
-
-**The setup script will handle installing both of these for you, as well as configuring the environment for your local needs.**
-
-TODO (WSL) - make an option that chooses the correct path to export so single user installation (Nix WSL recommendation) works out of the box. Build this into `setup.sh`
-
-
-#### Steps
-1. Make `setup.sh` executable
-2. $ `./setup.sh`
+#### Steps to install
+1. Clone this repo
+2. nixos-rebuild switch --flake 
 3. `nvim` then `:checkhealth` to ensure everything is in working order
 
 
 
-
-
-
-
-
-
-
-
-## Bored?
-
-Have a look at [Awesome Neovim](https://github.com/rockerBOO/awesome-neovim) to get some inspiration.
-
 ## Acknowledgements
-> This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home. If you're here to setup you're own config,  you should really consider looking at @fmoda3's first.
+> This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home.  
 
-
-
-
-
-
-
+> Thank you very much to Nobbz, who was an invaluable resource learning nix
