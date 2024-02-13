@@ -1,6 +1,6 @@
 {
   makeLinuxAliases = system: {
-    switch = "sudo nixos-rebuild switch --flake ${system}/.";
+    rebuild = "sudo nixos-rebuild switch --flake ${system}/.";
     templates="lsd ${system}/templates";
     battery = "acpi";
     sleep = "systemctl hibernate";

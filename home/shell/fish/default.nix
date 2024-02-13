@@ -1,4 +1,8 @@
 { config, pkgs, lib, ... }:
+let
+  inherit (import ../../../lib/mkaliases.nix) mkaliases;
+  aliases = mkaliases config.local-env.system;
+in
  {
   programs.fish = {
     enable = true;
@@ -23,7 +27,7 @@
 #    plugins = [
 #      pkgs.fishPlugins.foreign-env
 #   ];
-    #shellAliases = import ../aliases.nix;
+    shellAliases = aliases;
 #    vendor = {
 #      completions.enable=true;
 #      config.enable=true;

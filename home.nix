@@ -3,16 +3,15 @@ with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
 
-  inherit (import ./nix_functions/get_system_type.nix) isMac;
+  inherit (import ./lib/get_system_type.nix) isMac;
 
 in {
   imports = [
     ./env
-    ./nvim
-    ./git
-    #./tmux
-    ./shell
-
+    ./home/nvim
+    ./home/git
+    #./home/tmux
+    ./home/shell
   ];
   config = {
     programs.home-manager.enable = true;
