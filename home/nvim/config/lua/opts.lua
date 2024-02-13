@@ -3,6 +3,7 @@ vim.opt.background='dark'
 local cmd = vim.cmd
 cmd('syntax on')
 cmd('set clipboard+=unnamedplus')
+cmd('set foldlevel=99')
 
 -- Neovim Theme
 --cmd('colorscheme github')
@@ -17,6 +18,10 @@ require('lualine').setup({theme= 'horizon'})
 -- TmuxLine Theme
 vim.g.tmuxline_preset = 'horizon'
 --vim.g.tmuxline_preset = 'papercolor_light'
+
+--vim.g.vim_markdown_folding_disabled=1
+
+
 
 vim.opt.termguicolors = true
 
