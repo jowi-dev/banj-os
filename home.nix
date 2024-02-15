@@ -10,7 +10,7 @@ in {
     ./env
     ./home/nvim
     ./home/git
-    #./home/tmux
+    ./home/tmux
     ./home/shell
   ];
   config = {

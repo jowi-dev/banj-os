@@ -93,9 +93,9 @@ in {
 
       extraConfig = with config.local-env; ''
         let g:elixir_ls_home = "${pkgs.elixir-ls}"
-        let g:UltiSnipsSnippetDirectories = ["${homeDirectory}${toolingDirectory}/nvim/config/lua/UltiSnips"]
+        let g:UltiSnipsSnippetDirectories = ["${homeDirectory}${toolingDirectory}/home/nvim/config/lua/UltiSnips"]
 
-        :lua nvimHome = "${homeDirectory}/.config/nvim/lua"
+        :lua nvimHome = "${homeDirectory}/.config/home/nvim/lua"
         :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
         :lua logs_path = "${homeDirectory}${toolingDirectory}/logs"
 
