@@ -25,6 +25,7 @@ in {
         #nvim-treesitter
         vim-fugitive
         vim-merginal
+        vim-markdown
         tmuxline-vim
         vim-elixir
         vim-nix

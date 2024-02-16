@@ -1,0 +1,3 @@
+[submodule "logs"]
+	path = logs
+	url = git@github.com:jowi-dev/logs.git
