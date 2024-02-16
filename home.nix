@@ -23,9 +23,9 @@ in {
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
         HOME_WIFI_PASSWORD = homeWifiPassword;
-        BASHGPT_CHAT_HOME = "${homeDirectory}${toolingDirectory}/logs/bashgpt/";
+        BASHGPT_CHAT_HOME = "${homeDirectory}${toolingDirectory}/data/bashgpt/assistants/";
         BASHGPT_CONVERSATION_HISTORY_DIR =
-          "${homeDirectory}${toolingDirectory}/logs/bashgpt/";
+          "${homeDirectory}${toolingDirectory}/data/bashgpt/conversations/";
 
       };
       stateVersion = "23.11";
