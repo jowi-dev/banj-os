@@ -2,11 +2,13 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    enableFishIntegration = false;
+    enableFishIntegration = true;
     settings = {
       format = lib.concatStrings [
         "$username"
         "$hostname"
+        "\${custom.zsh}"
+        "\${custom.fish}"
         "$localip"
         "$shlvl"
         "$singularity"
@@ -132,6 +134,14 @@
         format = "\\[[$symbol($version)]($style)\\]";
       };
       erlang = { format = "\\[[$symbol($version)]($style)\\]"; };
+      custom.fish = {
+        symbol = "FISH";
+        format = "\\[[$symbol($version)]($style)\\]"; 
+      };
+      custom.zsh = { 
+        symbol = "ZSH";
+        format = "\\[[$symbol($version)]($style)\\]"; 
+      };
       gcloud = {
         format = "\\[[$symbol$account(@$domain)(\\($region\\))]($style)\\]";
       };
