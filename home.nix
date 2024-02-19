@@ -2,6 +2,7 @@
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
+  _1password = pkgs.callPackage ./pkgs/1password.nix { };
 
   inherit (import ./lib/get_system_type.nix) isMac;
 
@@ -18,8 +19,11 @@ in {
 
     home =  with config.local-env; {
 
+      
       sessionVariables = {
-        OPENAI_API_KEY = openAPIKey;
+        OP_SESSION_my="$(op signin my --raw)";
+        # TODO - this needs to be aliased before all chat commands
+        #OPENAI_API_KEY="op://Personal/openai-secret/password";
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
         HOME_WIFI_PASSWORD = homeWifiPassword;
@@ -65,6 +69,7 @@ in {
         # Custom
         bash-gpt.packages.${system}.default
         burn-to-iso
+        _1password
 
         # Why is this here?
         fzf

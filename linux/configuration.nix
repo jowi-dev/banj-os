@@ -107,7 +107,11 @@ in {
     isNormalUser = true;
     description = "Joe Williams";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [ kate brave ];
+    packages = with pkgs; [ 
+      kate 
+      brave 
+      _1password-gui
+    ];
   };
 
   # Allow unfree packages
@@ -117,7 +121,7 @@ in {
     variables = with config.local-env; {
       NIXOS_CONFIG =
         "${homeDirectory}${toolingDirectory}/linux/configuration.nix";
-      OPENAI_API_KEY = "${openAPIKey}";
+      #OPENAI_API_KEY = "${openAPIKey}";
       HOME_WIFI_PASSWORD = "${homeWifiPassword}";
     };
     systemPackages = with pkgs; [

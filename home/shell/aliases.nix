@@ -1,3 +1,8 @@
+let
+  #openai_api_key="OPENAI_API_KEY=$(op read op://Personal/openai-secret/password)";
+  openai_api_key="set OPENAI_API_KEY $(op read op://Personal/openai-secret/password)";
+  signin="eval $(op signin)";
+in
 {
   ports="lsof -i -P -n";
   port-kill="kill $(lsof -t -i:4369)";
@@ -16,5 +21,10 @@
   env-hide="git add --intent-to-add env/default.nix && git update-index --assume-unchanged env/default.nix";
 
   bs="echo ':terminal' | nvim -s --listen /tmp/$(tmux display-message -p '#S').pipe";
+
+  # TODO - probably needs smarter pathing
+  assistant="${openai_api_key} && chat-beta || ${signin} && ${openai_api_key} && chat-beta";
+  code-gen="${openai_api_key} && code";
+  ask-jeeves="${openai_api_key} && chat";
 }
 
