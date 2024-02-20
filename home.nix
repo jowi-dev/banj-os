@@ -21,9 +21,6 @@ in {
 
       
       sessionVariables = {
-        OP_SESSION_my="$(op signin my --raw)";
-        # TODO - this needs to be aliased before all chat commands
-        #OPENAI_API_KEY="op://Personal/openai-secret/password";
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
         HOME_WIFI_PASSWORD = homeWifiPassword;
@@ -62,6 +59,7 @@ in {
         btop
         lazydocker
         lazygit
+        wavemon
 
         ctags
         nodePackages.neovim

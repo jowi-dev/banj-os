@@ -12,5 +12,10 @@
       "monitor-duplicate && xrandr --output eDP-1 --right-of HDMI-2";
     display-single-laptop = "monitor-duplicate && xrandr --output HDMI-2 --off";
     display-single-desktop = "monitor-duplicate && xrandr --output eDP-1 --off";
+
+    # Wifi Commands: wifi
+    wifi-save-config="wpa_passphrase";
+    wifi="wpa_gui";
+    
   };
 }

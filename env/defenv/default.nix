@@ -42,13 +42,6 @@ in {
       description = "The email associated with your git account\n      ";
     };
 
-    openAPIKey = mkOption {
-      type = types.str;
-      default = "";
-      description =
-        "The API key associated to your open API account. Leave blank if you do not need ChatGPT integration\n      ";
-    };
-
     homeWifiPassword = mkOption {
       type = types.str;
       default = "";

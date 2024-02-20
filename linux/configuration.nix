@@ -21,9 +21,17 @@ in {
   networking = {
     hostName = "nixos";
     wireless = {
-      networks.Obsidian.psk = "countryclub";
       userControlled.enable = true;
       enable = true; # Enables wireless support via wpa_supplicant.
+      networks = {
+        Obsidian = {
+          pskRaw ="dbbeb39d04be3916d99e3a376576c308e0019b4dbf94084bc8c07c1ff3d7f7a0";
+        };
+        # Have a new wifi config? add it here!
+#        "My Network Name" = {
+#          pskRaw = "generated psk output from wifi-save-config";
+#        };
+      };
     };
   };
 
@@ -110,6 +118,7 @@ in {
     packages = with pkgs; [ 
       kate 
       brave 
+      wpa_supplicant_gui
       _1password-gui
     ];
   };
@@ -121,7 +130,6 @@ in {
     variables = with config.local-env; {
       NIXOS_CONFIG =
         "${homeDirectory}${toolingDirectory}/linux/configuration.nix";
-      #OPENAI_API_KEY = "${openAPIKey}";
       HOME_WIFI_PASSWORD = "${homeWifiPassword}";
     };
     systemPackages = with pkgs; [

@@ -10,6 +10,7 @@ in
   # Monitoring Commands: `monitor-*`
   monitor="btop";
   monitor-containers="lazydocker";
+  monitor-wifi="wavemon";
 
   movie="ssh -o StrictHostKeyChecking=no watch.ascii.theater";
   garbage-collect="nix-collect-garbage";
