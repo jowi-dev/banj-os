@@ -10,7 +10,7 @@ let
   });
 in {
   imports = [ # Include the results of the hardware scan.
-    ../env
+    ../../env
     ./hardware-configuration.nix
   ];
 
@@ -129,7 +129,7 @@ in {
   environment = {
     variables = with config.local-env; {
       NIXOS_CONFIG =
-        "${homeDirectory}${toolingDirectory}/linux/configuration.nix";
+        "${homeDirectory}${toolingDirectory}/sys/linux/configuration.nix";
       HOME_WIFI_PASSWORD = "${homeWifiPassword}";
     };
     systemPackages = with pkgs; [

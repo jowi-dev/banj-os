@@ -28,7 +28,7 @@
       darwinSystem = "aarch64-darwin";
       nixpkgsConfig = with inputs; { config = { allowUnfree = true; }; };
       darwinModules = [
-        (./. + "/darwin/configuration.nix")
+        (import ./sys/darwin/configuration.nix)
         home-manager.darwinModules.home-manager
         {
           nixpkgs = nixpkgsConfig;
@@ -44,7 +44,7 @@
         }
       ];
       nixosModules = [
-        (./. + "/linux/configuration.nix")
+        (import ./sys/linux/configuration.nix)
         home-manager.nixosModules.home-manager
         {
           nixpkgs = nixpkgsConfig;

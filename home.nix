@@ -34,7 +34,7 @@ in {
       file = if isMac system then
         { }
       else
-        import ./linux/config/window-manager;
+        import ./sys/linux/config/window-manager;
       packages = with pkgs; [
         # Global Languages
         cmake
