@@ -3,7 +3,7 @@
 let 
 
   inherit (import ../lib/get_system_type.nix) isMac;
-  inherit (import ../env/default.nix) local-env;
+  local-env = import ../env/default.nix ;
   isDarwin = isMac local-env.system;
   isLinux = !isDarwin;
 in
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
           stripRoot = false;
         } else
       fetchurl {
-        url = "https://cache.agilebits.com/dist/1P/op/pkg/v${version}/op_apple_universal_v${version}.pkg";
+        url = "https://cache.agilebits.com/dist/1P/op2/pkg/v${version}/op_apple_universal_v${version}.pkg";
         sha256 = "0000000000000000000000000000000000000000000000000000";
       };
 

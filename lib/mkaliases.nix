@@ -1,5 +1,5 @@
 let 
-  inherit (import ../env/default.nix) local-env;
+  local-env = import ../env/default.nix;
   homeDirectory = local-env.homeDirectory;
   toolingDirectory = local-env.toolingDirectory;
   inherit (import ./get_system_type.nix) isMac;

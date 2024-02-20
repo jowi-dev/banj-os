@@ -2,7 +2,7 @@
 let 
   inherit (import ../../../lib/mkaliases.nix) mkaliases;
 
-  aliases = mkaliases config.local-env.system;
+  aliases = mkaliases config.system;
 in
 with lib; {
   programs.zsh = {

@@ -118,6 +118,7 @@ in {
     packages = with pkgs; [ 
       kate 
       brave 
+      wavemon
       wpa_supplicant_gui
       _1password-gui
     ];
@@ -127,10 +128,9 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   environment = {
-    variables = with config.local-env; {
+    variables = with config; {
       NIXOS_CONFIG =
         "${homeDirectory}${toolingDirectory}/sys/linux/configuration.nix";
-      HOME_WIFI_PASSWORD = "${homeWifiPassword}";
     };
     systemPackages = with pkgs; [
       vim

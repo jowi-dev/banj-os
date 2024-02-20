@@ -2,8 +2,8 @@
   programs = {
     git = {
       enable = true;
-      userName = config.local-env.gitUserName;
-      userEmail = config.local-env.gitEmail;
+      userName = config.gitUserName;
+      userEmail = config.gitEmail;
 
       aliases = { };
 

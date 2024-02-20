@@ -2,7 +2,7 @@
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
-  _1password = pkgs.callPackage ./pkgs/1password.nix { };
+  #_1password = pkgs.callPackage ./pkgs/1password.nix { };
 
   inherit (import ./lib/get_system_type.nix) isMac;
 
@@ -17,13 +17,12 @@ in {
   config = {
     programs.home-manager.enable = true;
 
-    home =  with config.local-env; {
+    home =  with config; {
 
       
       sessionVariables = {
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
-        HOME_WIFI_PASSWORD = homeWifiPassword;
         BASHGPT_CHAT_HOME = "${homeDirectory}${toolingDirectory}/data/bashgpt/assistants/";
         BASHGPT_CONVERSATION_HISTORY_DIR =
           "${homeDirectory}${toolingDirectory}/data/bashgpt/conversations/";
@@ -59,7 +58,6 @@ in {
         btop
         lazydocker
         lazygit
-        wavemon
 
         ctags
         nodePackages.neovim

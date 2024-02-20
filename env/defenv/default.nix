@@ -1,8 +1,7 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.local-env;
-in {
-  options.local-env = {
+{
+  options = {
     system = mkOption {
       type = types.str;
       default = "";
@@ -40,13 +39,6 @@ in {
       type = types.str;
       default = "";
       description = "The email associated with your git account\n      ";
-    };
-
-    homeWifiPassword = mkOption {
-      type = types.str;
-      default = "";
-      description =
-        "The Wifi password most often used on this machine\n      ";
     };
   };
 

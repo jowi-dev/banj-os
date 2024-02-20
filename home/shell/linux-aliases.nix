@@ -16,6 +16,6 @@
     # Wifi Commands: wifi
     wifi-save-config="wpa_passphrase";
     wifi="wpa_gui";
-    
+    monitor-wifi="wavemon";
   };
 }

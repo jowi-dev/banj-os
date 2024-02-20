@@ -92,7 +92,7 @@ in {
           fd
         ];
 
-      extraConfig = with config.local-env; ''
+      extraConfig = with config; ''
         let g:elixir_ls_home = "${pkgs.elixir-ls}"
         let g:UltiSnipsSnippetDirectories = ["${homeDirectory}${toolingDirectory}/home/nvim/config/lua/UltiSnips"]
 
