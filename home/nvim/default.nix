@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, currentSystem, ... }:
 with lib;
 let
   # So this is actually pretty cool.
@@ -92,15 +92,15 @@ in {
           fd
         ];
 
-      extraConfig = with config.local-env; ''
+      extraConfig = with currentSystem.directories; ''
         let g:elixir_ls_home = "${pkgs.elixir-ls}"
-        let g:UltiSnipsSnippetDirectories = ["${homeDirectory}${toolingDirectory}/home/nvim/config/lua/UltiSnips"]
+        let g:UltiSnipsSnippetDirectories = ["${tooling}/home/nvim/config/lua/UltiSnips"]
 
-        :lua nvimHome = "${homeDirectory}/.config/home/nvim/lua"
+        :lua nvimHome = "${home}/.config/home/nvim/lua"
         :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
-        :lua logs_path = "${homeDirectory}${toolingDirectory}/logs"
+        :lua logs_path = "${tooling}/logs"
 
-        :lua package.path = "${homeDirectory}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
+        :lua package.path = "${home}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
         :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
 
         :luafile ~/.config/nvim/lua/init.lua

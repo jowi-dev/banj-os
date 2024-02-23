@@ -1,7 +1,5 @@
 { stdenv, fetchFromGitHub  }:
 
-# JOE - this is how you import variables from other files
-#let inherit (import ../env/default.nix) local-env; in
 stdenv.mkDerivation rec {
   pname = "bash-gpt";
   version = "1.0.0";

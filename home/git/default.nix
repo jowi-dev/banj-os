@@ -1,9 +1,9 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, currentSystem, ... }: {
   programs = {
     git = {
       enable = true;
-      userName = config.local-env.gitUserName;
-      userEmail = config.local-env.gitEmail;
+      userName = currentSystem.git.username;
+      userEmail = currentSystem.git.email;
 
       aliases = { };
 

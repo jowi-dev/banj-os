@@ -17,73 +17,54 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
+
   };
 
   outputs =
     inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts }:
-    let
-      nixosSystem = "x86_64-linux";
-      darwinSystem = "aarch64-darwin";
-      nixpkgsConfig = with inputs; { config = { allowUnfree = true; }; };
-      darwinModules = [
-        (import ./sys/darwin/configuration.nix)
-        home-manager.darwinModules.home-manager
-        {
-          nixpkgs = nixpkgsConfig;
-          nix.registry =
-            nixpkgs.lib.mapAttrs (_: value: { flake = value; }) inputs;
-          home-manager = {
-            users.jwilliams = import ./home.nix;
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = { inherit bash-gpt; };
-          };
-
-        }
-      ];
-      nixosModules = [
-        (import ./sys/linux/configuration.nix)
-        home-manager.nixosModules.home-manager
-        {
-          nixpkgs = nixpkgsConfig;
-          nix.registry =
-            nixpkgs.lib.mapAttrs (_: value: { flake = value; }) inputs;
-          home-manager = {
-            users.jowi.imports = [ ./home.nix ];
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = { inherit bash-gpt; };
-          };
-        }
-      ];
-    in flake-parts.lib.mkFlake { inherit inputs; } {
+  let
+    mkSystem = import ./lib/mksystem.nix {
+      inherit nixpkgs inputs;
+    };
+  in
+    flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         templates = import ./templates;
         nixosConfigurations = {
-          nixos = nixpkgs.lib.nixosSystem {
-            system = nixosSystem;
-            modules = [ ] ++ nixosModules;
+          nixos = mkSystem "nixos" {
+            system = "x86_64-linux";
+            enableGui = true;
+            username = "jowi";
+            homeDirectory = "/home/jowi";
+            toolingDirectory = "/.config/nix-config";
+            gitUsername = "jowi-dev";
+            gitEmail = "joey8williams@gmail.com";
+            extraSpecialArgs = {inherit bash-gpt;};
           };
-          nixosIso = nixpkgs.lib.nixosSystem {
-            system = nixosSystem;
-            modules =
-              [ "${nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix" ]
-              ++ nixosModules;
+          nixosIso = mkSystem "nisosIso" {
+            system = "x86_64-linux";
+            username = "jowi";
+            homeDirectory = "/home/jowi";
+            toolingDirectory = "/.config/nix-config";
+            gitUsername = "jowi-dev";
+            gitEmail = "joey8williams@gmail.com";
+            extraSpecialArgs = {inherit bash-gpt;};
           };
-
         };
         darwinConfigurations = {
-          papa-laptop = darwin.lib.darwinSystem {
-            system = darwinSystem;
-            modules = darwinModules;
+          papa-laptop = mkSystem "papa-laptop" {
+            system = "aarch64-darwin";
+            username = "jwilliams";
+            homeDirectory = "/Users/jwilliams";
+            toolingDirectory = "/.config/nix-config";
+            gitUsername = "jowi-papa";
+            gitEmail = "jwilliams@papa.com";
+            extraSpecialArgs = {inherit bash-gpt;};
           };
 
         };
       };
-      systems = [ nixosSystem darwinSystem ];
-
+      systems = [  ];
     };
-
 }

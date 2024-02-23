@@ -1,40 +1,30 @@
-{ config, pkgs, lib, bash-gpt, ... }:
+{ config, pkgs, lib, currentSystem, bash-gpt, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
-  _1password = pkgs.callPackage ./pkgs/1password.nix { };
-
-  inherit (import ./lib/get_system_type.nix) isMac;
+  _1password = pkgs.callPackage ./pkgs/1password.nix { 
+    currentSystem = currentSystem;
+  };
 
 in {
-  imports = [
-    ./env
-    ./home/nvim
-    ./home/git
-    ./home/tmux
-    ./home/shell
-  ];
+  imports = [ ./home/nvim ./home/git ./home/tmux ./home/shell ];
   config = {
     programs.home-manager.enable = true;
 
-    home =  with config.local-env; {
+    home = with currentSystem.directories; {
 
-      
       sessionVariables = {
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
-        HOME_WIFI_PASSWORD = homeWifiPassword;
-        BASHGPT_CHAT_HOME = "${homeDirectory}${toolingDirectory}/data/bashgpt/assistants/";
+        BASHGPT_CHAT_HOME = "${tooling}/data/bashgpt/assistants/";
         BASHGPT_CONVERSATION_HISTORY_DIR =
-          "${homeDirectory}${toolingDirectory}/data/bashgpt/conversations/";
+          "${tooling}/data/bashgpt/conversations/";
 
       };
       stateVersion = "23.11";
-      username = username;
-      file = if isMac system then
-        { }
-      else
-        import ./sys/linux/config/window-manager;
+      username = currentSystem.user;
+      file = currentSystem.extraConfigFiles;
+
       packages = with pkgs; [
         # Global Languages
         cmake

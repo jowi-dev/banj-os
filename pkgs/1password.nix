@@ -1,10 +1,9 @@
 /* copy from nixpkgs but updated to fix arm64 support */
-{ config, lib, stdenv, fetchzip, autoPatchelfHook, fetchurl, xar, cpio }:
+{ config, lib, currentSystem, stdenv, fetchzip, autoPatchelfHook, fetchurl, xar, cpio }:
 let 
 
   inherit (import ../lib/get_system_type.nix) isMac;
-  inherit (import ../env/default.nix) local-env;
-  isDarwin = isMac local-env.system;
+  isDarwin = isMac currentSystem.architecture;
   isLinux = !isDarwin;
 in
 stdenv.mkDerivation rec {

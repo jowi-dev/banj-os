@@ -1,5 +1,5 @@
 # Darwin Config
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, currentSystem ... }:
 with lib;
 let 
   cfg = config.my-darwin;
@@ -23,12 +23,10 @@ in {
 
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-    #environment.systemPackages = [myFish pkgs.zsh pkgs.fishPlugins.bass];
 
-    # TODO - this needs to be folded into the flake config if possible, or imported from local env 
-    users.users.jwilliams = {
-      name = "jwilliams";
-      home = "/Users/jwilliams";
+    users.users.${currentSystem.user} = {
+      name = currentSystem.user;
+      home = currentSystem.directories.home;
       shell = pkgs.fish;
       #shell = myFish;
     };
