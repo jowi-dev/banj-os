@@ -18,23 +18,25 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = "nixos";
+    hostName = currentSystem.name;
     wireless = {
       userControlled.enable = true;
       enable = true; # Enables wireless support via wpa_supplicant.
       networks = {
         Obsidian = {
-          pskRaw ="dbbeb39d04be3916d99e3a376576c308e0019b4dbf94084bc8c07c1ff3d7f7a0";
+          pskRaw =
+            "dbbeb39d04be3916d99e3a376576c308e0019b4dbf94084bc8c07c1ff3d7f7a0";
         };
         # Have a new wifi config? add it here!
-#        "My Network Name" = {
-#          pskRaw = "generated psk output from wifi-save-config";
-#        };
+        #        "My Network Name" = {
+        #          pskRaw = "generated psk output from wifi-save-config";
+        #        };
       };
     };
   };
 
-  virtualisation.docker.enable = true;
+  # making this configurable so servers can run as lean as possible
+  virtualisation.docker.enable = currentSystem.enableContainers;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -59,24 +61,31 @@ in {
     # Enable CLI tools for checking battery information
     acpid.enable = true;
 
-  # Enable the X11 windowing system.
+    # TODO - a wayland config? 
+    # Enable the X11 windowing system.
     xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "";
-      displayManager = {
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      displayManager = if currentSystem.enableGui then {
         defaultSession = "none+awesome";
         lightdm.enable = true;
+      } else {
+        startx.enable = true;
       };
-      windowManager = {
+      windowManager = if currentSystem.enableGui then {
         awesome = {
           package = awesome;
           enable = true;
-          luaModules = [ pkgs.luaPackages.luarocks pkgs.luaPackages.vicious ];
-
+          luaModules = [ 
+            pkgs.luaPackages.luarocks 
+            pkgs.luaPackages.vicious 
+          ];
         };
-
-      };
+      } else
+        { };
 
     };
   };
@@ -85,10 +94,10 @@ in {
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  sound.enable = currentSystem.enableSound;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
+  services.pipewire = if currentSystem.enableSound then {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -99,7 +108,7 @@ in {
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
-  };
+  } else {};
 
   # Nix Options
   nix.settings.experimental-features = "nix-command flakes";
@@ -107,19 +116,16 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   programs.fish.enable = true;
-  users.users.jowi = {
-    name = "jowi";
-    home = "/home/jowi";
+  users.users.${currentSystem.user} = {
+    name = currentSystem.user;
+    home = currentSystem.directories.home;
     shell = pkgs.fish;
     isNormalUser = true;
     description = "Joe Williams";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [ 
-      kate 
-      brave 
-      wpa_supplicant_gui
-      _1password-gui
-    ];
+    extraGroups = if currentSystem.enableContainers then
+    [ "networkmanager" "wheel" "docker" ]
+    else [ "networkmanager" "wheel" ] ;
+    packages = if currentSystem.enableGui then with pkgs; [ kate brave wpa_supplicant_gui _1password-gui ] else [];
   };
 
   # Allow unfree packages
@@ -129,7 +135,7 @@ in {
     variables = with currentSystem; {
       NIXOS_CONFIG = "${directories.tooling}/sys/${name}/configuration.nix";
     };
-    systemPackages = with pkgs; [
+    systemPackages =  with pkgs;  if currentSystem.enableGui then [
       vim
       git
       discord
@@ -137,7 +143,8 @@ in {
       mangohud
       xorg.xkill
       flameshot
-    ];
+    ] else [vim git];
+     
 
   };
 

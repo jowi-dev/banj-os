@@ -35,6 +35,8 @@
           nixos = mkSystem "nixos" {
             system = "x86_64-linux";
             enableGui = true;
+            enableSound = true;
+            enableContainers = true;
             username = "jowi";
             homeDirectory = "/home/jowi";
             toolingDirectory = "/.config/nix-config";

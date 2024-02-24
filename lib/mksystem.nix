@@ -6,7 +6,7 @@ name:
 { system, username ? "jowi", homeDirectory ? "/home/jowi"
 , toolingDirectory ? "/.config/nix-config", gitUsername ? "jowi-dev"
 , gitEmail ? "joey8williams@gmail.com", extraSpecialArgs ? { }
-, enableGui ? false, }:
+, enableGui ? false, enableSound? true, enableContainers ? true, }:
 
 let
 
@@ -27,12 +27,18 @@ let
   else
   inputs.home-manager.nixosModules.home-manager;
 
+  # Never enable awesomeWM on mac
+  sysEnableGui = if isMac system then false else enableGui;
+
   extraConfigFiles =
-    if enableGui then (import ../home/window-manager) else { };
+    if sysEnableGui then (import ../home/window-manager) else { };
 
         currentSystem = {
           architecture = system;
           name = name;
+          enableGui = sysEnableGui;
+          enableSound = enableSound;
+          enableContainers = enableContainers;
           user = username;
           directories = {
             home = homeDirectory;
