@@ -3,10 +3,20 @@
 { nixpkgs, inputs }:
 
 name:
-{ system, username ? "jowi", homeDirectory ? "/home/jowi"
-, toolingDirectory ? "/.config/nix-config", gitUsername ? "jowi-dev"
-, gitEmail ? "joey8williams@gmail.com", extraSpecialArgs ? { }
-, enableGui ? false, enableSound? true, enableContainers ? true, }:
+{ 
+  system, 
+  username ? "jowi", 
+  homeDirectory ? "/home/jowi", 
+  toolingDirectory ? "/.config/nix-config", 
+  gitUsername ? "jowi-dev", 
+  gitEmail ? "joey8williams@gmail.com", 
+  extraSpecialArgs ? { }, 
+  enableGui ? false, 
+  enableSound? true, 
+  enableContainers ? true, 
+  iso ? false,
+  ai ? false,
+}:
 
 let
 
@@ -56,6 +66,9 @@ let
           };
         };
 
+    isoModules = if iso then ["${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"] else [];
+
+    #extraSpecialArgs = if ai then extraSpecialArgs else { inherit
 
 in systemFunc rec {
   inherit system;
@@ -81,5 +94,5 @@ in systemFunc rec {
     {
       config._module.args = {inherit currentSystem;};
     }
-  ];
+  ] ++ isoModules;
 }

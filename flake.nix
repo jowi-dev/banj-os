@@ -17,12 +17,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    llama-cpp = {
+      url = "github:ggerganov/llama.cpp";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
 
   };
 
   outputs =
-    inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts }:
+    inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts, llama-cpp }:
   let
     mkSystem = import ./lib/mksystem.nix {
       inherit nixpkgs inputs;
@@ -31,6 +38,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         templates = import ./templates;
+        # See lib/mksystem.nix for config options
         nixosConfigurations = {
           nixos = mkSystem "nixos" {
             system = "x86_64-linux";
@@ -42,9 +50,10 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = {inherit bash-gpt;};
+            extraSpecialArgs = {inherit bash-gpt; inherit llama-cpp; };
           };
-          nixosIso = mkSystem "nisosIso" {
+          nixosIso = mkSystem "nixos" {
+            iso = true;
             system = "x86_64-linux";
             username = "jowi";
             homeDirectory = "/home/jowi";

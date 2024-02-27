@@ -1,3 +1,4 @@
+#{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, ... }:
 { config, pkgs, lib, currentSystem, bash-gpt, ... }:
 with lib;
 let
@@ -56,6 +57,7 @@ in {
 
         # Custom
         bash-gpt.packages.${system}.default
+        #llama-cpp.packages.${system}.default
         burn-to-iso
         _1password
 

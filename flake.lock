@@ -97,6 +97,29 @@
         "type": "github"
       }
     },
+    "llama-cpp": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1708784632,
+        "narHash": "sha256-3yg77IeyD1k+0Fbdx5yBDJgn/+r2LlydZFFB+gVDKzM=",
+        "owner": "ggerganov",
+        "repo": "llama.cpp",
+        "rev": "4c4cb30736582cacb1a164a9d4bc8e17b1014be7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggerganov",
+        "repo": "llama.cpp",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1708655239,
@@ -137,6 +160,7 @@
         "darwin": "darwin",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "llama-cpp": "llama-cpp",
         "nixpkgs": "nixpkgs"
       }
     },
