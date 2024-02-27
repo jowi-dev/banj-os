@@ -50,16 +50,14 @@ in {
         btop
         lazydocker
         lazygit
-        wavemon
+        
 
         ctags
         nodePackages.neovim
 
         # Custom
         bash-gpt.packages.${system}.default
-        #llama-cpp.packages.${system}.default
         burn-to-iso
-        _1password
 
         # Why is this here?
         fzf
@@ -70,7 +68,9 @@ in {
         xclip
         jq
         coreutils
-      ];
+        
+      ] ++ (if currentSystem.isMac then [] else [wavemon _1password llama-cpp.packages.${system}.default cosmic-term]);
+        
     };
 
   };

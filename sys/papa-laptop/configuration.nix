@@ -1,5 +1,5 @@
 # Darwin Config
-{ config, pkgs, lib, currentSystem ... }:
+{ config, pkgs, lib, currentSystem, ... }:
 with lib;
 let 
   cfg = config.my-darwin;
@@ -34,6 +34,7 @@ in {
     # Make sure nix always runs in multi-user mode on Mac
     services.nix-daemon.enable = true;
 
+    nixpkgs.config.allowUnfree = true;
     nix = {
       package = pkgs.nixStable;
       # Add cache for nix-community, used mainly for neovim nightly
