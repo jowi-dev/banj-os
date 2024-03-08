@@ -17,7 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     llama-cpp = {
@@ -26,15 +25,31 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
+#    # Elixir LS - installing from nixpkgs for now
+#    nextls = {
+#      url = "github:elixir-tools/next-ls";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#    };
+
+    zig = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zls = {
+      url = "github:zigtools/zls";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.zig-overlay.follows = "zig";
+    };
+
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts, llama-cpp }:
-  let
-    mkSystem = import ./lib/mksystem.nix {
-      inherit nixpkgs inputs;
-    };
-  in
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts
+    , llama-cpp, zig, zls }:
+    let 
+
+    overlays = [ zig.overlays.default ];
+      mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
+    in 
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         templates = import ./templates;
@@ -50,7 +65,11 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = {inherit bash-gpt; inherit llama-cpp; };
+            extraSpecialArgs = {
+              inherit bash-gpt;
+              inherit llama-cpp;
+              inherit zls;
+            };
           };
           nixosIso = mkSystem "nixos" {
             iso = true;
@@ -60,7 +79,7 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = {inherit bash-gpt;};
+            extraSpecialArgs = { inherit bash-gpt; };
           };
         };
         darwinConfigurations = {
@@ -71,11 +90,11 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-papa";
             gitEmail = "jwilliams@papa.com";
-            extraSpecialArgs = {inherit bash-gpt;};
+            extraSpecialArgs = { inherit bash-gpt; };
           };
 
         };
       };
-      systems = [  ];
+      systems = [ ];
     };
 }

@@ -1,5 +1,4 @@
-#{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, ... }:
-{ config, pkgs, lib, currentSystem, bash-gpt, ... }:
+{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, zls, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -32,9 +31,11 @@ in {
         (luajit.withPackages (p: with p; [ luajitPackages.vicious ]))
         elixir
         nodejs
+        ccls
+        gtest
+        gdb
         go
         bun
-        zig
         ruby
         rustup
         alacritty
@@ -58,6 +59,9 @@ in {
         # Custom
         bash-gpt.packages.${system}.default
         burn-to-iso
+        
+        zigpkgs.master
+        zls.packages.${system}.default
 
         # Why is this here?
         fzf

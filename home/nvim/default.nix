@@ -1,10 +1,13 @@
-{ config, pkgs, lib, currentSystem, ... }:
+{ config, pkgs, lib, currentSystem,  ... }:
 with lib;
 let
   # So this is actually pretty cool.
   # We're making a luajit environment with http (and dependencies) available.
   # This is used in the ChatGPT submission code
-  nvimLuaEnv = pkgs.luajit.withPackages (p: with p; [ http lpeg basexx cqueues cjson ]);
+  nvimLuaEnv =
+    pkgs.luajit.withPackages (p: with p; [ http lpeg basexx cqueues cjson ]);
+
+  #nextPackage = nextls.packages.${currentSystem.architecture}.default;
 
 in {
   config = {
@@ -19,7 +22,10 @@ in {
         awesome-vim-colorschemes
         nerdtree
         # csv-vim
+        vim-ccls
         nvim-jqx
+        nvim-dap
+        elixir-tools-nvim
         vim-graphql
         nvim-treesitter.withAllGrammars
         #nvim-treesitter
@@ -43,68 +49,65 @@ in {
         nvim-cmp
         lualine-nvim
         ultisnips
-        #elixir-tools-nvim
 
-        #nvim-treesitter-parsers.pony
       ];
 
-      extraPackages = with pkgs;
-        [
-          jq
-          tree-sitter
-          nodejs
+      extraPackages = with pkgs; [
+        jq
+        tree-sitter
+        nodejs
 
-          # Language Servers
-          # Bash
-          nodePackages.bash-language-server
+        # Language Servers
+        # Bash
+        nodePackages.bash-language-server
 
-          # Erlang
-          beam.packages.erlang.erlang-ls
-          beam.packages.erlang.elixir-ls
+        # Erlang
+        beam.packages.erlang.erlang-ls
+        elixir-ls
 
-          # ZIG BABY
-          zig
+        # Lua
+        lua-language-server
+        #luajit
 
-          # Lua
-          lua-language-server
-          #luajit
+        # Nix
+        nixfmt
+        rnix-lsp
+        nixpkgs-fmt
+        statix
 
-          # Nix
-          nixfmt
-          rnix-lsp
-          nixpkgs-fmt
-          statix
+        #python-debug
+        black
+        python310Full
+        python310Packages.pynvim
+        python310Packages.powerline
 
-          #python-debug
-          black
-          python310Full
-          python310Packages.pynvim
-          python310Packages.powerline
+        # Typescript
+        nodePackages.typescript-language-server
 
-          # Typescript
-          nodePackages.typescript-language-server
+        # Web (ESLint, HTML, CSS, JSON)
+        nodePackages.vscode-langservers-extracted
 
-          # Web (ESLint, HTML, CSS, JSON)
-          nodePackages.vscode-langservers-extracted
-
-          # Telescope tools
-          ripgrep
-          fd
-        ];
+        # Telescope tools
+        ripgrep
+        fd
+      ];
 
       extraConfig = with currentSystem.directories; ''
-        let g:elixir_ls_home = "${pkgs.elixir-ls}"
         let g:UltiSnipsSnippetDirectories = ["${tooling}/home/nvim/config/lua/UltiSnips"]
 
         :lua nvimHome = "${home}/.config/home/nvim/lua"
-        :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
         :lua logs_path = "${tooling}/logs"
 
         :lua package.path = "${home}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
         :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
+        :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
+        :lua elixir_ls_home = "${pkgs.elixir-ls}"
 
         :luafile ~/.config/nvim/lua/init.lua
+
       '';
+
+        #:lua elixir_tools = "${nextPackage}"
     };
 
     xdg.configFile.nvim = {

@@ -7,6 +7,7 @@ require('actions.copy_to_clipboard')
 require('actions.build_environment')
 require('actions.send_to_note')
 
+
 -- Leader Key
 vim.g.mapleader=","
 
@@ -48,7 +49,7 @@ map('n', '<leader>vr', ':source ~/.config/nvim/init.lua', {noremap=true})
 
 
 -- Testing Keybinds -- PREFIX t
-map('n', '<leader>t',   ':lua RunTests()<CR>',{noremap=true})
+map('n', '<leader>t',   ':lua vim.lsp.codelens.run()<CR>',{noremap=true})
 
 -- Formatting Keybinds -- PREFIX f
 map('n', '<leader>f',   ':lua Format()<CR>',{noremap=true})
@@ -70,6 +71,13 @@ map('n', '<space>e', vim.diagnostic.open_float, {noremap=true})
 map('n', '[d', vim.diagnostic.goto_prev, {noremap=true})
 map('n', ']d', vim.diagnostic.goto_next, {noremap=true})
 map('n', '<space>q', vim.diagnostic.setloclist, {noremap=true})
+
+-- Debugger
+map('n','<leader>bs', ":lua require('dap').toggle_breakpoint()", {noremap=true})
+map('n','<leader>bo', ":lua require('dap').step_over()", {noremap=true})
+map('n','<leader>bi', ":lua require('dap').step_into()", {noremap=true})
+map('n','<leader>bc', ":lua require('dap').continue()", {noremap=true})
+map('n','<leader>br', ":lua require('dap').repl.open()", {noremap=true})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer

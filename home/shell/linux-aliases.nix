@@ -9,9 +9,9 @@
     # Screen reorganization commands
     display-duplicate = "xrandr --auto";
     display-extended =
-      "monitor-duplicate && xrandr --output eDP-1 --right-of HDMI-2";
-    display-single-laptop = "monitor-duplicate && xrandr --output HDMI-2 --off";
-    display-single-desktop = "monitor-duplicate && xrandr --output eDP-1 --off";
+      "display-duplicate && xrandr --output eDP-1 --right-of HDMI-2";
+    display-single-laptop = "display-duplicate && xrandr --output HDMI-2 --off";
+    display-single-desktop = "display-duplicate && xrandr --output eDP-1 --off";
 
     # Wifi Commands: wifi
     wifi-save-config="wpa_passphrase";

@@ -1,6 +1,6 @@
 # This function creates a NixOS system
 # Effectively sugar so the main flake.nix isn't cluttered
-{ nixpkgs, inputs }:
+{ nixpkgs, inputs, overlays }:
 
 name:
 { 
@@ -75,6 +75,7 @@ in systemFunc rec {
   inherit system;
 
   modules = [
+    {nixpkgs.overlays = overlays;}
     (import ../sys/${name}/configuration.nix)
     homeManagerFunc
     {

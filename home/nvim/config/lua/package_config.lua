@@ -3,6 +3,7 @@
 ----------------------------------------------------------------------
 require'package_configs/telescope'
 require'package_configs/cmp'
+require'package_configs/dap'
 -- This plugin was deprecated. Mason.nvim or manage lsps via nix?
 --require'package_configs/nvim_lsp_installer'
 ----------------------------------------------------------------------
