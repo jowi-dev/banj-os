@@ -36,20 +36,22 @@ in {
         vim-elixir
         vim-nix
         vim-gitgutter
-        nvim-lspconfig
         plenary-nvim
         null-ls-nvim
         nvim-lsp-ts-utils
         telescope-nvim
         telekasten-nvim
+
+        lualine-nvim
+        ultisnips
+
+        nvim-lspconfig
         cmp-nvim-lsp
+        cmp-nvim-ultisnips
         cmp-buffer
         cmp-path
         cmp-cmdline
         nvim-cmp
-        lualine-nvim
-        ultisnips
-
       ];
 
       extraPackages = with pkgs; [

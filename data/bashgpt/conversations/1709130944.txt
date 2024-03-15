@@ -1,0 +1,49 @@
+Title: How to fix "Linker cc not found" error in Rust.
+User: Linker cc not found rust error - how to fix?
+System: The error message `linker 'cc' not found` in Rust typically means that the Rust compilation process can't find the C compiler on your system, which is commonly used for linking binaries. To resolve this error, follow these steps:
+
+1. **Install a C Compiler:**
+   - On **Windows**, install the Build Tools for Visual Studio. Make sure to select the C++ build tools during the installation. These tools include the Microsoft C/C++ compiler (`cl`) which Rust will use as the linker.
+   - On **macOS**, you'll need to install the Command Line Tools for Xcode by running `xcode-select --install` in the terminal. This will install `clang`, Apple's C compiler and linker.
+   - On **Linux**, you need to install `gcc` or `clang`. You can use your distribution's package manager to install it. For example:
+     - **Ubuntu/Debian**: `sudo apt-get install build-essential`
+     - **Fedora**: `sudo dnf install gcc`
+     - **Arch**: `sudo pacman -S base-devel`
+
+2. **Set the Correct Linker:**
+   If you have a C compiler installed but Rust is not using it correctly, you may need to specify the linker explicitly in your Rust project's configuration. Create or edit the `.cargo/config` or `.cargo/config.toml` file in your project directory or in any parent directory and add something like:
+
+   ```toml
+   [target.<your-target-triple>]
+   linker = "path/to/your/linker"
+   ```
+
+   Replace `<your-target-triple>` with your specific target triple (e.g., `x86_64-unknown-linux-gnu`) and `path/to/your/linker` with the actual path to the C compiler executable (`gcc` or `clang`).
+
+3. **Update the PATH Environment Variable:**
+   If the C compiler is installed but not found, make sure it's included in the `PATH` environment variable. You can check if the linker is in the `PATH` by running `which cc` or `which gcc` (on Unix-like systems) or `where cl` (on Windows) in the terminal.
+
+4. **C Compiler Issues:**
+   Ensure that the C compiler and linker are working correctly. You can test them by compiling a simple C program. If there are problems with them, you may need to reinstall or configure them properly.
+
+5. **Update Rust:**
+   If you're running an outdated version of Rust, updating to the latest version might resolve the issue. You can update Rust using the following command:
+
+   ```shell
+   rustup update
+   ```
+
+6. **Check Rustc Configuration:**
+   Run `rustc -vV` in the command line to check if Rustc has the default linker set. Look for `host:` or `target:` fields to understand the default configurations. If the configurations point to the wrong compiler, modify the `.cargo/config` or `.cargo/config.toml` file accordingly.
+
+7. **Use RUSTFLAGS Environment Variable:**
+   In some cases, you might want to pass custom flags to the linker. You can set these using the `RUSTFLAGS` environment variable before running `cargo build`. For example:
+
+   ```shell
+   RUSTFLAGS="-C linker=gcc" cargo build
+   ```
+
+   This tells Rust to use `gcc` as the linker.
+
+After carrying out these troubleshooting steps, try compiling your Rust project again. It should be able to locate the `cc` linker and successfully link your project. If the problem persists, verify the steps again or consult the Rust's user forums and documentation for further assistance.
+

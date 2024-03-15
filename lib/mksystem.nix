@@ -62,6 +62,8 @@ let
             email = gitEmail;
           };
           extraConfigFiles = extraConfigFiles;
+          # This is rube-goldberg but its my stomping grounds for learning cpp
+          #cmds = aliases;
           shell = {
             inherit aliases;
           };

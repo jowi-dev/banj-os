@@ -72,7 +72,7 @@ map('n', '[d', vim.diagnostic.goto_prev, {noremap=true})
 map('n', ']d', vim.diagnostic.goto_next, {noremap=true})
 map('n', '<space>q', vim.diagnostic.setloclist, {noremap=true})
 
--- Debugger
+-- Debugger - SEMI TODO THIS IS HALF DONE
 map('n','<leader>bs', ":lua require('dap').toggle_breakpoint()", {noremap=true})
 map('n','<leader>bo', ":lua require('dap').step_over()", {noremap=true})
 map('n','<leader>bi', ":lua require('dap').step_into()", {noremap=true})

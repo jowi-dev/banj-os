@@ -12,17 +12,17 @@ in
   monitor-containers="lazydocker";
   monitor-wifi="wavemon";
 
-  movie="ssh -o StrictHostKeyChecking=no watch.ascii.theater";
+  #CMD_MOVIE="ssh -o StrictHostKeyChecking=no watch.ascii.theater";
   garbage-collect="nix-collect-garbage";
   flake-move-out="mv flake.nix flake.lock ~/";
   flake-move-in="mv ~/flake.nix ~/flake.lock ./";
   flake-hide="git add --intent-to-add flake.nix flake.lock && git update-index --assume-unchanged flake.nix flake.lock";
 
-  bs="echo ':terminal' | nvim -s --listen /tmp/$(tmux display-message -p '#S').pipe";
+  #CMD_BS="echo ':terminal' | nvim -s --listen /tmp/$(tmux display-message -p '#S').pipe";
 
   # TODO - probably needs smarter pathing
-  assistant="${openai_api_key} && chat-beta || ${signin} && ${openai_api_key} && chat-beta";
-  code-gen="${openai_api_key} && code";
-  ask-jeeves="${openai_api_key} && chat";
+  #CMD_ASSISTANT="${openai_api_key} && chat-beta || ${signin} && ${openai_api_key} && chat-beta";
+  #CMD_CODE_GEN="${openai_api_key} && code";
+  #CMD_ASK_JEEVES="${openai_api_key} && chat";
 }
 

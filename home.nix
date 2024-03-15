@@ -20,7 +20,7 @@ in {
         BASHGPT_CONVERSATION_HISTORY_DIR =
           "${tooling}/data/bashgpt/conversations/";
 
-      };
+      }; #// currentSystem.cmds;
       stateVersion = "23.11";
       username = currentSystem.user;
       file = currentSystem.extraConfigFiles;

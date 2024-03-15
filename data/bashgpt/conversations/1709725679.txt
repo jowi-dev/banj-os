@@ -1,0 +1,4 @@
+Title: 
+User: How do I expire old generations of nixos?
+System:
+
