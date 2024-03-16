@@ -33,7 +33,7 @@ in {
         nodejs
         ccls
         gtest
-        gdb
+        lldb
         go
         bun
         ruby

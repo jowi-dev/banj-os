@@ -29,8 +29,6 @@ in {
         vim-graphql
         nvim-treesitter.withAllGrammars
         #nvim-treesitter
-        vim-fugitive
-        vim-merginal
         vim-markdown
         tmuxline-vim
         vim-elixir
@@ -39,7 +37,9 @@ in {
         plenary-nvim
         null-ls-nvim
         nvim-lsp-ts-utils
+
         telescope-nvim
+        telescope-dap-nvim
         telekasten-nvim
 
         lualine-nvim
@@ -48,6 +48,8 @@ in {
         nvim-lspconfig
         cmp-nvim-lsp
         cmp-nvim-ultisnips
+        cmp-nvim-lua
+        cmp-nvim-lsp-signature-help
         cmp-buffer
         cmp-path
         cmp-cmdline
@@ -71,6 +73,9 @@ in {
         lua-language-server
         #luajit
 
+        # for git diffs in telescope
+        diff-so-fancy
+
         # Nix
         nixfmt
         rnix-lsp
@@ -92,12 +97,15 @@ in {
         # Telescope tools
         ripgrep
         fd
+        #telescope-fzf-native-nvim
+
       ];
 
       extraConfig = with currentSystem.directories; ''
         let g:UltiSnipsSnippetDirectories = ["${tooling}/home/nvim/config/lua/UltiSnips"]
 
-        :lua nvimHome = "${home}/.config/home/nvim/lua"
+        :lua nvimHome = "${home}/.config/home/nvim/config/lua"
+        :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
         :lua logs_path = "${tooling}/logs"
 
         :lua package.path = "${home}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 

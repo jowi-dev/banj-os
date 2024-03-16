@@ -31,6 +31,10 @@
 #      inputs.nixpkgs.follows = "nixpkgs";
 #    };
 
+    neovim-nightly-overlay = {
+      # Don't follow so the binary cache can be used
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
     zig = {
       url = "github:mitchellh/zig-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,10 +48,10 @@
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts
-    , llama-cpp, zig, zls }:
+    , llama-cpp, neovim-nightly-overlay, zig, zls }:
     let 
 
-    overlays = [ zig.overlays.default ];
+    overlays = [ zig.overlays.default neovim-nightly-overlay.overlay ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
     in 
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -87,10 +91,10 @@
             system = "aarch64-darwin";
             username = "jwilliams";
             homeDirectory = "/Users/jwilliams";
-            toolingDirectory = "/.config/nix-config";
+            toolingDirectory = "/.config/nix-configs";
             gitUsername = "jowi-papa";
             gitEmail = "jwilliams@papa.com";
-            extraSpecialArgs = { inherit bash-gpt; };
+            extraSpecialArgs = { inherit bash-gpt; inherit zls; };
           };
 
         };

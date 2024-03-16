@@ -1,3 +1,17 @@
+
+snippet dele "delegate"
+# -----------------------------------------------------------------------------
+#  $1 
+# -----------------------------------------------------------------------------
+@doc delegate_to: {PapaPal.Web.API.V2.Resolvers.$2, :call, 3}
+defdelegate $3(parent, args, context),
+  to: PapaPal.Web.API.V2.Resolvers.$2,
+  as: :call
+endsnippet
+
+
+
+
 snippet defmo "defmodule"
 defmodule ${1:PapaPal.} do
 @moduledoc """

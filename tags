@@ -1,0 +1,55 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	Development	//
+) awesome.quit	home/window-manager/awesome.lua	/^   { "quit", function() awesome.quit() end },$/;"	f
+) hotkeys_popup.show_help	home/window-manager/awesome.lua	/^   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },$/;"	f
+) menubar.show	home/window-manager/awesome.lua	/^    awful.key({ modkey }, "p", function() menubar.show() end,$/;"	f
+BuildEnv	home/nvim/config/lua/actions/build_environment.lua	/^function BuildEnv()$/;"	f
+CopyToClipboard	home/nvim/config/lua/actions/copy_to_clipboard.lua	/^function CopyToClipboard()$/;"	f
+DarkMode	home/nvim/config/lua/actions/build_environment.lua	/^function DarkMode()$/;"	f
+Format	home/nvim/config/lua/actions/test.lua	/^function Format()$/;"	f
+GPTSubmit	home/nvim/config/lua/actions/gpt.lua	/^function GPTSubmit(version)$/;"	f
+GithubLink	home/nvim/config/lua/actions/copy_to_clipboard.lua	/^function GithubLink()$/;"	f
+GqlGetHost	home/nvim/config/lua/actions/gql_request.lua	/^function GqlGetHost()$/;"	f
+GqlGetToken	home/nvim/config/lua/actions/gql_request.lua	/^function GqlGetToken()$/;"	f
+GqlInput	home/nvim/config/lua/actions/gql_request.lua	/^function GqlInput()$/;"	f
+GqlRequest	home/nvim/config/lua/actions/gql_request.lua	/^function GqlRequest()$/;"	f
+GqlSetHost	home/nvim/config/lua/actions/gql_request.lua	/^function GqlSetHost(host)$/;"	f
+GqlSetToken	home/nvim/config/lua/actions/gql_request.lua	/^function GqlSetToken(token)$/;"	f
+HttpGet	home/nvim/config/lua/actions/http_request.lua	/^function HttpGet(url)$/;"	f
+HttpGetDomain	home/nvim/config/lua/actions/http_request.lua	/^function HttpGetDomain()$/;"	f
+HttpSetDomain	home/nvim/config/lua/actions/http_request.lua	/^function HttpSetDomain(domain)$/;"	f
+LightMode	home/nvim/config/lua/actions/build_environment.lua	/^function LightMode()$/;"	f
+Output	home/nvim/config/lua/actions/gql_request.lua	/^function Output(data)$/;"	f
+Post	home/nvim/config/lua/actions/http_post.lua	/^function Post(url, body, api_key, opts)$/;"	f
+RunTests	home/nvim/config/lua/actions/test.lua	/^function RunTests()$/;"	f
+SendToNote	home/nvim/config/lua/actions/send_to_note.lua	/^function SendToNote()$/;"	f
+arrange	home/window-manager/xrandr.lua	/^local function arrange(out)$/;"	f
+awful.key({ modkey,           }, "t",      function (c) c.ontop 	home/window-manager/awesome.lua	/^    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,$/;"	f
+callback 	home/nvim/config/lua/keybindings.lua	/^  callback = function(ev)$/;"	f
+client.connect_signal("focus", function(c) c.border_color 	home/window-manager/awesome.lua	/^client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)$/;"	f
+client.connect_signal("unfocus", function(c) c.border_color 	home/window-manager/awesome.lua	/^client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)$/;"	f
+expand 	home/nvim/config/lua/package_configs/cmp.lua	/^    expand = function(args)$/;"	f
+format 	home/nvim/config/lua/package_configs/cmp.lua	/^    format = function(entry, vim_item)$/;"	f
+if type(wallpaper) 	home/window-manager/awesome.lua	/^        if type(wallpaper) == "function" then$/;"	f
+local on_attach 	home/nvim/config/lua/languages.lua	/^local on_attach = function(client, buf)$/;"	f
+login	pkgs/hammercurl/hammercurl.sh	/^login() {$/;"	f
+login_admin	pkgs/hammercurl/hammercurl.sh	/^login_admin() {$/;"	f
+menu	home/window-manager/xrandr.lua	/^local function menu()$/;"	f
+naughty_destroy_callback	home/window-manager/xrandr.lua	/^local function naughty_destroy_callback(reason)$/;"	f
+on_attach 	home/nvim/config/lua/languages/elixir.lua	/^    on_attach = function(client, bufnr)$/;"	f
+on_attach 	home/nvim/config/lua/languages/typescript.lua	/^    on_attach = function(client, bufnr)$/;"	f
+outputs	home/window-manager/xrandr.lua	/^local function outputs()$/;"	f
+pal_app_login	pkgs/hammercurl/hammercurl.sh	/^pal_app_login() {$/;"	f
+seed_pal	pkgs/hammercurl/hammercurl.sh	/^seed_pal() {$/;"	f
+set_env	pkgs/hammercurl/hammercurl.sh	/^set_env() {$/;"	f
+set_wallpaper	home/window-manager/awesome.lua	/^local function set_wallpaper(s)$/;"	f
+source_all	home/nvim/config/lua/actions/build_environment.lua	/^local function source_all()$/;"	f
+t) awful.tag.viewnext	home/window-manager/awesome.lua	/^                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),$/;"	f
+t) awful.tag.viewprev	home/window-manager/awesome.lua	/^                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)$/;"	f
+t) t:view_only	home/window-manager/awesome.lua	/^                    awful.button({ }, 1, function(t) t:view_only() end),$/;"	f
+xrandr	home/window-manager/xrandr.lua	/^local function xrandr()$/;"	f
+{ name 	home/nvim/config/lua/package_configs/cmp.lua	/^    { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized$/;"	f

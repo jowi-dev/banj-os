@@ -19,13 +19,19 @@ map('n',  '<leader>m', ':let @+=expand("%")<CR>',{noremap=true})
 map('v',  '<leader>k', '"*y<CR>',{noremap=true})
 
 -- Git Keybinds -- PREFIX g
-map('n',  '<leader>gs', ':GitGutterStageHunk<CR>',{noremap=true})
-map('n',  '<leader>gr', ':GitGutterRevertHunk<CR>',{noremap=true})
-map('n',  '<leader>gd', ':Gvdiffsplit!<CR>',{noremap=true})
-map('n',  '<leader>gq', ':diffget //2<CR>',{noremap=true})
-map('n',  '<leader>gp', ':diffget //3<CR>',{noremap=true})
-map('n',  '<leader>gm', ':Merginal<CR>',{noremap=true})
-map('n',  '<leader>gg', ':Git<CR>',{noremap=true})
+map('n',  '<leader>gs', ':Telescope git_status<CR>',{noremap=true})
+map('n',  '<leader>gb', ':Telescope git_branches<CR>',{noremap=true})
+map('n',  '<leader>gc', ':lua GitConflicts({})<CR>',{noremap=true})
+map('n',  '<leader>gd', ':lua GitDiffs({})<CR>',{noremap=true})
+-- can't be C-d because that's page down natively
+map('n',  '<leader>d',      ':Telescope diagnostics<CR>', {noremap=true})
+
+--map('n',  '<leader>gr', ':GitGutterRevertHunk<CR>',{noremap=true})
+--map('n',  '<leader>gd', ':Gvdiffsplit!<CR>',{noremap=true})
+--map('n',  '<leader>gq', ':diffget //2<CR>',{noremap=true})
+--map('n',  '<leader>gp', ':diffget //3<CR>',{noremap=true})
+--map('n',  '<leader>gm', ':Merginal<CR>',{noremap=true})
+--map('n',  '<leader>gg', ':Git<CR>',{noremap=true})
 
 -- Search and  FileNavigation Related keybinds
 map('n',  '<C-p>',      ':Telescope find_files<CR>',{noremap=true})
