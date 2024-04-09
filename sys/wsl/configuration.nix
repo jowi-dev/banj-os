@@ -4,7 +4,7 @@
   wsl = {
     enable = true;
     wslConf.automount.root = "/mnt";
-    defaultUser = currentSystem.username;
+    defaultUser = currentSystem.user;
     startMenuLaunchers = true;
   };
 

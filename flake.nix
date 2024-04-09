@@ -51,7 +51,7 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts
+  outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, bash-gpt, flake-parts
     , llama-cpp, neovim-nightly-overlay, zig, zls }:
     let 
 
@@ -64,6 +64,22 @@
         # See lib/mksystem.nix for config options
         nixosConfigurations = {
           nixos = mkSystem "nixos" {
+            system = "x86_64-linux";
+            enableGui = true;
+            enableSound = true;
+            enableContainers = true;
+            username = "jowi";
+            homeDirectory = "/home/jowi";
+            toolingDirectory = "/.config/nix-config";
+            gitUsername = "jowi-dev";
+            gitEmail = "joey8williams@gmail.com";
+            extraSpecialArgs = {
+              inherit bash-gpt;
+              inherit llama-cpp;
+              inherit zls;
+            };
+          };
+          wsl = mkSystem "wsl" {
             system = "x86_64-linux";
             enableGui = true;
             enableSound = true;
