@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708466187,
-        "narHash": "sha256-2fTNTGqrJvjciDOmbx9KwLdXGsPwxSIB0i9ld0YjtFo=",
+        "lastModified": 1710447748,
+        "narHash": "sha256-wla1rZEH9JvjaEL3+DHRdUF7+k8JpRwqMyJWSNH/Xu8=",
         "owner": "sysread",
         "repo": "bash-gpt",
-        "rev": "79beac4277caa78e8937c56dbd63ba68ab3d14c7",
+        "rev": "1685bdcd23b0a489feb588958018ae65b47dadb3",
         "type": "github"
       },
       "original": {

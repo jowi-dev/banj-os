@@ -82,3 +82,6 @@ lsp.lua_ls.setup{
 }
 
 
+lsp.ols.setup{
+  capabilities = capabilities
+}

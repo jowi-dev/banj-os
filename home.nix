@@ -40,6 +40,8 @@ in {
         rustup
         alacritty
         kitty
+        odin
+        ols
 
         # Global Tooling
         git
