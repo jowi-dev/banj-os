@@ -16,6 +16,7 @@ in {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  #services.blueman.enable=true;
 
   networking = {
     hostName = currentSystem.name;
@@ -130,6 +131,8 @@ in {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   environment = {
     variables = with currentSystem; {
@@ -141,6 +144,7 @@ in {
       discord
       gparted
       mangohud
+      #bluez
       xorg.xkill
       flameshot
     ] else [vim git];

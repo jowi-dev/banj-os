@@ -37,7 +37,10 @@ in {
         go
         bun
         ruby
-        rustup
+        #rustup
+        cargo
+        gnumake
+        rust-analyzer
         alacritty
         kitty
         odin

@@ -81,6 +81,7 @@
           };
           wsl = mkSystem "wsl" {
             system = "x86_64-linux";
+            wsl = true;
             enableGui = true;
             enableSound = true;
             enableContainers = true;

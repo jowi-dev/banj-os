@@ -23,3 +23,10 @@ function GithubLink()
   local filename = "https://github.com/" .. repo .. "/blob/" .. branch .. "/" .. vim.fn.expand("%:.")
   os.execute("echo '" .. filename .. "' | pbcopy")
 end
+
+
+function LldbBreak()
+  local filename = vim.fn.expand("%:.")
+  local lnum, _ = unpack(vim.api.nvim_win_get_cursor(0))
+  os.execute("echo breakpoint set -f "..filename.." -l ".. lnum .. "| xclip -selection clipboard")
+end

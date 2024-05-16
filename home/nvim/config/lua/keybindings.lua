@@ -84,6 +84,7 @@ map('n','<leader>bo', ":lua require('dap').step_over()", {noremap=true})
 map('n','<leader>bi', ":lua require('dap').step_into()", {noremap=true})
 map('n','<leader>bc', ":lua require('dap').continue()", {noremap=true})
 map('n','<leader>br', ":lua require('dap').repl.open()", {noremap=true})
+map('n','<leader>bp', ":lua LldbBreak()<CR>", {noremap=true})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
