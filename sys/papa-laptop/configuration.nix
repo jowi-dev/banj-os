@@ -65,7 +65,7 @@ in {
         name = "toasttab/toast";
         clone_target = "git@github.com:toasttab/homebrew-toast";
       }];
-      brews = [ "libffi" "cocoapods" "lunchbox" ];
+      brews = [ "libffi" "cocoapods" "lunchbox" "obsidian" ];
     };
 
     # Create /etc/zshrc that loads the nix-darwin environment.

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, zls, ... }:
+{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, zls, banj-cli, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -27,6 +27,7 @@ in {
 
       packages = with pkgs; [
         # Global Languages
+        banj-cli
         cmake
         (luajit.withPackages (p: with p; [ luajitPackages.vicious ]))
         elixir

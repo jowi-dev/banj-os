@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    banj-cli = {
+      url = "github:jowi-dev/banj-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     bash-gpt = {
       url = "github:sysread/bash-gpt";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +56,7 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, bash-gpt, flake-parts
+  outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
     , llama-cpp, neovim-nightly-overlay, zig, zls }:
     let 
 
@@ -77,6 +82,7 @@
               inherit bash-gpt;
               inherit llama-cpp;
               inherit zls;
+              inherit banj-cli;
             };
           };
           wsl = mkSystem "wsl" {

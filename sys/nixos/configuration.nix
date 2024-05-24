@@ -28,6 +28,9 @@ in {
           pskRaw =
             "dbbeb39d04be3916d99e3a376576c308e0019b4dbf94084bc8c07c1ff3d7f7a0";
         };
+        "Green Acres" = {
+          pskRaw="1d9d8acb29c6dc656374d0a5be9668fe104337f5c1a0962eaf3d50114ccbdc2e";
+        };
         # Have a new wifi config? add it here!
         #        "My Network Name" = {
         #          pskRaw = "generated psk output from wifi-save-config";
@@ -147,6 +150,7 @@ in {
       #bluez
       xorg.xkill
       flameshot
+      obsidian
     ] else [vim git];
      
 
