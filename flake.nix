@@ -59,8 +59,7 @@
   outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
     , llama-cpp, neovim-nightly-overlay, zig, zls }:
     let 
-
-    overlays = [ zig.overlays.default neovim-nightly-overlay.overlay ];
+      overlays = [ zig.overlays.default neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
     in 
     flake-parts.lib.mkFlake { inherit inputs; } {

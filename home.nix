@@ -27,7 +27,6 @@ in {
 
       packages = with pkgs; [
         # Global Languages
-        banj-cli
         cmake
         (luajit.withPackages (p: with p; [ luajitPackages.vicious ]))
         elixir
@@ -35,7 +34,7 @@ in {
         ccls
         gtest
         lldb
-        go
+        #go
         bun
         ruby
         #rustup
@@ -64,6 +63,7 @@ in {
 
         # Custom
         bash-gpt.packages.${system}.default
+        banj-cli.packages.${system}.default
         burn-to-iso
         
         zigpkgs.master
