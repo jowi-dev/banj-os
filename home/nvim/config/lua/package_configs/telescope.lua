@@ -131,6 +131,14 @@ telescope.setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   },
   pickers = {
+    find_files = {
+      mappings = {
+        n = {
+          ["dd"] = delete_file,
+          ["dl"] = delete_line
+        }
+      }
+    },
     live_grep = {
       mappings = {
         n = {

@@ -7,8 +7,25 @@ let
   };
 
 in {
-  imports = [ ./home/nvim ./home/git ./home/tmux ./home/shell ];
-  config = {
+    imports = [ ./home/nvim ./home/git ./home/shell ];
+  	  config = {
+
+      programs.tmux = {
+        enable = true;
+        plugins = with pkgs.tmuxPlugins; [
+          resurrect
+          nord
+        ];
+        terminal = "alacritty";
+        shell = "${pkgs.fish}/bin/fish";
+        #shell = "\${pkgs.fish}/bin/fish";
+        mouse=true;
+        escapeTime = 10;
+        keyMode = "vi";
+        extraConfig = ''
+              set-window-option -g mode-keys vi
+            '';
+      };
     programs.home-manager.enable = true;
 
     home = with currentSystem.directories; {

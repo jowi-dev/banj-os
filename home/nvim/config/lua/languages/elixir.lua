@@ -47,4 +47,14 @@ require("elixir").setup({
  -- elixirls = {enable = true},
 })
 
+function ElixirOpenTestFile()
+  local current_file = vim.fn.expand("%")
+
+  current_file = current_file:gsub("lib", "test")
+
+  current_file = current_file:gsub(".ex", "_test.exs")
+
+  vim.cmd("vs " .. current_file)
+end
+
 return lsp.elixirls

@@ -59,6 +59,7 @@ map('n', '<leader>t',   ':lua vim.lsp.codelens.run()<CR>',{noremap=true})
 
 -- Formatting Keybinds -- PREFIX f
 map('n', '<leader>f',   ':lua Format()<CR>',{noremap=true})
+map('n', '<leader>to',   ':lua ElixirOpenTestFile()<CR>',{noremap=true})
 
 -- If you want :UltiSnipsEdit to split your window.
 vim.g.UltiSnipsExpandTrigger="<leader>sx"

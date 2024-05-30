@@ -79,6 +79,7 @@ in {
         # Nix
         nixfmt
         nixpkgs-fmt
+        nixd
         statix
 
         #python-debug
