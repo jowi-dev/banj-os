@@ -1,9 +1,9 @@
 local lsp = require'lspconfig'
 
 
-vim.g.mix_format_on_save = 1
+vim.g.mix_format_on_save = 0
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+--local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 --lsp.elixirls.setup{
 --  cmd = {"elixir-ls"},
@@ -15,7 +15,7 @@ require("elixir").setup({
   nextls = {
     enable = false, -- defaults to false
     cmd = elixir_tools .. "/bin/nextls", -- path to the executable. mutually exclusive with `port`
-    version = "0.5.0", -- version of Next LS to install and use. defaults to the latest version
+    --version = "0.5.0", -- version of Next LS to install and use. defaults to the latest version
     on_attach = function(client, bufnr)
       -- custom keybinds
       vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
@@ -36,7 +36,7 @@ require("elixir").setup({
     cmd = elixir_ls_home .. "/bin/elixir-ls", -- path to the executable. mutually exclusive with `port`
     settings = elixirls.settings {
       dialyzerEnabled = true,
-      enableTestLenses = true,
+      enableTestLenses = false,
     },
     on_attach = function(client, bufnr)
       vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
@@ -46,5 +46,18 @@ require("elixir").setup({
   }
  -- elixirls = {enable = true},
 })
+
+function ElixirOpenTestFile()
+  local current_file = vim.fn.expand("%")
+
+  current_file = current_file:gsub("lib", "test")
+
+  current_file = current_file:gsub(".ex", "_test.exs")
+
+  vim.cmd("vs " .. current_file)
+end
+
+-- TODO - figure out how they do this
+--vim.fn.ElixirOpenTestFile = open_test_file
 
 return lsp.elixirls

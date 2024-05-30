@@ -36,8 +36,20 @@ vim.g.LANG='en_us'
 vim.opt.tabstop=2
 vim.opt.softtabstop=2
 vim.opt.shiftwidth=2
-vim.opt.autoindent=true
+vim.opt.autoindent=false
 vim.opt.expandtab=true
+
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "ex|exs",
+	command = "filetype indent off"
+})
+--" show existing tab with 4 spaces width
+--set tabstop=4
+--" when indenting with '>', use 4 spaces width
+--set shiftwidth=4
+--" On pressing tab, insert 4 spaces
+--set expandtab
 
 -- CMD Center
 vim.opt.directory='/tmp'

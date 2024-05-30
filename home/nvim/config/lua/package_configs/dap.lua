@@ -4,6 +4,8 @@ dap.adapters.mix_task = {
   command = elixir_ls_home ..'/bin/elixir-debug-adapter', -- debugger.bat for windows
   args = {}
 }
+
+dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 dap.configurations.elixir = {
   {
     type = "mix_task",

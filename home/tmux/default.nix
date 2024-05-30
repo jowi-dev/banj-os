@@ -5,12 +5,14 @@
       resurrect
       nord
     ];
-    terminal = "screen-256color";
+    terminal = "alacritty";
+    shell = "${pkgs.fish}/bin/fish";
+    #shell = "\${pkgs.fish}/bin/fish";
+    mouse=true;
     escapeTime = 10;
     keyMode = "vi";
     extraConfig = ''
           set-window-option -g mode-keys vi
-          set-option -sa terminal-overrides ',xterm-256color:RGB'
         '';
   };
 }

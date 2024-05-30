@@ -31,55 +31,32 @@ end
 local refresh_results = function(prompt_bufnr)
   local current_picker = action_state.get_current_picker(prompt_bufnr)
   local prompt = current_picker:_get_prompt()
-
   local cmd = {'rg', prompt, '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'}
-
-  local new_finder = finders.new_job(function(new_prompt)
+  local new_finder = finders.new_job(function()
     return cmd
   end, make_entry.gen_from_vimgrep({}), 500, vim.fn.getcwd())--  local results = {}
---  for entry in current_picker.manager:iter() do
---    table.insert(results, entry)
---  end
---
---  local new_finder = finders.new_table {
---    results = results,
---    entry_maker = function(x)
---      return x
---    end,
---  }
-  print("Prompt is "..prompt)
 
   current_picker:refresh(new_finder, { reset_prompt = false })
-
 end
 
 
 local delete_file = function(prompt_bufnr)
-  --pre = append_to_history,
---  action = function(prompt_bufnr)
     local entry = action_state.get_selected_entry(prompt_bufnr)
-    --local value = action_set.select(prompt_bufnr, "default")
-    print("entry_filename: " .. entry.filename)
     local confirmation = ask_to_confirm("Delete "..entry.filename.."? ", 'y', {"y", "yes"})
     if confirmation then
       vim.fn.system('rm ' .. entry.filename)
       refresh_results(prompt_bufnr)
     end
-    --return action_set.edit("drop", prompt_bufnr)
     return confirmation
 end
 
 local delete_line = function(prompt_bufnr)
-  --pre = append_to_history,
---  action = function(prompt_bufnr)
     local entry = action_state.get_selected_entry(prompt_bufnr)
-    print("entry_filename: " .. entry.filename, " line number: " .. entry.lnum)
     local confirmation = ask_to_confirm("Delete "..entry.filename..':'..entry.lnum.."? ", 'y', {"y", "yes"})
     if confirmation then
       vim.fn.system('sed -i '..entry.lnum..'d'..' '.. entry.filename)
       refresh_results(prompt_bufnr)
     end
-    --return action_set.edit("drop", prompt_bufnr)
     return confirmation
 end
 
@@ -131,6 +108,14 @@ telescope.setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   },
   pickers = {
+    find_files = {
+      mappings = {
+        n = {
+          ["dd"] = delete_file,
+          ["dl"] = delete_line
+        }
+      }
+    },
     live_grep = {
       mappings = {
         n = {

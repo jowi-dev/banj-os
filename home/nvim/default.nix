@@ -78,7 +78,7 @@ in {
 
         # Nix
         nixfmt
-        rnix-lsp
+        nixd
         nixpkgs-fmt
         statix
 

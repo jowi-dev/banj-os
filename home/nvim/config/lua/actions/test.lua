@@ -16,16 +16,17 @@ function RunTests()
 end
 
 function Format()
-    local tmux_session = vim.fn.trim(vim.fn.system("tmux display-message -p '#S'"))
+    --local tmux_session = vim.fn.trim(vim.fn.system("tmux display-message -p '#S'"))
 
-    local current_file = vim.fn.expand('%')
+    --local current_file = vim.fn.expand('%')
 
-    local cmd = 'nvim --server /tmp/'..tmux_session..'.pipe --remote-send "mix format '..current_file..' <CR>"'
+    --local cmd = 'nvim --server /tmp/'..tmux_session..'.pipe --remote-send "mix format '..current_file..' <CR>"'
 
     --debug
     --print(cmd)
-    vim.fn.system(cmd)
+    vim.fn.system('mix format')
 
     --reload the file post format
     vim.cmd('e')
 end
+

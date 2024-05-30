@@ -55,7 +55,8 @@ map('n', '<leader>vr', ':source ~/.config/nvim/init.lua', {noremap=true})
 
 
 -- Testing Keybinds -- PREFIX t
-map('n', '<leader>t',   ':lua vim.lsp.codelens.run()<CR>',{noremap=true})
+--map('n', '<leader>t',   ':lua vim.lsp.codelens.run()<CR>',{noremap=true})
+map('n', '<leader>to',   ':lua ElixirOpenTestFile()<CR>',{noremap=true})
 
 -- Formatting Keybinds -- PREFIX f
 map('n', '<leader>f',   ':lua Format()<CR>',{noremap=true})
