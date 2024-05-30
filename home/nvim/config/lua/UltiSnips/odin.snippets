@@ -1,0 +1,15 @@
+
+snippet test "Test boilerplate"
+@(test)
+$1 :: proc(_: ^testing.T) {
+  assert(/*something == somethingElse*/)
+}
+endsnippet
+
+snippet comment "add a comment"
+
+/*
+* $1 
+*/
+
+endsnippet

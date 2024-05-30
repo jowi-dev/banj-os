@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, zls, ... }:
+{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, banj-cli, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -33,6 +33,7 @@ in {
       sessionVariables = {
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
+        BANJ_DB="${tooling}/logs/banj-cli.db";
         BASHGPT_CHAT_HOME = "${tooling}/data/bashgpt/assistants/";
         BASHGPT_CONVERSATION_HISTORY_DIR =
           "${tooling}/data/bashgpt/conversations/";
@@ -51,12 +52,17 @@ in {
         ccls
         gtest
         lldb
-        go
+        #go
         bun
         ruby
-        rustup
+        #rustup
+        cargo
+        gnumake
+        rust-analyzer
         alacritty
         kitty
+        odin
+        ols
 
         # Global Tooling
         git
@@ -75,10 +81,11 @@ in {
 
         # Custom
         bash-gpt.packages.${system}.default
+        banj-cli.packages.${system}.default
         burn-to-iso
         
         zigpkgs.master
-        zls.packages.${system}.default
+        #zls.packages.${system}.default
 
         # Why is this here?
         fzf
@@ -90,7 +97,7 @@ in {
         jq
         coreutils
         
-      ] ++ (if currentSystem.isMac then [] else [wavemon _1password llama-cpp.packages.${system}.default cosmic-term]);
+      ] ++ (if currentSystem.isMac then [] else [_1password llama-cpp.packages.${system}.default cosmic-term]);
         
     };
 

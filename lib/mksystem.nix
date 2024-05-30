@@ -5,6 +5,7 @@
 name:
 { 
   system, 
+  wsl ? false,
   username ? "jowi", 
   homeDirectory ? "/home/jowi", 
   toolingDirectory ? "/.config/nix-config", 
@@ -79,6 +80,7 @@ in systemFunc rec {
   modules = [
     {nixpkgs.overlays = overlays;}
     (import ../sys/${name}/configuration.nix)
+    (if wsl then inputs.wsl.nixosModules.wsl else {})
     homeManagerFunc
     {
       #nixpkgs = nixpkgs;

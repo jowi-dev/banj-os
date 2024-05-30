@@ -7,8 +7,17 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    banj-cli = {
+      url = "github:jowi-dev/banj-cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -39,19 +48,18 @@
       url = "github:mitchellh/zig-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zls = {
-      url = "github:zigtools/zls";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.zig-overlay.follows = "zig";
-    };
+#    zls = {
+#      url = "github:zigtools/zls";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#      inputs.zig-overlay.follows = "zig";
+#    };
 
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, bash-gpt, flake-parts
-    , llama-cpp, neovim-nightly-overlay, zig, zls }:
+  outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
+    , llama-cpp, neovim-nightly-overlay, zig }:
     let 
-
-    overlays = [ zig.overlays.default neovim-nightly-overlay.overlay ];
+      overlays = [ zig.overlays.default neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
     in 
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -72,7 +80,25 @@
             extraSpecialArgs = {
               inherit bash-gpt;
               inherit llama-cpp;
-              inherit zls;
+              #inherit zls;
+              inherit banj-cli;
+            };
+          };
+          wsl = mkSystem "wsl" {
+            system = "x86_64-linux";
+            wsl = true;
+            enableGui = true;
+            enableSound = true;
+            enableContainers = true;
+            username = "jowi";
+            homeDirectory = "/home/jowi";
+            toolingDirectory = "/.config/nix-config";
+            gitUsername = "jowi-dev";
+            gitEmail = "joey8williams@gmail.com";
+            extraSpecialArgs = {
+              inherit bash-gpt;
+              inherit llama-cpp;
+              #inherit zls;
             };
           };
           nixosIso = mkSystem "nixos" {
@@ -94,7 +120,7 @@
             toolingDirectory = "/.config/nix-configs";
             gitUsername = "jowi-papa";
             gitEmail = "jwilliams@papa.com";
-            extraSpecialArgs = { inherit bash-gpt; inherit zls; };
+            extraSpecialArgs = { inherit bash-gpt; };
           };
 
         };

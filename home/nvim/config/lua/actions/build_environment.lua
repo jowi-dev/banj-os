@@ -36,7 +36,7 @@ end
 
 function LightMode()
   vim.cmd('let ayucolor="light"')
-  vim.cmd('colorscheme ayu')
+  vim.cmd('colorscheme github')
   --BuildEnv()
 end
 
