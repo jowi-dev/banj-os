@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, zls, banj-cli, ... }:
+{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, banj-cli, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -68,7 +68,7 @@ in {
         burn-to-iso
         
         zigpkgs.master
-        zls.packages.${system}.default
+        #zls.packages.${system}.default
 
         # Why is this here?
         fzf
@@ -80,7 +80,7 @@ in {
         jq
         coreutils
         
-      ] ++ (if currentSystem.isMac then [] else [wavemon _1password llama-cpp.packages.${system}.default cosmic-term]);
+      ] ++ (if currentSystem.isMac then [] else [_1password llama-cpp.packages.${system}.default cosmic-term]);
         
     };
 

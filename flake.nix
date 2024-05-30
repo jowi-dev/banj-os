@@ -48,16 +48,16 @@
       url = "github:mitchellh/zig-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zls = {
-      url = "github:zigtools/zls";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.zig-overlay.follows = "zig";
-    };
+#    zls = {
+#      url = "github:zigtools/zls";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#      inputs.zig-overlay.follows = "zig";
+#    };
 
   };
 
   outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
-    , llama-cpp, neovim-nightly-overlay, zig, zls }:
+    , llama-cpp, neovim-nightly-overlay, zig }:
     let 
       overlays = [ zig.overlays.default neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
@@ -80,7 +80,7 @@
             extraSpecialArgs = {
               inherit bash-gpt;
               inherit llama-cpp;
-              inherit zls;
+              #inherit zls;
               inherit banj-cli;
             };
           };
@@ -98,7 +98,7 @@
             extraSpecialArgs = {
               inherit bash-gpt;
               inherit llama-cpp;
-              inherit zls;
+              #inherit zls;
             };
           };
           nixosIso = mkSystem "nixos" {
@@ -120,7 +120,7 @@
             toolingDirectory = "/.config/nix-configs";
             gitUsername = "jowi-papa";
             gitEmail = "jwilliams@papa.com";
-            extraSpecialArgs = { inherit bash-gpt; inherit zls; };
+            extraSpecialArgs = { inherit bash-gpt; };
           };
 
         };
