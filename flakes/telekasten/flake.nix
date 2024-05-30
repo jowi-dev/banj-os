@@ -6,9 +6,9 @@
 
   outputs = { self, nixpkgs }:
     let
-
+#self.lastModified or
       # to work with older version of flakes
-      lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
+      lastModifiedDate = self.lastModifiedDate or  "19700101";
 
       # Generate a user-friendly version number.
       version = builtins.substring 0 8 lastModifiedDate;

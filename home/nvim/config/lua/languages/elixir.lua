@@ -1,7 +1,7 @@
 local lsp = require'lspconfig'
 
 
-vim.g.mix_format_on_save = 1
+vim.g.mix_format_on_save = 0
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -36,7 +36,7 @@ require("elixir").setup({
     cmd = elixir_ls_home .. "/bin/elixir-ls", -- path to the executable. mutually exclusive with `port`
     settings = elixirls.settings {
       dialyzerEnabled = true,
-      enableTestLenses = true,
+      enableTestLenses = false,
     },
     on_attach = function(client, bufnr)
       vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })

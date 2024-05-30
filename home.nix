@@ -33,6 +33,7 @@ in {
       sessionVariables = {
         OPENAI_MODEL = "gpt-4-1106-preview";
         EDITOR = "nvim";
+        CONFIG_DIR="${tooling}";
         BANJ_DB="${tooling}/logs/banj-cli.db";
         BASHGPT_CHAT_HOME = "${tooling}/data/bashgpt/assistants/";
         BASHGPT_CONVERSATION_HISTORY_DIR =

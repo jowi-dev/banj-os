@@ -23,6 +23,7 @@ in {
 
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+    environment.pathsToLink = ["/share/doc"];
 
     users.users.${currentSystem.user} = {
       name = currentSystem.user;

@@ -120,7 +120,7 @@
             toolingDirectory = "/.config/nix-configs";
             gitUsername = "jowi-papa";
             gitEmail = "jwilliams@papa.com";
-            extraSpecialArgs = { inherit bash-gpt; };
+            extraSpecialArgs = { inherit bash-gpt; inherit banj-cli; };
           };
 
         };
