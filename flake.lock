@@ -29,7 +29,7 @@
         ]
       },
       "locked": {
-        "lastModified": 1717009765,
+        "lastModified": 1717009768,
         "narHash": "sha256-S+GtBGCpHdApSy5oxPsOfQFnZ3K1MTNWX47iqcyueds=",
         "owner": "sysread",
         "repo": "bash-gpt",
