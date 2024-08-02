@@ -57,6 +57,7 @@ in {
       ];
 
       extraPackages = with pkgs; [
+        lexical
         jq
         tree-sitter
         nodejs
@@ -105,8 +106,8 @@ in {
         let g:UltiSnipsSnippetDirectories = ["${tooling}/home/nvim/config/lua/UltiSnips"]
 
         :lua nvimHome = "${home}/.config/home/nvim/config/lua"
-        :lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
         :lua logs_path = "${tooling}/logs"
+        :lua lexicalls = "${pkgs.lexical}"
 
         :lua package.path = "${home}".."/.config/nvim/?.lua" .. ";${nvimLuaEnv}/share/lua/5.1/?.lua" 
         :lua package.cpath = package.cpath ..";${nvimLuaEnv}/lib/lua/5.1/?.so"
@@ -117,6 +118,7 @@ in {
 
       '';
 
+        #:lua elixir_tools = "${pkgs.vimPlugins.elixir-tools-nvim}"
         #:lua elixir_tools = "${nextPackage}"
     };
 
