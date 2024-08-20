@@ -115,11 +115,11 @@
         darwinConfigurations = {
           papa-laptop = mkSystem "papa-laptop" {
             system = "aarch64-darwin";
-            username = "jwilliams";
-            homeDirectory = "/Users/jwilliams";
-            toolingDirectory = "/.config/nix-configs";
-            gitUsername = "jowi-papa";
-            gitEmail = "jwilliams@papa.com";
+            username = "jowi";
+            homeDirectory = "/Users/jowi";
+            toolingDirectory = "/banj-os";
+            gitUsername = "jowi-dev";
+            gitEmail = "joey8williams@gmail.com";
             extraSpecialArgs = { inherit bash-gpt; inherit banj-cli; };
           };
 

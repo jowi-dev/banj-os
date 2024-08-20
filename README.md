@@ -20,6 +20,29 @@ I think the tooling nix provides is unmatched in a lot of ways. There's no sugar
 3. `nvim` then `:checkhealth` to ensure everything is in working order
 
 
+### Fresh machine setup 
+1. Install Git & Add an SSH key that has access to this repo
+  * Create Key `ssh-keygen -t ed25519 -C "your_email@example.com"`
+  * Copy Key `pbcopy $(cat ~/.ssh/id_ed25519.pub)`
+  * Add key to GH account
+2. Install Nix, enable flakes
+  * [Install](https://nixos.org/download/)
+  * Enable Flakes `echo experimental-features=nix-command flakes > ~/.config/nix/nix.conf`
+3. Clone this Repo 
+4. `cd $THISREPO`
+5. Look in `flake.nix` and decide on a system that fits your needs. **Generally speaking use nixos for linux or papa-laptop for mac.** These systems have been dogfooded for years.
+#### Darwin
+```
+nix build .#darwinConfigurations.papa-laptop.system
+./result/sw/bin/darwin-rebuild switch --flake .#papa-laptop
+```
+### NixOS
+```
+nix build ".#nixosConfigurations.nixos.system"
+sudo ./result/sw/bin/nixos-rebuild switch --flake ".#nixos"
+```
+6. Restart your computer, open a terminal, type `nvim` and when nvim opens type `:checkhealth`. All plugins and language runtimes should be installed and ready to dev
+
 
 ## Acknowledgements
 > This Nix config was heavily inspired by https://github.com/fmoda3/nix-configs/tree/master/home.  
