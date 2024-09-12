@@ -84,9 +84,9 @@ in {
 
         #python-debug
         black
-        python310Full
-        python310Packages.pynvim
-        python310Packages.powerline
+        #python310Full
+#        python310Packages.pynvim
+#        python310Packages.powerline
 
         # Typescript
         nodePackages.typescript-language-server

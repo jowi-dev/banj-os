@@ -66,7 +66,7 @@ in {
         name = "toasttab/toast";
         clone_target = "git@github.com:toasttab/homebrew-toast";
       }];
-      brews = [ "libffi" "cocoapods" "lunchbox" "obsidian" ];
+      brews = [ "libffi" "cocoapods" "lunchbox" "obsidian" "xcode" ];
     };
 
     # Create /etc/zshrc that loads the nix-darwin environment.
@@ -135,7 +135,7 @@ in {
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark"; # set dark mode
-        "com.apple.swipescrolldirection" = false;
+        "com.apple.swipescrolldirection" = true;
       };
     };
   };

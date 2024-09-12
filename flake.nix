@@ -33,7 +33,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
-
+    # until darwin is supported
+#    ghostty = {
+#      url = "git+ssh://git@github.com/ghostty-org/ghostty";
+#    };    
 #    # Elixir LS - installing from nixpkgs for now
 #    nextls = {
 #      url = "github:elixir-tools/next-ls";
@@ -120,7 +123,7 @@
             toolingDirectory = "/banj-os";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = { inherit bash-gpt; inherit banj-cli; };
+            extraSpecialArgs = { inherit bash-gpt; inherit banj-cli;  };
           };
 
         };
