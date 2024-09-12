@@ -8,4 +8,9 @@
     path = ./odin;
     description = "A complete graphics oriented dev shell for odin";
   };
+
+  elixir-phoenix = {
+    path = ./elixir-phoenix;
+    description = "An elixir flake with tools needed to run phoenix such as docker, colima, inotify-tools(Linux), postgres";
+  }
 }
