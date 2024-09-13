@@ -98,7 +98,7 @@ in {
         jq
         coreutils
         
-      ] ++ (if currentSystem.isMac then [] else [_1password llama-cpp.packages.${system}.default cosmic-term]);
+      ] ++ (lib.optionals pkgs.stdenv.isLinux [_1password llama-cpp.packages.${system}.default cosmic-term]);
         
     };
 
