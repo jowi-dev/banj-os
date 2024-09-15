@@ -81,6 +81,10 @@ lsp.lua_ls.setup{
   }
 }
 
+lsp.swift_mesonls.setup{
+  capabilities = capabilities
+}
+
 
 lsp.ols.setup{
   capabilities = capabilities

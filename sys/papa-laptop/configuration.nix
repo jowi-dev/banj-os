@@ -1,29 +1,11 @@
 # Darwin Config
 { config, pkgs, lib, currentSystem, ... }:
-with lib;
-let 
-  cfg = config.my-darwin;
-  #myFish = pkgs.wrapFish { pluginPkgs = with pkgs; [fishPlugins.bass babelfish];};
-
-in {
-
-
-  options.my-darwin = {
-    isWork = lib.mkEnableOption "work profile";
-    enableSudoTouch = lib.mkEnableOption "sudo touch id";
-
-    theme = lib.mkOption {
-      type = types.str;
-      default = "nord";
-      description = ''
-        Theme to apply
-      '';
-    };
-  };
-
+{
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
     environment.pathsToLink = ["/share/doc"];
+    environment.systemPackages = [ ];
+    environment.shells = with pkgs; [bashInteractive zsh fish];
 
     users.users.${currentSystem.user} = {
       name = currentSystem.user;
@@ -60,13 +42,13 @@ in {
     };
 
     homebrew = {
-      enable = config.my-darwin.isWork;
+      enable = true;
       onActivation = { cleanup = "uninstall"; };
-      taps = [{
-        name = "toasttab/toast";
-        clone_target = "git@github.com:toasttab/homebrew-toast";
-      }];
-      brews = [ "libffi" "cocoapods" "lunchbox" "obsidian" "xcode" ];
+      brews = [ 
+        "libffi" 
+        "ruby"
+        "cocoapods" 
+      ];
     };
 
     # Create /etc/zshrc that loads the nix-darwin environment.
@@ -90,32 +72,7 @@ in {
       # End Nix
       '';
 
-    environment.shells = with pkgs; [bashInteractive zsh fish];
-#    programs.zsh = {
-#      enable = true;
-#    };
-#    programs.fish = {
-#      enable = true;
-#      useBabelfish = true;
-#
-##      # This fixes a bug between nix darwin and home-manager over completion conflicts
-##      # Completion is enabled in home-manager config
-##      enableCompletion = false;
-##      promptInit = "";
-#      loginShellInit = let
-#      # This naive quoting is good enough in this case. There shouldn't be any
-#      # double quotes in the input string, and it needs to be double quoted in case
-#      # it contains a space (which is unlikely!)
-#      dquote = str: "\"" + str + "\"";
-#
-#      makeBinPathList = map (path: path + "/bin");
-#    in ''
-#      fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList config.environment.profiles)}
-#      set fish_user_paths $fish_user_paths
-#    '';
-#    };
-
-    security.pam.enableSudoTouchIdAuth = cfg.enableSudoTouch;
+    security.pam.enableSudoTouchIdAuth = true;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
