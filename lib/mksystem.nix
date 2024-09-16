@@ -46,7 +46,6 @@ let
 
         currentSystem = {
           architecture = system;
-          isMac = isMac system;
           name = name;
           enableGui = sysEnableGui;
           enableSound = enableSound;

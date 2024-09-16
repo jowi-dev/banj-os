@@ -1,16 +1,10 @@
 /* copy from nixpkgs but updated to fix arm64 support */
 { config, lib, currentSystem, stdenv, fetchzip, autoPatchelfHook, fetchurl, xar, cpio }:
-let 
-
-  inherit (import ../lib/get_system_type.nix) isMac;
-  isDarwin = isMac currentSystem.architecture;
-  isLinux = !isDarwin;
-in
 stdenv.mkDerivation rec {
   pname = "1password";
   version = "2.24.0";
   src =
-    if isLinux then
+    if stdenv.isLinux then
       fetchzip
         {
           url = {
@@ -30,9 +24,9 @@ stdenv.mkDerivation rec {
         sha256 = "0000000000000000000000000000000000000000000000000000";
       };
 
-  buildInputs = lib.optionals isDarwin [ xar cpio ];
+  buildInputs = lib.optionals stdenv.isDarwin [ xar cpio ];
 
-  unpackPhase = lib.optionalString isDarwin ''
+  unpackPhase = lib.optionalString stdenv.isDarwin ''
     xar -xf $src
     zcat op.pkg/Payload | cpio -i
   '';
@@ -41,9 +35,9 @@ stdenv.mkDerivation rec {
     install -D op $out/bin/op
   '';
 
-  dontStrip = isDarwin;
+  dontStrip = stdenv.isDarwin;
 
-  nativeBuildInputs = lib.optionals isLinux [ autoPatchelfHook ];
+  nativeBuildInputs = lib.optionals stdenv.isLinux [ autoPatchelfHook ];
 
   doInstallCheck = true;
 
