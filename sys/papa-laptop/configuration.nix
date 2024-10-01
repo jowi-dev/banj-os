@@ -92,7 +92,7 @@
       };
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark"; # set dark mode
-        "com.apple.swipescrolldirection" = true;
+        "com.apple.swipescrolldirection" = false;
       };
     };
   };

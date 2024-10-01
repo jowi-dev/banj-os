@@ -2,9 +2,9 @@
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
-  _1password = pkgs.callPackage ./pkgs/1password.nix { 
-    currentSystem = currentSystem;
-  };
+  #_1password = pkgs.callPackage ./pkgs/1password.nix { 
+#    currentSystem = currentSystem;
+#  };
 
 in {
     imports = [ ./home/nvim ./home/git ./home/shell ];
@@ -75,6 +75,7 @@ in {
         btop
         lazydocker
         lazygit
+        _1password-cli
         
 
         ctags
@@ -98,7 +99,7 @@ in {
         jq
         coreutils
         
-      ] ++ (lib.optionals pkgs.stdenv.isLinux [_1password llama-cpp.packages.${system}.default cosmic-term]) ++ lib.optionals pkgs.stdenv.isDarwin [rubyPackages.cocoapods];
+      ] ++ (lib.optionals pkgs.stdenv.isLinux [llama-cpp.packages.${system}.default cosmic-term]) ++ lib.optionals pkgs.stdenv.isDarwin [rubyPackages.cocoapods];
         
     };
 
