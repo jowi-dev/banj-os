@@ -65,6 +65,8 @@ in {
         odin
         ols
 
+        _1password
+
         # Global Tooling
         git
         gum

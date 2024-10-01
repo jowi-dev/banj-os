@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717078081,
-        "narHash": "sha256-EFY8b+szI2dA0pw7HxYCL7SjPwSyVxAi698EvEAMEqc=",
+        "lastModified": 1727744318,
+        "narHash": "sha256-xnfbWgez62bp+IdlKJBhZNkRjnG2wPesjBVqZCD//ao=",
         "owner": "jowi-dev",
         "repo": "banj-cli",
-        "rev": "d0063eee35368a209e685b6f17a0a637a1ce9705",
+        "rev": "a0b1ba7b8713f81d796a325041515110704623d3",
         "type": "github"
       },
       "original": {
