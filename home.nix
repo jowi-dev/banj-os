@@ -75,7 +75,6 @@ in {
         btop
         lazydocker
         lazygit
-        _1password-cli
         
 
         ctags
