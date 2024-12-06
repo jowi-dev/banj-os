@@ -45,6 +45,8 @@
             doCheck=false;
             packages=basePackages;
             buildPhase = ''
+              ${hooks}
+              mix deps.get
               mix escript.build
             '';
             installPhase = ''

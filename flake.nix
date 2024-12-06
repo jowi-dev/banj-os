@@ -28,11 +28,19 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    llama-cpp = {
-      url = "github:ggerganov/llama.cpp";
+    # dev deps for a project
+#    llama-cpp = {
+#      url = "github:ggerganov/llama.cpp";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#      inputs.flake-parts.follows = "flake-parts";
+#    };
+    fnord = {
+      url = "github:jowi-dev/fnord";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
+
+
     # until darwin is supported
 #    ghostty = {
 #      url = "git+ssh://git@github.com/ghostty-org/ghostty";
@@ -60,7 +68,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
-    , llama-cpp, neovim-nightly-overlay, zig, zls }:
+    , fnord, neovim-nightly-overlay, zig, zls }:
     let 
       overlays = [ zig.overlays.default neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
@@ -82,7 +90,7 @@
             gitEmail = "joey8williams@gmail.com";
             extraSpecialArgs = {
               inherit bash-gpt;
-              inherit llama-cpp;
+              inherit fnord;
               inherit zls;
               inherit banj-cli;
             };
@@ -100,7 +108,7 @@
             gitEmail = "joey8williams@gmail.com";
             extraSpecialArgs = {
               inherit bash-gpt;
-              inherit llama-cpp;
+              inherit fnord;
               inherit zls;
             };
           };

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, bash-gpt, llama-cpp, banj-cli, ... }:
+{ config, pkgs, lib, currentSystem, bash-gpt, fnord, banj-cli, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -100,7 +100,7 @@ in {
         jq
         coreutils
         
-      ] ++ (lib.optionals pkgs.stdenv.isLinux [llama-cpp.packages.${system}.default cosmic-term]) ++ lib.optionals pkgs.stdenv.isDarwin [rubyPackages.cocoapods];
+      ] ++ (lib.optionals pkgs.stdenv.isLinux [fnord.packages.${system}.default cosmic-term]) ++ lib.optionals pkgs.stdenv.isDarwin [rubyPackages.cocoapods];
         
     };
 

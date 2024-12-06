@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1727744318,
-        "narHash": "sha256-xnfbWgez62bp+IdlKJBhZNkRjnG2wPesjBVqZCD//ao=",
+        "lastModified": 1729957390,
+        "narHash": "sha256-Xy3rNiLWHE+N+W0e7Zgn5IdrdmVAtCMb/Xzz+ayZt9Q=",
         "owner": "jowi-dev",
         "repo": "banj-cli",
-        "rev": "a0b1ba7b8713f81d796a325041515110704623d3",
+        "rev": "5c2e77589bbbad3588c038debda21d0c19e019fe",
         "type": "github"
       },
       "original": {
@@ -146,6 +146,24 @@
     },
     "flake-parts_2": {
       "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1733312601,
+        "narHash": "sha256-4pDvzqnegAfRkPwO3wmwBhVi/Sye1mzps0zHWYnP88c=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "205b12d8b7cd4802fbcb8e8ef6a0f1408781a4f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_3": {
+      "inputs": {
         "nixpkgs-lib": [
           "neovim-nightly-overlay",
           "nixpkgs"
@@ -165,7 +183,7 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
+    "flake-parts_4": {
       "inputs": {
         "nixpkgs-lib": [
           "neovim-nightly-overlay",
@@ -276,6 +294,27 @@
         "type": "github"
       }
     },
+    "fnord": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733498023,
+        "narHash": "sha256-Tt2GUBh8035CI+oq5g/PpkWexeMUoGWmUrROY+3652I=",
+        "owner": "jowi-dev",
+        "repo": "fnord",
+        "rev": "3c8fe90a63f710f34b76d9b2b91a436f40985628",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jowi-dev",
+        "repo": "fnord",
+        "type": "github"
+      }
+    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -348,7 +387,7 @@
     },
     "hercules-ci-effects": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_4",
         "nixpkgs": [
           "neovim-nightly-overlay",
           "nixpkgs"
@@ -388,33 +427,10 @@
         "type": "github"
       }
     },
-    "llama-cpp": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1725711379,
-        "narHash": "sha256-LcgHN6xjDkIh4OCWzBNcKcc4B17r+EEsVxEBkj6+jhg=",
-        "owner": "ggerganov",
-        "repo": "llama.cpp",
-        "rev": "df270ef74596da8f1178f08991f4c51f18c9ee82",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ggerganov",
-        "repo": "llama.cpp",
-        "type": "github"
-      }
-    },
     "neovim-nightly-overlay": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts_3",
         "git-hooks": "git-hooks",
         "hercules-ci-effects": "hercules-ci-effects",
         "neovim-src": "neovim-src",
@@ -478,6 +494,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/356624c12086a18f2ea2825fed34523d60ccc4e3.tar.gz"
       }
     },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1733096140,
+        "narHash": "sha256-1qRH7uAUsyQI7R1Uwl4T+XvdNv778H0Nb5njNrqvylY=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5487e69da40cbd611ab2cadee0b4637225f7cfae.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5487e69da40cbd611ab2cadee0b4637225f7cfae.tar.gz"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1725534445,
@@ -500,8 +528,8 @@
         "bash-gpt": "bash-gpt",
         "darwin": "darwin",
         "flake-parts": "flake-parts",
+        "fnord": "fnord",
         "home-manager": "home-manager",
-        "llama-cpp": "llama-cpp",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_2",
         "wsl": "wsl",
