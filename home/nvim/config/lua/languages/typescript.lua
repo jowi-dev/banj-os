@@ -1,6 +1,6 @@
-lsp = require'lspconfig'
+local lsp = require'lspconfig'
 
-lsp.tsserver.setup({
+lsp.ts_ls.setup({
     -- Needed for inlayHints. Merge this table with your settings or copy
     -- it from the source if you want to add your own init_options.
     init_options = require("nvim-lsp-ts-utils").init_options,
@@ -70,4 +70,4 @@ lsp.tsserver.setup({
     end
 })
 
-return lsp.tsserver
+return lsp.ts_ls

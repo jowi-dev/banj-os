@@ -21,11 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    bash-gpt = {
-      url = "github:sysread/bash-gpt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     # dev deps for a project
@@ -55,22 +50,12 @@
       # Don't follow so the binary cache can be used
       url = "github:nix-community/neovim-nightly-overlay";
     };
-    zig = {
-      url = "github:mitchellh/zig-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    zls = {
-      url = "github:zigtools/zls";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.zig-overlay.follows = "zig";
-    };
-
   };
 
   outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
     , fnord, neovim-nightly-overlay, zig, zls }:
     let 
-      overlays = [ zig.overlays.default neovim-nightly-overlay.overlays.default ];
+      overlays = [ neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
     in 
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -89,9 +74,7 @@
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
             extraSpecialArgs = {
-              inherit bash-gpt;
               inherit fnord;
-              inherit zls;
               inherit banj-cli;
             };
           };
@@ -106,10 +89,9 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = {
-              inherit bash-gpt;
+            extraSpecialArgs =  {
               inherit fnord;
-              inherit zls;
+              inherit banj-cli;
             };
           };
           nixosIso = mkSystem "nixos" {
@@ -120,7 +102,10 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = { inherit bash-gpt; };
+            extraSpecialArgs =  {
+              inherit fnord;
+              inherit banj-cli;
+            };
           };
         };
         darwinConfigurations = {
@@ -131,9 +116,8 @@
             toolingDirectory = "/banj-os";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = { inherit bash-gpt; inherit banj-cli; inherit zls;  };
+            extraSpecialArgs = { inherit banj-cli; inherit fnord; };
           };
-
         };
       };
       systems = [ ];

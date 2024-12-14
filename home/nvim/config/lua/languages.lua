@@ -37,7 +37,7 @@ end
 --end
 
 lsp.graphql.setup{}
-lsp.tsserver = require'languages/typescript'
+lsp.ts_ls = require'languages/typescript'
 lsp.zls.setup{}
 lsp.rust_analyzer.setup{
     on_attach = on_attach,

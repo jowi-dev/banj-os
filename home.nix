@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, bash-gpt, fnord, banj-cli, ... }:
+{ config, pkgs, lib, currentSystem, fnord, banj-cli, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -80,15 +80,14 @@ in {
         
 
         ctags
-        nodePackages.neovim
+        #nodePackages.neovim
 
         # Custom
-        bash-gpt.packages.${system}.default
         banj-cli.packages.${system}.default
+        fnord.packages.${system}.default
         burn-to-iso
         
-        zigpkgs.master
-        #zls.packages.${system}.default
+        #zigpkgs.master
 
         # Why is this here?
         fzf
@@ -100,7 +99,7 @@ in {
         jq
         coreutils
         
-      ] ++ (lib.optionals pkgs.stdenv.isLinux [fnord.packages.${system}.default cosmic-term]) ++ lib.optionals pkgs.stdenv.isDarwin [rubyPackages.cocoapods];
+      ] ++ (lib.optionals pkgs.stdenv.isLinux [ cosmic-term]) ++ lib.optionals pkgs.stdenv.isDarwin [rubyPackages.cocoapods];
         
     };
 

@@ -6,7 +6,7 @@
     environment.pathsToLink = ["/share/doc"];
     environment.systemPackages = [ ];
     environment.shells = with pkgs; [bashInteractive zsh fish];
-
+    nix.configureBuildUsers = true;
     users.users.${currentSystem.user} = {
       name = currentSystem.user;
       home = currentSystem.directories.home;
