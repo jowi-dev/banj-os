@@ -56,7 +56,7 @@
         in
         {
           devShells.default = pkgs.mkShell {
-            packages = basePackages;
+            packages = basePackages ++ [pkgs.flyctl];
             shellHook = hooks;
           };
         };
