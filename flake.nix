@@ -2,6 +2,7 @@
   description = "A very basic flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -16,35 +17,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    banj-cli = {
-      url = "github:jowi-dev/banj-cli";
+    publisher = {
+      url = "github:jowi-dev/publisher";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    # dev deps for a project
-#    llama-cpp = {
-#      url = "github:ggerganov/llama.cpp";
-#      inputs.nixpkgs.follows = "nixpkgs";
-#      inputs.flake-parts.follows = "flake-parts";
-#    };
     fnord = {
       url = "github:jowi-dev/fnord";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
 
+    banj-cli = {
+      url = "github:jowi-dev/banj-cli-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # until darwin is supported
-#    ghostty = {
-#      url = "git+ssh://git@github.com/ghostty-org/ghostty";
-#    };    
-#    # Elixir LS - installing from nixpkgs for now
-#    nextls = {
-#      url = "github:elixir-tools/next-ls";
-#      inputs.nixpkgs.follows = "nixpkgs";
-#    };
 
     neovim-nightly-overlay = {
       # Don't follow so the binary cache can be used
@@ -52,8 +41,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin,wsl, home-manager, banj-cli, bash-gpt, flake-parts
-    , fnord, neovim-nightly-overlay, zig, zls }:
+  outputs = inputs@{ self, nixpkgs, flake-parts, darwin,wsl, home-manager, banj-cli, fnord, neovim-nightly-overlay, ... }:
     let 
       overlays = [ neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
