@@ -393,11 +393,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736628783,
-        "narHash": "sha256-iN/pSn03RkSRYx+axeg9VWd7TktjNmNd/13kghl2eYo=",
+        "lastModified": 1736631313,
+        "narHash": "sha256-1nklam2LFc08oS4yM/HF8E3/muDmu++A9CjkNfl9C7E=",
         "owner": "jowi-dev",
         "repo": "publisher",
-        "rev": "f5bcbd862281528c9e980ff532955ebe0e9c127c",
+        "rev": "c66125ae34064a2e541aa722287fd7f9c730b41a",
         "type": "github"
       },
       "original": {

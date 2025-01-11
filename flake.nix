@@ -41,10 +41,16 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, darwin,wsl, home-manager, banj-cli, fnord, neovim-nightly-overlay, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-parts, darwin,wsl, home-manager, publisher, banj-cli, fnord, neovim-nightly-overlay, ... }:
     let 
       overlays = [ neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
+
+      standardArgs = {
+        inherit fnord;
+        inherit banj-cli;
+        inherit publisher;
+      };
     in 
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
@@ -61,10 +67,7 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = {
-              inherit fnord;
-              inherit banj-cli;
-            };
+            extraSpecialArgs = standardArgs;
           };
           wsl = mkSystem "wsl" {
             system = "x86_64-linux";
@@ -77,10 +80,7 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs =  {
-              inherit fnord;
-              inherit banj-cli;
-            };
+            extraSpecialArgs = standardArgs;
           };
           nixosIso = mkSystem "nixos" {
             iso = true;
@@ -90,10 +90,7 @@
             toolingDirectory = "/.config/nix-config";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs =  {
-              inherit fnord;
-              inherit banj-cli;
-            };
+            extraSpecialArgs = standardArgs;
           };
         };
         darwinConfigurations = {
@@ -104,7 +101,7 @@
             toolingDirectory = "/banj-os";
             gitUsername = "jowi-dev";
             gitEmail = "joey8williams@gmail.com";
-            extraSpecialArgs = { inherit banj-cli; inherit fnord; };
+            extraSpecialArgs = standardArgs;
           };
         };
       };

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, fnord, banj-cli, ... }:
+{ config, pkgs, lib, currentSystem, fnord, banj-cli, publisher, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -94,6 +94,7 @@ in {
         # Custom
         banj-cli.packages.${system}.default
         fnord.packages.${system}.default
+        publisher.packages.${system}.default
         burn-to-iso
         
         #zigpkgs.master
