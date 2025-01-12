@@ -41,8 +41,8 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, darwin,wsl, home-manager, publisher, banj-cli, fnord, neovim-nightly-overlay, ... }:
-    let 
+  outputs = inputs@{ self, nixpkgs, flake-parts, darwin, wsl, home-manager, publisher, banj-cli, fnord, neovim-nightly-overlay, ... }:
+    let
       overlays = [ neovim-nightly-overlay.overlays.default ];
       mkSystem = import ./lib/mksystem.nix { inherit nixpkgs inputs overlays; };
 
@@ -51,7 +51,7 @@
         inherit banj-cli;
         inherit publisher;
       };
-    in 
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         templates = import ./templates;

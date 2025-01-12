@@ -16,17 +16,18 @@
 
         nativeBuildInputs = with pkgs; [ ];
         # Any Dependencies the script needs to run
-        buildInputs = with pkgs; [ 
-#          gum 
-#          jq 
-#          curl 
+        buildInputs = with pkgs; [
+          #          gum 
+          #          jq 
+          #          curl 
         ];
         installPhase = ''
-            # Custom installation commands
-            mkdir -p $out/bin
-            cp YOURSCRIPT $out/bin && chmod +x $out/bin/${pname}
+          # Custom installation commands
+          mkdir -p $out/bin
+          cp YOURSCRIPT $out/bin && chmod +x $out/bin/${pname}
         '';
-      in {
+      in
+      {
 
         packages.default = pkgs.stdenv.mkDerivation {
           version = "0.0.0";

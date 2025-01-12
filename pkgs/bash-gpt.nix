@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub  }:
+{ stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
   pname = "bash-gpt";
@@ -8,8 +8,8 @@ stdenv.mkDerivation rec {
     owner = "sysread";
     repo = "bash-gpt";
     rev = "cf63fe7ae9c3c29d1a9e5ab12065ce7a580e0984";
-    sha256 =  "sha256-VAb3wdnFewqNbivUOv5LdZYQ9bjCWO4IohzC3fUwSoE=";
-    
+    sha256 = "sha256-VAb3wdnFewqNbivUOv5LdZYQ9bjCWO4IohzC3fUwSoE=";
+
   };
   #phases = ["installPhase"];
 
@@ -27,9 +27,9 @@ stdenv.mkDerivation rec {
     cp tester $out/bin && chmod +x $out/bin/tester
   '';
 
-#  meta = with stdenv.lib; {
-#    description = "A little toy to talk to the openai conversations api from bash";
-#    homepage = "https://github.com/sysread/bash-gpt";
-#    license = licenses.mit;
-#  };
+  #  meta = with stdenv.lib; {
+  #    description = "A little toy to talk to the openai conversations api from bash";
+  #    homepage = "https://github.com/sysread/bash-gpt";
+  #    license = licenses.mit;
+  #  };
 }

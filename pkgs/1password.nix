@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
           }.${stdenv.hostPlatform.system};
           sha256 = {
             "i686-linux" = "0000000000000000000000000000000000000000000000000000";
-            "x86_64-linux" ="sha256-hgMZ3gSqpb04ixTwMnEg0EpYgzuTF1CMEGGl6LbYKjY=";
+            "x86_64-linux" = "sha256-hgMZ3gSqpb04ixTwMnEg0EpYgzuTF1CMEGGl6LbYKjY=";
             "aarch64-linux" = "0000000000000000000000000000000000000000000000000000";
           }.${stdenv.hostPlatform.system};
           stripRoot = false;

@@ -11,9 +11,10 @@
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          packageName = "PACKAGENAME";
+          packageName = "UPDATEPACKAGENAME";
           docPath="";
           basePackages = with pkgs; [
+            beam.interpreters.elixir
             elixir 
             erlang_27
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [inotify-tools] ;
@@ -44,17 +45,16 @@
             # run tests?
             doCheck=false;
             packages=basePackages;
+            buildInputs = basePackages;
             buildPhase = ''
               ${hooks}
               mix deps.get
               mix escript.build
             '';
             installPhase = ''
-              #/etc/profiles/per-user/$USER/share/doc/${packageName}/md/
               mkdir -p $out/bin
               mkdir -p $out/${docPath}
-              mv ${packageName} $out/bin
-              mv docs/* $out/${docPath}
+              mv ${packageName} $out/bin/${packageName}
             '';
           };
         };

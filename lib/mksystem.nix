@@ -3,20 +3,20 @@
 { nixpkgs, inputs, overlays }:
 
 name:
-{ 
-  system, 
-  wsl ? false,
-  username ? "jowi", 
-  homeDirectory ? "/home/jowi", 
-  toolingDirectory ? "/.config/nix-config", 
-  gitUsername ? "jowi-dev", 
-  gitEmail ? "joey8williams@gmail.com", 
-  extraSpecialArgs ? { }, 
-  enableGui ? false, 
-  enableSound? true, 
-  enableContainers ? true, 
-  iso ? false,
-  ai ? false,
+{ system
+, wsl ? false
+, username ? "jowi"
+, homeDirectory ? "/home/jowi"
+, toolingDirectory ? "/.config/nix-config"
+, gitUsername ? "jowi-dev"
+, gitEmail ? "joey8williams@gmail.com"
+, extraSpecialArgs ? { }
+, enableGui ? false
+, enableSound ? true
+, enableContainers ? true
+, iso ? false
+, ai ? false
+,
 }:
 
 let
@@ -33,10 +33,11 @@ let
   systemFunc =
     if isMac system then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
 
-  homeManagerFunc = if isMac system then
-  inputs.home-manager.darwinModules.home-manager
-  else
-  inputs.home-manager.nixosModules.home-manager;
+  homeManagerFunc =
+    if isMac system then
+      inputs.home-manager.darwinModules.home-manager
+    else
+      inputs.home-manager.nixosModules.home-manager;
 
   # Never enable awesomeWM on mac
   sysEnableGui = if isMac system then false else enableGui;
@@ -44,42 +45,43 @@ let
   extraConfigFiles =
     if sysEnableGui then (import ../home/window-manager) else { };
 
-        currentSystem = {
-          architecture = system;
-          name = name;
-          enableGui = sysEnableGui;
-          enableSound = enableSound;
-          enableContainers = enableContainers;
-          user = username;
-          directories = {
-            home = homeDirectory;
-            # if this needs to be seperated great,
-            # otherwise this fixes a big annoyance
-            tooling = "${homeDirectory}${toolingDirectory}";
-          };
-          git = {
-            username = gitUsername;
-            email = gitEmail;
-          };
-          extraConfigFiles = extraConfigFiles;
-          # This is rube-goldberg but its my stomping grounds for learning cpp
-          #cmds = aliases;
-          shell = {
-            inherit aliases;
-          };
-        };
+  currentSystem = {
+    architecture = system;
+    name = name;
+    enableGui = sysEnableGui;
+    enableSound = enableSound;
+    enableContainers = enableContainers;
+    user = username;
+    directories = {
+      home = homeDirectory;
+      # if this needs to be seperated great,
+      # otherwise this fixes a big annoyance
+      tooling = "${homeDirectory}${toolingDirectory}";
+    };
+    git = {
+      username = gitUsername;
+      email = gitEmail;
+    };
+    extraConfigFiles = extraConfigFiles;
+    # This is rube-goldberg but its my stomping grounds for learning cpp
+    #cmds = aliases;
+    shell = {
+      inherit aliases;
+    };
+  };
 
-    isoModules = if iso then ["${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"] else [];
+  isoModules = if iso then [ "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix" ] else [ ];
 
-    #extraSpecialArgs = if ai then extraSpecialArgs else { inherit
+  #extraSpecialArgs = if ai then extraSpecialArgs else { inherit
 
-in systemFunc rec {
+in
+systemFunc rec {
   inherit system;
 
   modules = [
-    {nixpkgs.overlays = overlays;}
+    { nixpkgs.overlays = overlays; }
     (import ../sys/${name}/configuration.nix)
-    (if wsl then inputs.wsl.nixosModules.wsl else {})
+    (if wsl then inputs.wsl.nixosModules.wsl else { })
     homeManagerFunc
     {
       #nixpkgs = nixpkgs;
@@ -88,7 +90,7 @@ in systemFunc rec {
         users.${username}.imports = [ ../home.nix ];
         useGlobalPkgs = true;
         useUserPackages = true;
-        extraSpecialArgs = { 
+        extraSpecialArgs = {
           inherit currentSystem;
         } // extraSpecialArgs;
       };
@@ -97,7 +99,7 @@ in systemFunc rec {
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
     {
-      config._module.args = {inherit currentSystem;};
+      config._module.args = { inherit currentSystem; };
     }
   ] ++ isoModules;
 }

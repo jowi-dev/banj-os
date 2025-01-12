@@ -1,5 +1,5 @@
 { pkgs, currentSystem, ... }: {
-  imports = [];
+  imports = [ ];
 
   wsl = {
     enable = true;

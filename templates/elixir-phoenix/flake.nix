@@ -14,11 +14,11 @@
           basePackages = with pkgs; [
             colima
             docker
-            elixir 
+            elixir
             postgresql_16
-          ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [inotify-tools] ;
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [ inotify-tools ];
 
-            
+
           hooks = ''
             # this allows mix to work on the local directory
             mkdir -p .nix-mix .nix-hex
@@ -56,7 +56,7 @@
         in
         {
           devShells.default = pkgs.mkShell {
-            packages = basePackages ++ [pkgs.flyctl];
+            packages = basePackages ++ [ pkgs.flyctl ];
             shellHook = hooks;
           };
         };

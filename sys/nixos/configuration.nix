@@ -8,8 +8,10 @@ let
   awesome = pkgs.awesome.overrideAttrs (oldAttrs: {
     buildInputs = oldAttrs.buildInputs ++ [ pkgs.luajitPackages.vicious ];
   });
-in {
-  imports = [ # Include the results of the hardware scan.
+in
+{
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -29,7 +31,7 @@ in {
             "dbbeb39d04be3916d99e3a376576c308e0019b4dbf94084bc8c07c1ff3d7f7a0";
         };
         "Green Acres" = {
-          pskRaw="1d9d8acb29c6dc656374d0a5be9668fe104337f5c1a0962eaf3d50114ccbdc2e";
+          pskRaw = "1d9d8acb29c6dc656374d0a5be9668fe104337f5c1a0962eaf3d50114ccbdc2e";
         };
         # Have a new wifi config? add it here!
         #        "My Network Name" = {
@@ -73,23 +75,25 @@ in {
         layout = "us";
         variant = "";
       };
-      displayManager = if currentSystem.enableGui then {
-        defaultSession = "none+awesome";
-        lightdm.enable = true;
-      } else {
-        startx.enable = true;
-      };
-      windowManager = if currentSystem.enableGui then {
-        awesome = {
-          package = awesome;
-          enable = true;
-          luaModules = [ 
-            pkgs.luaPackages.luarocks 
-            pkgs.luaPackages.vicious 
-          ];
+      displayManager =
+        if currentSystem.enableGui then {
+          defaultSession = "none+awesome";
+          lightdm.enable = true;
+        } else {
+          startx.enable = true;
         };
-      } else
-        { };
+      windowManager =
+        if currentSystem.enableGui then {
+          awesome = {
+            package = awesome;
+            enable = true;
+            luaModules = [
+              pkgs.luaPackages.luarocks
+              pkgs.luaPackages.vicious
+            ];
+          };
+        } else
+          { };
 
     };
   };
@@ -101,18 +105,19 @@ in {
   sound.enable = currentSystem.enableSound;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = if currentSystem.enableSound then {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+  services.pipewire =
+    if currentSystem.enableSound then {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  } else {};
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    } else { };
 
   # Nix Options
   nix.settings.experimental-features = "nix-command flakes";
@@ -126,10 +131,11 @@ in {
     shell = pkgs.fish;
     isNormalUser = true;
     description = "Joe Williams";
-    extraGroups = if currentSystem.enableContainers then
-    [ "networkmanager" "wheel" "docker" ]
-    else [ "networkmanager" "wheel" ] ;
-    packages = if currentSystem.enableGui then with pkgs; [ kate brave wpa_supplicant_gui _1password-gui ] else [];
+    extraGroups =
+      if currentSystem.enableContainers then
+        [ "networkmanager" "wheel" "docker" ]
+      else [ "networkmanager" "wheel" ];
+    packages = if currentSystem.enableGui then with pkgs; [ kate brave wpa_supplicant_gui _1password-gui ] else [ ];
   };
 
   # Allow unfree packages
@@ -141,7 +147,7 @@ in {
     variables = with currentSystem; {
       NIXOS_CONFIG = "${directories.tooling}/sys/${name}/configuration.nix";
     };
-    systemPackages =  with pkgs;  if currentSystem.enableGui then [
+    systemPackages = with pkgs;  if currentSystem.enableGui then [
       vim
       git
       discord
@@ -151,8 +157,8 @@ in {
       xorg.xkill
       flameshot
       obsidian
-    ] else [vim git];
-     
+    ] else [ vim git ];
+
 
   };
 

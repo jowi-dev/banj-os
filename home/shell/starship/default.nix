@@ -136,11 +136,11 @@
       erlang = { format = "\\[[$symbol($version)]($style)\\]"; };
       custom.fish = {
         symbol = "FISH";
-        format = "\\[[$symbol($version)]($style)\\]"; 
+        format = "\\[[$symbol($version)]($style)\\]";
       };
-      custom.zsh = { 
+      custom.zsh = {
         symbol = "ZSH";
-        format = "\\[[$symbol($version)]($style)\\]"; 
+        format = "\\[[$symbol($version)]($style)\\]";
       };
       gcloud = {
         format = "\\[[$symbol$account(@$domain)(\\($region\\))]($style)\\]";

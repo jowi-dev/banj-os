@@ -1,7 +1,7 @@
 {
   makeLinuxAliases = system: {
     rebuild = "sudo nixos-rebuild switch --flake ${system}/.";
-    templates="lsd ${system}/templates";
+    templates = "lsd ${system}/templates";
     battery = "acpi";
     sleep = "systemctl hibernate";
 
@@ -14,8 +14,8 @@
     display-single-desktop = "display-duplicate && xrandr --output eDP-1 --off";
 
     # Wifi Commands: wifi
-    wifi-save-config="wpa_passphrase";
-    wifi="wpa_gui";
-    
+    wifi-save-config = "wpa_passphrase";
+    wifi = "wpa_gui";
+
   };
 }

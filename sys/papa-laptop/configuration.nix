@@ -3,9 +3,9 @@
 {
   config = {
     environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-    environment.pathsToLink = ["/share/doc"];
+    environment.pathsToLink = [ "/share/doc" ];
     environment.systemPackages = [ ];
-    environment.shells = with pkgs; [bashInteractive zsh fish];
+    environment.shells = with pkgs; [ bashInteractive zsh fish ];
     nix.configureBuildUsers = true;
     users.users.${currentSystem.user} = {
       name = currentSystem.user;
@@ -44,15 +44,15 @@
     homebrew = {
       enable = true;
       onActivation = { cleanup = "uninstall"; };
-      brews = [ 
-        "libffi" 
+      brews = [
+        "libffi"
         "ruby"
-        "cocoapods" 
+        "cocoapods"
       ];
     };
 
     # Create /etc/zshrc that loads the nix-darwin environment.
-      # zsh is the default shell on Mac and we want to make sure that we're
+    # zsh is the default shell on Mac and we want to make sure that we're
     # configuring the rc correctly with nix-darwin paths.
     programs.zsh.enable = true;
     programs.zsh.shellInit = ''
@@ -61,7 +61,7 @@
         . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
       fi
       # End Nix
-      '';
+    '';
 
     programs.fish.enable = true;
     programs.fish.shellInit = ''
@@ -70,7 +70,7 @@
         source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
       end
       # End Nix
-      '';
+    '';
 
     security.pam.enableSudoTouchIdAuth = true;
 

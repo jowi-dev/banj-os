@@ -6,7 +6,7 @@
 
   outputs = { self, nixpkgs }:
     let
-#self.lastModified or
+      #self.lastModified or
       # to work with older version of flakes
       lastModifiedDate = self.lastModifiedDate or  "19700101";
 
@@ -51,10 +51,10 @@
             vendorSha256 = "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=";
           };
         });
-      
+
       # Add dependencies that are only needed for development
       devShells = forAllSystems (system:
-        let 
+        let
           pkgs = nixpkgsFor.${system};
         in
         {

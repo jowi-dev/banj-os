@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem,  ... }:
+{ config, pkgs, lib, currentSystem, ... }:
 with lib;
 let
   # So this is actually pretty cool.
@@ -9,7 +9,8 @@ let
 
   #nextPackage = nextls.packages.${currentSystem.architecture}.default;
 
-in {
+in
+{
   config = {
     programs.neovim = {
       package = pkgs.neovim-unwrapped;
@@ -77,7 +78,7 @@ in {
         diff-so-fancy
 
         # Nix
-        nixfmt
+        nixfmt-rfc-style
         nixpkgs-fmt
         nixd
         statix
@@ -85,8 +86,8 @@ in {
         #python-debug
         black
         #python310Full
-#        python310Packages.pynvim
-#        python310Packages.powerline
+        #        python310Packages.pynvim
+        #        python310Packages.powerline
 
         # Typescript
         nodePackages.typescript-language-server
@@ -117,7 +118,7 @@ in {
 
       '';
 
-        #:lua elixir_tools = "${nextPackage}"
+      #:lua elixir_tools = "${nextPackage}"
     };
 
     xdg.configFile.nvim = {
