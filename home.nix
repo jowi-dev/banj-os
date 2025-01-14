@@ -4,6 +4,9 @@ let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
   logDirPersonal = "${currentSystem.directories.home}/log-dir";
   sitePersonal = "${currentSystem.directories.home}/sites/personal";
+  getSecret = pkgs.writeShellScript "get-secret" ''
+    ${pkgs._1password-cli}/bin/op read "op://osr3ibpmvndmdsobguo3egxm6i/openai-secret/password"
+  '';
 in
 {
   imports = [ ./home/nvim ./home/git ./home/shell ./home/tmux ];
@@ -15,6 +18,8 @@ in
 
       sessionVariables = {
         OPENAI_MODEL = "gpt-4-1106-preview";
+        # used by fnord
+        OPENAI_API_KEY="$(${getSecret})";
         EDITOR = "nvim";
         CONFIG_DIR = "${tooling}";
         FLAKE = "${currentSystem.name}";
