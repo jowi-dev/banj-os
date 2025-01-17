@@ -2,13 +2,14 @@
   programs = {
     git = {
       enable = true;
-      userName = "GH_USER"; #currentSystem.git.username;
-      userEmail = "GH_EMAIL"; #currentSystem.git.email;
+      #userName = "GH_USER"; #currentSystem.git.username;
+      #userEmail = "GH_EMAIL"; #currentSystem.git.email;
 
       aliases = { };
 
       extraConfig = {
         init.defaultBranch = "main";
+        include.path = "~/.git_dynamic";
         advice = { statusHints = true; };
 
         apply = { whitespace = "nowarn"; };

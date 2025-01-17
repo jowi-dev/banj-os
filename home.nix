@@ -32,16 +32,17 @@ in
       file = currentSystem.extraConfigFiles;
 
       # This is dynamic GH user switching via git
-      activation.gitUser = ''
-        gh_user=$(gh api user --jq '.name' 2>/dev/null || echo "Default User")
-        gh_email=$(gh api user --jq '.email' 2>/dev/null || echo "default@example.com")
-        
+      activation.gitDynamicUser = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        gh_user=$(${pkgs.gh}/bin/gh api user --jq '.name' 2>/dev/null || echo "Default User")
+        gh_email=$(${pkgs.gh}/bin/gh api user --jq '.email' 2>/dev/null || echo "default@example.com")
+        echo "GIT DETAILS: $gh_user $gh_email"
+
         if [ "$gh_user" != "Default User" ]; then
-          git config --global user.name "$gh_user"
-          git config --global user.email "$gh_email"
+          echo "[user]" > ~/.git_dynamic
+          echo "  name = $gh_user" >> ~/.git_dynamic
+          echo "  email = $gh_email" >> ~/.git_dynamic
         fi
       '';
-
 
       activation.cloneLogRepo = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         export PATH="${pkgs.openssh}/bin:$PATH"
