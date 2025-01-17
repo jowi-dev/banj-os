@@ -15,6 +15,7 @@
         "$kubernetes"
         "$directory"
         "$vcsh"
+        "\${custom.gh}"
         "$git_branch"
         "$git_commit"
         "$git_state"
@@ -117,6 +118,15 @@
         format = "\\[[$symbol$context]($style)\\]";
       };
       dotnet = { format = "\\[[$symbol($version)(🎯 $tfm)]($style)\\]"; };
+      custom.gh = {
+        command = "gh api user -q .login";
+        when = "gh auth status 2>/dev/null";
+        format = "[$output]($style) ";
+        style = "bold yellow";
+        description = "Currently logged in GitHub user";
+        shell = ["bash" "--noprofile" "--norc"];
+        disabled = false;
+      };
       custom.elixir = {
         command = "elixir --short-version";
         detect_files = [ "mix.exs" ];

@@ -31,6 +31,17 @@ in
       username = currentSystem.user;
       file = currentSystem.extraConfigFiles;
 
+      # This is dynamic GH user switching via git
+      activation.gitUser = ''
+        gh_user=$(gh api user --jq '.name' 2>/dev/null || echo "Default User")
+        gh_email=$(gh api user --jq '.email' 2>/dev/null || echo "default@example.com")
+        
+        if [ "$gh_user" != "Default User" ]; then
+          git config --global user.name "$gh_user"
+          git config --global user.email "$gh_email"
+        fi
+      '';
+
 
       activation.cloneLogRepo = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         export PATH="${pkgs.openssh}/bin:$PATH"

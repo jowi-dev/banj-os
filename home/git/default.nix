@@ -2,12 +2,13 @@
   programs = {
     git = {
       enable = true;
-      userName = currentSystem.git.username;
-      userEmail = currentSystem.git.email;
+      userName = "GH_USER"; #currentSystem.git.username;
+      userEmail = "GH_EMAIL"; #currentSystem.git.email;
 
       aliases = { };
 
       extraConfig = {
+        init.defaultBranch = "main";
         advice = { statusHints = true; };
 
         apply = { whitespace = "nowarn"; };
