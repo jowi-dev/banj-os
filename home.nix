@@ -68,7 +68,8 @@ in
       '';
 
       packages = with pkgs; [
-        # Global Languages
+        claude-code
+        # Global Languages - TODO: dump this
         cmake
         (luajit.withPackages (p: with p; [ luajitPackages.vicious ]))
         elixir

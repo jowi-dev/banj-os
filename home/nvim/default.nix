@@ -36,7 +36,6 @@ in
         vim-nix
         vim-gitgutter
         plenary-nvim
-        null-ls-nvim
         nvim-lsp-ts-utils
 
         telescope-nvim

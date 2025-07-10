@@ -24,7 +24,7 @@ require("elixir").setup({
     end
   },
   credo = {
-    enable = true, -- defaults to true
+    enable = false, -- defaults to true
     cmd = elixir_tools .. "/bin/credo-language-server", -- path to the executable. mutually exclusive with `port`
     version = "0.1.0-rc.3", -- version of credo-language-server to install and use. defaults to the latest release
     on_attach = function(client, bufnr)
@@ -32,7 +32,7 @@ require("elixir").setup({
     end
   },
   elixirls = {
-    enable = true,
+    enable = false,
     cmd = elixir_ls_home .. "/bin/elixir-ls", -- path to the executable. mutually exclusive with `port`
     settings = elixirls.settings {
       dialyzerEnabled = true,

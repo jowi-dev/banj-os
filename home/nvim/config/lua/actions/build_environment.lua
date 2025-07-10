@@ -37,11 +37,15 @@ end
 function LightMode()
   vim.cmd('let ayucolor="light"')
   vim.cmd('colorscheme github')
+  vim.api.nvim_set_hl(0, 'Cursor', { fg = 'white', bg = '#ff6666' })
+  vim.opt.guicursor = 'n-v-c:block-Cursor,i:ver25-Cursor'
   --BuildEnv()
 end
 
 function DarkMode()
   vim.cmd('colorscheme angr')
+  vim.api.nvim_set_hl(0, 'Cursor', { fg = 'white', bg = '#ff6666' })
+  vim.opt.guicursor = 'n-v-c:block-Cursor,i:ver25-Cursor'
   --BuildEnv()
 end
 

@@ -14,13 +14,7 @@ require'package_configs/dap'
 ----------------------------------------------------------------------
 
 
--- Null LS
-local null_ls = require("null-ls")
 
-null_ls.setup({
-  null_ls.builtins.diagnostics.credo,
-  null_ls.builtins.diagnostics.eslint,
-})
 
   -- LSP freaks but nix handles
 local logs = vim.fn.expand(logs_path)
