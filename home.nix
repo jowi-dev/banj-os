@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, fnord, banj-cli, publisher, ... }:
+{ config, pkgs, lib, currentSystem, ... }:
 with lib;
 let
   burn-to-iso = pkgs.callPackage ./pkgs/burn-to-iso { };
@@ -30,6 +30,7 @@ in
       stateVersion = "23.11";
       username = currentSystem.user;
       file = currentSystem.extraConfigFiles;
+      homeDirectory = home;
 
       # This is dynamic GH user switching via git
       activation.gitDynamicUser = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -106,9 +107,9 @@ in
         #nodePackages.neovim
 
         # Custom
-        banj-cli.packages.${system}.default
-        fnord.packages.${system}.default
-        publisher.packages.${system}.default
+#        banj-cli.packages.${system}.default
+#        fnord.packages.${system}.default
+#        publisher.packages.${system}.default
         burn-to-iso
 
         #zigpkgs.master

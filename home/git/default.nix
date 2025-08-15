@@ -2,8 +2,8 @@
   programs = {
     git = {
       enable = true;
-      #userName = "GH_USER"; #currentSystem.git.username;
-      #userEmail = "GH_EMAIL"; #currentSystem.git.email;
+      userName = currentSystem.git.username;
+      userEmail = currentSystem.git.email;
 
       aliases = { };
 

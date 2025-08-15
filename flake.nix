@@ -51,6 +51,7 @@
         inherit banj-cli;
         inherit publisher;
       };
+      pkgs = nixpkgs;
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
@@ -104,6 +105,30 @@
             extraSpecialArgs = standardArgs;
           };
         };
+	homeConfigurations."jowi" = home-manager.lib.homeManagerConfiguration {
+		pkgs = nixpkgs.legacyPackages."x86_64-linux";
+		modules = [ ./home.nix ];
+		extraSpecialArgs = {
+			currentSystem = {
+				architecture = "x86_64-linux";
+				user = "jowi";
+				name = "home";
+				shell = {
+					aliases = {};
+				};
+				directories = {
+					home = "/home/jowi";
+					tooling = "/home/jowi/banj-os";
+					
+				};
+				git = {
+					username = "jowi-dev";
+					email = "joey8williams@gmail.com";
+				};
+				extraConfigFiles = {};
+			};
+		};
+	};
       };
       systems = [ ];
     };
