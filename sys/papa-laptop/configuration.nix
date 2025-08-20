@@ -6,7 +6,6 @@
     environment.pathsToLink = [ "/share/doc" ];
     environment.systemPackages = [ ];
     environment.shells = with pkgs; [ bashInteractive zsh fish ];
-    nix.configureBuildUsers = true;
     users.users.${currentSystem.user} = {
       name = currentSystem.user;
       home = currentSystem.directories.home;
@@ -15,8 +14,6 @@
     };
 
     # Make sure nix always runs in multi-user mode on Mac
-    services.nix-daemon.enable = true;
-
     nixpkgs.config.allowUnfree = true;
     nix = {
       package = pkgs.nixStable;
@@ -72,11 +69,12 @@
       # End Nix
     '';
 
-    security.pam.enableSudoTouchIdAuth = true;
+    security.pam.services.sudo_local.touchIdAuth = true;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 4;
+    system.primaryUser = "jowi";
 
     system.keyboard = { enableKeyMapping = true; };
 
