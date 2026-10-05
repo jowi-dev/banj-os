@@ -2,7 +2,6 @@
 -- $ nvim --listen /tmp/<TMUX_SESSION_NAME>.pipe
 -- Then open the terminal via :terminal 
 -- and start the docker session with `make bash`
--- TODO - make this work for more than just papa context
 function RunTests()
     local tmux_session = vim.fn.trim(vim.fn.system("tmux display-message -p '#S'"))
 

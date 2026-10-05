@@ -10,29 +10,29 @@ function GqlInput()
 end
 
 function GqlGetHost()
-  if HAMMERCURL_HOST ~= ""
+  if GQL_HOST ~= ""
     then
-      print(HAMMERCURL_HOST)
+      print(GQL_HOST)
     else
       print("Please Set GQL Host")
     end
 end
 
 function GqlSetHost(host)
-  HAMMERCURL_HOST = host
+  GQL_HOST = host
 end
 
 function GqlGetToken()
-  if HAMMERCURL_TOKEN ~= ""
+  if GQL_TOKEN ~= ""
     then
-      print(HAMMERCURL_TOKEN)
+      print(GQL_TOKEN)
     else
       print("Please Set GQL Bearer Token")
     end
 end
 
 function GqlSetToken(token)
-  HAMMERCURL_TOKEN = token
+  GQL_TOKEN = token
 end
 
 function GqlRequest()
@@ -43,7 +43,7 @@ function GqlRequest()
   body.query = table.concat(lines, " ")
   local options = {}
   options["disable_decode"] = true
-  local result = Post(HAMMERCURL_HOST, body, HAMMERCURL_TOKEN, options)
+  local result = Post(GQL_HOST, body, GQL_TOKEN, options)
 
   Output(result)
 end

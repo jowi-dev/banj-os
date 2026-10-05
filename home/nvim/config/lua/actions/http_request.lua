@@ -1,23 +1,22 @@
 -- this is the counterpart to gql request
 
-HAMMERCURL_OUTPUT = "~/.hammercurl/output.json"
--- for testing
-HAMMERCURL_DOMAIN = "https://stable-main.backend.papadev.co"
+HTTP_OUTPUT = vim.fn.stdpath("cache") .. "/http_output.json"
+HTTP_DOMAIN = ""
 
 function HttpSetDomain(domain)
-  HAMMERCURL_DOMAIN = domain
+  HTTP_DOMAIN = domain
 end
 
 function HttpGetDomain()
-  if HAMMERCURL_DOMAIN ~= ""
+  if HTTP_DOMAIN ~= ""
     then
-      print(HAMMERCURL_DOMAIN)
+      print(HTTP_DOMAIN)
     else
       print("Please set domain")
     end
 end
 
 function HttpGet(url)
-  os.execute("curl " .. HAMMERCURL_DOMAIN .. url .. "| jq .  >> " .. HAMMERCURL_OUTPUT)
-  vim.cmd("e " ..HAMMERCURL_OUTPUT)
+  os.execute("curl " .. HTTP_DOMAIN .. url .. "| jq .  >> " .. HTTP_OUTPUT)
+  vim.cmd("e " ..HTTP_OUTPUT)
 end

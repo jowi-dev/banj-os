@@ -11,9 +11,9 @@ snippet dele "delegate"
 # -----------------------------------------------------------------------------
 #  $1 
 # -----------------------------------------------------------------------------
-@doc delegate_to: {PapaPal.Web.API.V2.Resolvers.$2, :call, 3}
+@doc delegate_to: {MyAppWeb.Resolvers.$2, :call, 3}
 defdelegate $3(parent, args, context),
-  to: PapaPal.Web.API.V2.Resolvers.$2,
+  to: MyAppWeb.Resolvers.$2,
   as: :call
 endsnippet
 
@@ -21,7 +21,7 @@ endsnippet
 
 
 snippet defmo "defmodule"
-defmodule ${1:PapaPal.} do
+defmodule ${1:MyApp.} do
 @moduledoc """
 This is gonna be awesome dude, write your tests first and eat your vegetables
 
@@ -104,7 +104,7 @@ endsnippet
 snippet env_var "creates a private function for an env var"
 
 defp get_$1 do
-  Application.get_env(:papa_pal, :$1)
+  Application.get_env(:my_app, :$1)
 end
 endsnippet
 
@@ -177,7 +177,7 @@ endsnippet
 snippet oban_test "create an oban test resource"
 @moduledoc """
 """
-use PapaPal.DataCase
+use MyApp.DataCase
 # Test functions to leverage
 # perform_job(MODULE_BEING_TESTED, args)
 # assert_enqueued(worker: MODULE_BEING_TESTED)
